@@ -1,12 +1,13 @@
-//ejemplo
-const getUsers = (req, res) => {
-  const users = [
-    { id: 1, name: 'Ana', email: 'ana@example.com' },
-    { id: 2, name: 'Carlos', email: 'carlos@example.com' },
-    { id: 3, name: 'Luisa', email: 'luisa@example.com' }
-  ];
-  
-  res.json(users);
+const db = require('../config/db');
+
+const getUsers = async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM users');
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error al obtener usuarios:', error);
+    res.status(500).json({ error: 'Error al obtener usuarios' });
+  }
 };
 
 module.exports = {

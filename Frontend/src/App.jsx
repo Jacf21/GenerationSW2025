@@ -1,32 +1,28 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './componentes/comunes/NavBar/NavBar';
+import Sidebar from './componentes/comunes/Sidebar/Sidebar';
+import Footer from './componentes/comunes/Footer/Footer';
+import Inicio from './paginas/Inicio/Inicio';
+import Registro from './paginas/Registro/Registro';
+import Login from './paginas/Login/Login';
+import './estilos/App.css';
 
 function App() {
-  const [mensaje, setMensaje] = useState('');
-
-  useEffect(() => {
-    fetch('http://localhost:5000/')
-      .then(res => res.text())
-      .then(data => setMensaje(data))
-      .catch(error => console.error('Error:', error));
-  }, []);
-
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <h1>{mensaje}</h1>
-          <nav>
-            <ul>
-
-            </ul>
-          </nav>
-        </header>
-
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-        </Routes>
+        <NavBar />
+        <div className="layout">
+          <Sidebar />
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Inicio />} />
+              <Route path="/registro" element={<Registro />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </main>
+        </div>
+        <Footer />
       </div>
     </Router>
   );

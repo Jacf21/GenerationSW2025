@@ -2,12 +2,12 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   user: 'postgres',
-  host: 'localhost', 
-  database: 'Tutorial-python',
-  password: 'jafetcana',
-  port: 5432, 
+  host: 'localhost',
+  database: 'tutorial_python',
+  password: 'Guilder6494',
+  port: 5434
 });
 
 module.exports = {
-  query: (text, params) => pool.query(text, params),
+  query: (text, params) => pool.query(text, params)
 };
