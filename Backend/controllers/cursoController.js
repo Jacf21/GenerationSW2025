@@ -1,4 +1,4 @@
-const cursoService = require('../services/cursoService');
+const cursoService = require('../services/cursoServices');
 const bcrypt = require('bcrypt');
 
 const crearCurso = async (req, res) => {
@@ -12,13 +12,13 @@ const crearCurso = async (req, res) => {
     try {
         // Seguridad
         const saltRounds = 10;
-        const contrasenaHashed = await bcrypt.hash(codigo, saltRounds);
+        const codigoHashed = await bcrypt.hash(codigo, saltRounds);
 
         const nuevoCurso = await cursoService.crearCurso(
             nombre, 
             fecha_ini, 
             fecha_fin, 
-            contrasenaHashed
+            codigoHashed
         );
         
         // Respuesta Exitosa

@@ -5,7 +5,8 @@ const app = express();
 
 // Importa las rutas
 const userRoutes = require('./routes/userRoutes');
-const authRoutes = require('./routes/authRoutes');
+//const authRoutes = require('./routes/authRoutes');
+const cursoRoutes = require('./routes/cursoRoutes');
 
 // Middleware
 app.use(cors());
@@ -13,7 +14,8 @@ app.use(express.json());
 
 // Enlaza las rutas 
 app.use('/api/users', userRoutes);
-app.use('/api/auth', authRoutes);
+//app.use('/api/auth', authRoutes);
+app.use('/api/curso', cursoRoutes);
 
 // Ruta de prueba para la conexión a la base de datos
 app.get('/test-db', async (req, res) => {
