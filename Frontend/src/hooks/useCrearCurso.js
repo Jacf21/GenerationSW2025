@@ -33,7 +33,7 @@ const useCrearCurso = () => {
 
             setMensaje({ 
                 type: 'success', 
-                text: `Curso "${data.curso.nombre}" creado con éxito! 🎉` 
+                text: `Curso "${data.curso.nombre}" creado con éxito! con codigo "${data.curso.codigo}"` 
             });
             setFormData(initialFormData); // Limpiar formulario
             

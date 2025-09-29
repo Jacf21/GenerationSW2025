@@ -16,4 +16,12 @@ const crearCurso = async (nombre, fecha_ini, fecha_fin, codigoHashed) => {
     return result.rows[0];
 };
 
-module.exports = { crearCurso };
+const buscarCursoPorCodigo = async (codigo) => {
+    const query = 'SELECT id FROM curso WHERE codigo = $1';
+    const values = [codigo];
+    const result = await pool.query(query, values);
+    // Retorna el primer curso si existe, o undefined si no hay resultados
+    return result.rows[0]; 
+};
+
+module.exports = { crearCurso, buscarCursoPorCodigo};
