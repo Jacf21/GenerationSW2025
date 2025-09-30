@@ -4,7 +4,7 @@ const validarCrearCurso = (req, res, next) => {
     if (!nombre || !fecha_ini || !fecha_fin) {
         return res.status(400).json({ 
             error: 'Faltan campos obligatorios.',
-            detalles: 'Asegúrate de proporcionar nombre, fecha_ini, fecha_fin y codigo.'
+            detalles: 'Asegúrate de proporcionar nombre, fecha_ini, fecha_fin.'
         });
     }
 
