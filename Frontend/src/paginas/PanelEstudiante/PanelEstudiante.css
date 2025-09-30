@@ -1,0 +1,40 @@
+.panel-estudiante {
+  padding: var(--espacio-lg);
+}
+
+.panel-header {
+  margin-bottom: var(--espacio-xl);
+}
+
+.panel-header h1 {
+  color: var(--texto);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.panel-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--espacio-lg);
+}
+
+.mis-cursos,
+.proximas-tareas {
+  background-color: var(--fondo-input);
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.mis-cursos h2,
+.proximas-tareas h2 {
+  color: var(--texto);
+  font-size: 1.25rem;
+  margin-bottom: var(--espacio-lg);
+}
+
+.cursos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--espacio-md);
+}
