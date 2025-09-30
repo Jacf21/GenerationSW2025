@@ -4,8 +4,11 @@ import Sidebar from './componentes/comunes/Sidebar/Sidebar';
 import Footer from './componentes/comunes/Footer/Footer';
 import Inicio from './paginas/Inicio/Inicio';
 import Registro from './paginas/Registro/Registro';
+import Login from './paginas/Login/Login';
 import CrearCurso from './paginas/CrearCurso/CrearCursoPage';
-//import Login from './paginas/Login/Login';
+import PanelEstudiante from './paginas/PanelEstudiante/PanelEstudiante';
+import PanelProfesor from './paginas/PanelProfesor/PanelProfesor';
+import PanelAdmin from './paginas/PanelAdmin/PanelAdmin';
 import './estilos/App.css';
 
 function App() {
@@ -19,8 +22,12 @@ function App() {
             <Routes>
               <Route path="/" element={<Inicio />} />
               <Route path="/registro" element={<Registro />} />
-              {/* <Route path="/login" element={<Login />} /> */}
+              <Route path="/login" element={<Login />} />
               <Route path="/crear-curso" element={<CrearCurso />} />
+              {/* Agregar rutas de paneles */}
+              <Route path="/panel-estudiante" element={<PanelEstudiante />} />
+              <Route path="/panel-profesor" element={<PanelProfesor />} />
+              <Route path="/panel-admin" element={<PanelAdmin />} />
             </Routes>
           </main>
         </div>

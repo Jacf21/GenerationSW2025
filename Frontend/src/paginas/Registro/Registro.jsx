@@ -30,12 +30,12 @@ const TipoUsuarioSelector = ({ onSelect }) => {
       descripcion: 'Para docentes que impartirán clases',
       icon: <FaChalkboardTeacher className="tipo-icon" />
     },
-    { 
-      id: 'admin', 
-      nombre: 'Administrador', 
-      descripcion: 'Para gestión del sistema',
-      icon: <FaUserCog className="tipo-icon" />
-    }
+    // { 
+    //   id: 'admin', 
+    //   nombre: 'Administrador', 
+    //   descripcion: 'Para gestión del sistema',
+    //   icon: <FaUserCog className="tipo-icon" />
+    // }
   ];
 
   // Renderizamos el modal con opciones de tipo de usuario

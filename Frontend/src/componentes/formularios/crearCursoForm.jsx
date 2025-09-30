@@ -28,7 +28,7 @@ const CursoFormulario = ({ formData, mensaje, handleChange, handleSubmit, isLoad
                 <input type="date" name="fecha_fin" value={formData.fecha_fin} onChange={handleChange} required disabled={isLoading} />
             </div>
 
-            <button type="submit" disabled={isLoading}>
+            <button className='boton' type="submit" disabled={isLoading}>
                 {isLoading ? 'Creando...' : 'Crear Curso'}
             </button>
         </form>
