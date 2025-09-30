@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 // Custom hook para manejar formularios y validaciones
 import { useFormulario } from '../../hooks/useFormulario';
 // Servicio API para hacer peticiones al backend
-import { registroUsuario } from '../../servicios/authService';
+//import { registroUsuario } from '../../servicios/authService';
+import { api } from '../../servicios/api';
 // Componente modal reutilizable
 import Modal from '../../componentes/comunes/Modal/Modal';
 // Iconos de react-icons
@@ -91,7 +92,8 @@ const Registro = () => {
   // Función que maneja el envío del formulario
   const onSubmit = async (datos) => {
     try {
-      await registroUsuario(datos); // llamada al backend
+      // Llamada al backend para registrar usuario
+      await api.registro(datos); // llamada al backend
       setMensaje({ 
         tipo: 'exito', 
         texto: 'Registro exitoso! Redirigiendo...' 
