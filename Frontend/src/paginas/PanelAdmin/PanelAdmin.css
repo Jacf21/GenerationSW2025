@@ -1,0 +1,46 @@
+.panel-admin {
+  padding: var(--espacio-lg);
+}
+
+.panel-header {
+  margin-bottom: var(--espacio-xl);
+}
+
+.panel-header h1 {
+  color: var(--texto);
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.panel-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espacio-lg);
+}
+
+.estadisticas {
+  grid-column: 1 / -1;
+}
+
+.estadisticas,
+.gestion-usuarios,
+.gestion-cursos {
+  background-color: var(--fondo-input);
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-lg);
+  box-shadow: var(--sombra-sm);
+}
+
+.estadisticas h2,
+.gestion-usuarios h2,
+.gestion-cursos h2 {
+  color: var(--texto);
+  font-size: 1.25rem;
+  margin-bottom: var(--espacio-lg);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--espacio-md);
+}
