@@ -1,0 +1,88 @@
+# Generación de Software - Proyecto Fullstack
+
+## Instalación de herramientas
+
+- ESLint (para mantener código limpio y consistente):
+```bash
+npm install eslint -D
+Ejecutar ESLint:
+
+bash
+Copiar código
+npx eslint .
+Ejecutar tests:
+
+bash
+Copiar código
+npm test
+📂 Estructura del proyecto
+Este repositorio está dividido en dos partes principales: frontend (React) y backend (Node.js con Postgres).
+A continuación se describe el uso de cada carpeta para que los desarrolladores mantengan el mismo orden y organización.
+
+🖥️ Frontend (/frontend)
+Aplicación React encargada de la interfaz de usuario.
+
+/src/components → Componentes reutilizables de UI (botones, formularios, modales, etc.).
+
+/src/pages → Vistas completas que representan pantallas de la aplicación (Login, Dashboard, etc.).
+
+/src/hooks → Hooks personalizados de React (useAuth, useFetch, etc.).
+
+/src/services → Funciones para comunicación con el backend (fetch/axios hacia /api).
+
+/src/context → Contextos de React para manejar estado global.
+
+/src/styles → Archivos de estilos globales, Tailwind config o CSS Modules.
+
+/src/tests → Pruebas unitarias e integrales de componentes (usando Jest + React Testing Library).
+
+/public → Archivos estáticos (favicon, imágenes, manifest, etc.).
+
+Regla: No colocar lógica de negocio en components/, solo en services/ o en el backend.
+
+⚙️ Backend (/backend)
+API desarrollada con Node.js + Express conectada a Postgres.
+
+/src/app.js → Configuración principal de Express (middlewares, parsers, etc.).
+
+/src/server.js → Punto de entrada para iniciar el servidor.
+
+/src/config → Archivos de configuración (conexión a base de datos, variables de entorno, etc.).
+
+/src/routes → Definición de endpoints de la API, cada recurso en un archivo (user.routes.js, auth.routes.js).
+
+/src/controllers → Maneja las solicitudes HTTP de cada ruta. Cada función debe ser pequeña y específica, enfocándose en recibir la petición, validar datos básicos, llamar a los servicios correspondientes y enviar la respuesta. No incluir lógica de negocio aquí.
+
+/src/services → Contiene la lógica de negocio de la aplicación (reglas, cálculos, transformaciones de datos, etc.).
+
+/src/models → Consultas a la base de datos o definiciones de ORM (ej: Prisma/Sequelize).
+
+/src/middleware → Middlewares de Express (autenticación, validaciones, logs, etc.).
+
+/src/utils → Funciones auxiliares (formatos de fecha, validadores, helpers genéricos).
+
+/src/tests → Pruebas unitarias e integrales para la API (Jest + Supertest).
+
+Regla: No poner lógica de negocio en routes/, solo en controllers/ y services/.
+
+🌍 Global
+/eslint.config.js → Configuración única de ESLint que aplica a frontend y backend.
+
+/package.json → Dependencias globales (eslint, husky, prettier, etc. opcionales).
+
+/.gitignore → Archivos y carpetas que no deben subirse al repositorio.
+
+/README.md → Documentación principal del proyecto.
+
+📐 Convenciones de desarrollo
+TDD: Escribir primero los tests en /tests/ y luego implementar el código.
+
+Rutas REST: Seguir convención RESTful (ej: /api/users, /api/auth/login).
+
+Commits: Mensajes claros y cortos (ej: feat: agregar login en backend).
+
+Linting: Antes de hacer commit, ejecutar npm run lint.
+
+Testing: Los PR solo se aceptan si todos los tests pasan.
+
+Con esta estructura aseguramos que el código sea escalable, ordenado y fácil de mantener.
