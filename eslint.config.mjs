@@ -2,11 +2,25 @@ import js from "@eslint/js";
 import globals from "globals";
 import pluginReact from "eslint-plugin-react";
 import json from "@eslint/json";
-import css from "@eslint/css";
+import vitest from "eslint-plugin-vitest";
+import prettier from "eslint-plugin-prettier";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  // JS / JSX
+  {
+    ignores: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.vscode/**",
+      "**/coverage/**",
+      "**/package*.json",
+      "**/*.lock",
+      "**/*.css",
+    ],
+  },
+
+  // 🟨 JavaScript / JSX
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
     languageOptions: {
@@ -16,35 +30,60 @@ export default defineConfig([
       },
     },
     extends: [js.configs.recommended],
-  },
-
-  // React
-  {
-    files: ["**/*.{jsx,tsx}"],
-    ...pluginReact.configs.flat.recommended,
-    settings: {
-      react: {
-        version: "detect", // detecta versión instalada de React
-      },
+    rules: {
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-console": "off",
     },
   },
 
-  // JSON
+  // ⚛️ React
   {
-    files: ["**/*.json"],
-    plugins: { json },
-    extends: ["json/recommended"],
-  },
-  {
-    files: ["**/*.jsonc"],
-    plugins: { json },
-    extends: ["json/recommended"],
+    files: ["**/*.{jsx,tsx}"],
+    ...pluginReact.configs.flat.recommended,
+    settings: { react: { version: "detect" } },
+    rules: {
+      "react/react-in-jsx-scope": "off", // React 17+ ya no necesita importar React
+      "react/jsx-no-target-blank": "warn",
+      "react/prop-types": "off", // si usas TypeScript o props sin PropTypes
+      "react/jsx-curly-brace-presence": ["warn", "never"], // limpia JSX
+    },
   },
 
-  // CSS
+  // Vitest (para evitar "test" y "expect" no definidos)
   {
-    files: ["**/*.css"],
-    plugins: { css },
-    extends: ["css/recommended"],
-  }
+    files: ["**/*.test.{js,jsx,ts,tsx}", "**/tests/**/*.{js,jsx,ts,tsx}"],
+    ...vitest.configs.recommended,
+    languageOptions: {
+      globals: {
+        ...globals.vitest,
+      },
+    },
+    rules: {
+      "vitest/no-focused-tests": "error",
+    },
+  },
+
+  // 📦 JSON
+  {
+    files: ["**/*.json", "**/*.jsonc"],
+    ...json.configs.recommended,
+  },
+
+  // 🧹 Prettier (formato automático)
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: { prettier },
+    rules: {
+      "prettier/prettier": [
+        "warn",
+        {
+          endOfLine: "auto",
+          semi: true,
+          singleQuote: false,
+          trailingComma: "es5",
+          printWidth: 100,
+        },
+      ],
+    },
+  },
 ]);
