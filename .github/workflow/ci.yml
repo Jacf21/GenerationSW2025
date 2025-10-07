@@ -35,4 +35,4 @@ jobs:
 
       # 5. Ejecutar tests con Vitest
       - name: Run Vitest
-        run: npx vitest run --reporter=dot
+        run: npm run test --reporter=dot
