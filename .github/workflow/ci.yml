@@ -1,4 +1,4 @@
-name: CI – Lint & Test
+name: CI   Lint & Test
 
 # Se ejecuta cuando hay push o PR a main
 on:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20]  # Ajusta según tu versión de Node
+        node-version: [20] # Ajusta según tu versión de Node
 
     steps:
       # 1. Clonar el repo
