@@ -31,5 +31,12 @@ jobs:
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
 
-      - name: Run test
-        run: npm run test --reporter=dot
+      # 🧪 Ejecutar tests del Backend con Jest
+      - name: Run Backend tests (Jest)
+        run: npx jest --config Backend/jest.config.js
+        working-directory: ./Backend
+
+      # 🧪 Ejecutar tests del Frontend con Vitest
+      - name: Run Frontend tests (Vitest)
+        run: npx vitest run --reporter=dot
+        working-directory: ./Frontend
