@@ -31,5 +31,5 @@ jobs:
       - name: Run ESLint
         run: npx eslint . --ext .js,.jsx,.ts,.tsx
 
-      - name: Run Vitest
+      - name: Run test
         run: npm run test --reporter=dot
