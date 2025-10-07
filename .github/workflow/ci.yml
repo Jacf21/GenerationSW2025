@@ -1,4 +1,4 @@
-name: CI   Lint & Test
+name: Lint & Test
 
 # Se ejecuta cuando hay push o PR a main
 on:
