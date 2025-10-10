@@ -1,0 +1,51 @@
+{
+  // 🔧 Formatear solo con ESLint al guardar
+  "editor.formatOnSave": false,
+
+  // 🧩 Habilitar ESLint y validar múltiples lenguajes
+  "eslint.alwaysShowStatus": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "jsonc"
+  ],
+
+  // 🚀 Ejecutar auto-fix y Prettier (a través de ESLint) al guardar
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+
+  // 💅 Evitar que Prettier actúe directo (solo a través de ESLint)
+  "prettier.enable": false,
+
+  // 📁 Ignorar carpetas innecesarias
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/coverage": true
+  },
+
+  // 💻 Configuración coherente para todos los tipos de archivo
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
+}

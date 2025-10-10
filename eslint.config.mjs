@@ -72,8 +72,11 @@ export default defineConfig([
   // 🧹 Prettier (formato automático)
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
-    plugins: { prettier },
+    plugins: {
+      prettier,
+    },
     rules: {
+      ...prettier.configs.recommended.rules,
       "prettier/prettier": [
         "warn",
         {
@@ -84,6 +87,15 @@ export default defineConfig([
           printWidth: 100,
         },
       ],
+    },
+  },
+
+  {
+    files: ["**/*.test.{js,jsx,ts,tsx}", "**/__tests__/**/*.{js,jsx,ts,tsx}"],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
     },
   },
 ]);
