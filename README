@@ -3,6 +3,7 @@
 ## Instalación de herramientas
 
 - ESLint (para mantener código limpio y consistente):
+
 ```bash
 npm install eslint -D
 Ejecutar ESLint:
@@ -86,3 +87,27 @@ Linting: Antes de hacer commit, ejecutar npm run lint.
 Testing: Los PR solo se aceptan si todos los tests pasan.
 
 Con esta estructura aseguramos que el código sea escalable, ordenado y fácil de mantener.
+```
+
+### ¿Cuál sería el mínimo aceptable para una entrega?
+
+```bash
+
+Si no quieres ir demasiado profundo, pero tampoco quedar mal, este es un nivel equilibrado de cobertura para tu proyecto Node.js + React 👇
+
+🧱 Backend (Node.js / Express)
+Prioridad	Qué testear	Estado
+🟥 Obligatorio	Controller principal (cursoController, userController, etc.)	✅
+🟥 Obligatorio	Service principal (cursoService, userService, etc.)	✅
+🟥 Obligatorio	Funciones utilitarias (utils, helpers de validación, hash, etc.)	✅
+🟧 Recomendado	Middleware de autenticación o validación (auth, validarCrearCurso, etc.)	🔄
+🟨 Opcional	Tests de integración de rutas (/api/cursos, /api/users) con Supertest	🔄
+🟩 Extra (para destacar)	Simulación de base de datos o mocks de ORM	✨
+💻 Frontend (React)
+Prioridad	Qué testear	Estado
+🟥 Obligatorio	Componentes principales (CrearCursoForm, LoginForm, etc.) — render y eventos	✅
+🟥 Obligatorio	Hooks personalizados (useCursos, useAuth, etc.)	✅
+🟧 Recomendado	Validaciones de formularios y llamadas a la API mockeadas	🔄
+🟨 Opcional	Rutas con React Router (/crear-curso, /login)	🔄
+🟩 Extra (para destacar)	Test E2E del flujo completo (Cypress o Playwright)	✨
+```
