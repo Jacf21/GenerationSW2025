@@ -1,4 +1,6 @@
-const validarCrearCurso = (req, res, next) => {
+// src/middleware/validateCurso.js
+
+export const validarCrearCurso = (req, res, next) => {
   const { nombre, fecha_ini, fecha_fin } = req.body;
 
   // Validar campos obligatorios
@@ -17,8 +19,7 @@ const validarCrearCurso = (req, res, next) => {
   }
 
   // Validar formato de fecha YYYY-MM-DD
-  const esFechaValida = (fecha) =>
-    /^\d{4}-\d{2}-\d{2}$/.test(fecha) && !isNaN(Date.parse(fecha));
+  const esFechaValida = (fecha) => /^\d{4}-\d{2}-\d{2}$/.test(fecha) && !isNaN(Date.parse(fecha));
 
   if (!esFechaValida(fecha_ini) || !esFechaValida(fecha_fin)) {
     return res.status(400).json({
@@ -44,5 +45,3 @@ const validarCrearCurso = (req, res, next) => {
 
   next();
 };
-
-module.exports = { validarCrearCurso };
