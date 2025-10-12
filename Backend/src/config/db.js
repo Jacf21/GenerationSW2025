@@ -1,5 +1,8 @@
-const dotenv = require("dotenv");
-const { Pool } = require("pg");
+
+// src/config/db.js
+import dotenv from "dotenv";
+import pkg from "pg"; // pg solo soporta import de esta forma en ESM
+const { Pool } = pkg;
 
 dotenv.config();
 
@@ -11,6 +14,7 @@ const pool = new Pool({
   port: parseInt(process.env.DB_PORT),
 });
 
-module.exports = {
+// Exportamos el objeto pool directamente como default
+export default {
   query: (text, params) => pool.query(text, params),
 };
