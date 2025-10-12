@@ -30,10 +30,9 @@ describe("cursoService", () => {
 
       const result = await cursoService.buscarCursoPorCodigo("codigo123");
 
-      expect(pool.query).toHaveBeenCalledWith(
-        "SELECT id FROM curso WHERE codigo = $1",
-        ["codigo123"]
-      );
+      expect(pool.query).toHaveBeenCalledWith("SELECT id FROM curso WHERE codigo = $1", [
+        "codigo123",
+      ]);
       expect(result).toEqual(mockCurso);
     });
 

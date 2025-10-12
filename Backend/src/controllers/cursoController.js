@@ -1,4 +1,3 @@
-// src/controllers/cursoController.js
 import * as cursoService from "../services/cursoServices.js";
 import * as utilsCurso from "../utils/cursoUtils.js";
 import bcrypt from "bcryptjs";

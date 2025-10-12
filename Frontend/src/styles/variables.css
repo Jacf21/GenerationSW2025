@@ -1,0 +1,54 @@
+:root {
+  /* 🎨 Colores principales */
+  --color-primario: #059669;          /* Verde esmeralda elegante */
+  --color-primario-hover: #047857;    /* Verde más oscuro para hover */
+  --color-secundario: #6b7280;        /* Gris neutro profesional */
+  --color-acento: #14b8a6;            /* Turquesa moderno para acentos */
+  
+  /* 🌞 Modo claro */
+  --fondo: #f9fafb;                   /* Fondo gris muy claro */
+  --texto: #111827;                   /* Texto principal casi negro */
+  --texto-secundario: #374151;        /* Gris oscuro para secundarios */
+  --fondo-input: #ffffff;             /* Blanco limpio para inputs */
+  --borde: #d1d5db;                   /* Gris suave para bordes */
+  
+  /* 🌙 Modo oscuro */
+  --fondo-oscuro: #0f172a;            /* Azul-gris muy oscuro */
+  --texto-oscuro: #f9fafb;            /* Texto claro */
+  --fondo-input-oscuro: #1e293b;      /* Fondo más claro para inputs */
+  --borde-oscuro: #334155;            /* Gris azulado para bordes */
+  
+  /* ⚡ Estados */
+  --error: #dc2626;                   /* Rojo fuerte */
+  --exito: #16a34a;                   /* Verde éxito */
+  --advertencia: #f59e0b;             /* Amarillo cálido */
+  
+  /* 📏 Espaciado */
+  --espacio-xs: 0.25rem;
+  --espacio-sm: 0.5rem;
+  --espacio-md: 1rem;
+  --espacio-lg: 1.5rem;
+  --espacio-xl: 2rem;
+
+  /* 🌫️ Sombras */
+  --sombra-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --sombra-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --sombra-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  /* ⬜ Bordes */
+  --radio-sm: 0.375rem;
+  --radio-md: 0.5rem;
+  --radio-lg: 0.75rem;
+
+  /* ✍️ Tipografía */
+  --fuente-principal: 'Inter', system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: var(--fondo-oscuro);
+    --texto: var(--texto-oscuro);
+    --fondo-input: var(--fondo-input-oscuro);
+    --borde: var(--borde-oscuro);
+  }
+}
