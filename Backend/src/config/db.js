@@ -1,4 +1,3 @@
-
 // src/config/db.js
 import dotenv from "dotenv";
 import pkg from "pg"; // pg solo soporta import de esta forma en ESM

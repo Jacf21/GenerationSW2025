@@ -44,9 +44,7 @@ describe("POST /cursos - crearCurso", () => {
   });
 
   it("debe manejar un error interno del servidor", async () => {
-    utilsCurso.generarCodigoUnico.mockRejectedValue(
-      new Error("Error generar código")
-    );
+    utilsCurso.generarCodigoUnico.mockRejectedValue(new Error("Error generar código"));
 
     const response = await request(app).post("/cursos").send({
       nombre: "Node.js",
@@ -55,8 +53,6 @@ describe("POST /cursos - crearCurso", () => {
     });
 
     expect(response.status).toBe(500);
-    expect(response.body.error).toBe(
-      "Error interno del servidor al crear el curso."
-    );
+    expect(response.body.error).toBe("Error interno del servidor al crear el curso.");
   });
 });

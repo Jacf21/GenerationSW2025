@@ -1,40 +1,40 @@
 // Importamos hooks de React
-import { useState } from 'react';
+import { useState } from "react";
 // Hook de react-router-dom para navegar entre páginas
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 // Custom hook para manejar formularios y validaciones
-import { useFormulario } from '../../hooks/useFormulario';
+import { useFormulario } from "../../hooks/useFormulario";
 // Servicio API para hacer peticiones al backend
-import { api } from '../../services/api';
+import { api } from "../../services/api";
 // Componente modal reutilizable
-import Modal from '../../components/comunes/Modal/modal';
+import Modal from "../../components/comunes/Modal/modal";
 // Iconos de react-icons
-import { FaUserGraduate, FaChalkboardTeacher, FaUserCog } from 'react-icons/fa';
+import { FaUserGraduate, FaChalkboardTeacher, FaUserCog } from "react-icons/fa";
 // Estilos CSS del componente
-import './Registro.css';
+import "./Registro.css";
 
 // Selector de tipo de usuario dentro del modal
 const TipoUsuarioSelector = ({ onSelect }) => {
   // Definimos los tipos de usuario con id, nombre, descripción e ícono
   const tipos = [
-    { 
-      id: 'est', 
-      nombre: 'Estudiante', 
-      descripcion: 'Para alumnos que tomarán cursos',
-      icon: <FaUserGraduate className="tipo-icon" />
+    {
+      id: "est",
+      nombre: "Estudiante",
+      descripcion: "Para alumnos que tomarán cursos",
+      icon: <FaUserGraduate className="tipo-icon" />,
     },
-    { 
-      id: 'profesor', 
-      nombre: 'Profesor', 
-      descripcion: 'Para docentes que impartirán clases',
-      icon: <FaChalkboardTeacher className="tipo-icon" />
+    {
+      id: "profesor",
+      nombre: "Profesor",
+      descripcion: "Para docentes que impartirán clases",
+      icon: <FaChalkboardTeacher className="tipo-icon" />,
     },
-    { 
-      id: 'admin', 
-      nombre: 'Administrador', 
-      descripcion: 'Para gestión del sistema',
-      icon: <FaUserCog className="tipo-icon" />
-    }
+    {
+      id: "admin",
+      nombre: "Administrador",
+      descripcion: "Para gestión del sistema",
+      icon: <FaUserCog className="tipo-icon" />,
+    },
   ];
 
   // Renderizamos el modal con opciones de tipo de usuario
@@ -42,7 +42,7 @@ const TipoUsuarioSelector = ({ onSelect }) => {
     <div className="tipo-usuario-selector">
       <h2>Selecciona el tipo de usuario</h2>
       <div className="tipos-grid">
-        {tipos.map(tipo => (
+        {tipos.map((tipo) => (
           <button
             key={tipo.id} // clave única para React
             className="tipo-card"
@@ -61,29 +61,22 @@ const TipoUsuarioSelector = ({ onSelect }) => {
 const Registro = () => {
   const navigate = useNavigate(); // Hook para redirigir después de registro
   const [showModal, setShowModal] = useState(true); // Estado para mostrar/ocultar modal
-  const [mensaje, setMensaje] = useState({ tipo: '', texto: '' }); // Estado para mensajes de éxito o error
+  const [mensaje, setMensaje] = useState({ tipo: "", texto: "" }); // Estado para mensajes de éxito o error
 
   // Usamos el hook personalizado para manejar el formulario
-  const { 
-    valores, 
-    errores, 
-    handleChange, 
-    handleBlur,
-    handleKeyDown, 
-    handleSubmit,
-    setValores 
-  } = useFormulario({
-    nombre: '',
-    email: '',
-    password: '',
-    tipo: ''
-  });
+  const { valores, errores, handleChange, handleBlur, handleKeyDown, handleSubmit, setValores } =
+    useFormulario({
+      nombre: "",
+      email: "",
+      password: "",
+      tipo: "",
+    });
 
   // Cuando se selecciona un tipo de usuario en el modal
   const handleTipoSelect = (tipo) => {
-    setValores(prev => ({
+    setValores((prev) => ({
       ...prev,
-      tipo
+      tipo,
     }));
     setShowModal(false); // cerramos el modal
   };
@@ -92,17 +85,17 @@ const Registro = () => {
   const onSubmit = async (datos) => {
     try {
       await api.registro(datos); // llamada al backend
-      setMensaje({ 
-        tipo: 'exito', 
-        texto: 'Registro exitoso! Redirigiendo...' 
+      setMensaje({
+        tipo: "exito",
+        texto: "Registro exitoso! Redirigiendo...",
       });
       // Redirigimos al login después de 2 segundos
-      setTimeout(() => navigate('/'), 2000);
+      setTimeout(() => navigate("/"), 2000);
     } catch (error) {
       // Capturamos error y mostramos mensaje
-      setMensaje({ 
-        tipo: 'error', 
-        texto: error.message || 'Error al registrar usuario' 
+      setMensaje({
+        tipo: "error",
+        texto: error.message || "Error al registrar usuario",
       });
     }
   };
@@ -110,7 +103,7 @@ const Registro = () => {
   // Si el modal está abierto, mostramos el selector de tipo de usuario
   if (showModal) {
     return (
-      <Modal isOpen={showModal} onClose={() => navigate('/')}>
+      <Modal isOpen={showModal} onClose={() => navigate("/")}>
         <TipoUsuarioSelector onSelect={handleTipoSelect} />
       </Modal>
     );
@@ -128,15 +121,10 @@ const Registro = () => {
         </div>
 
         {/* Mensaje de éxito o error */}
-        {mensaje.texto && (
-          <div className={`mensaje mensaje-${mensaje.tipo}`}>
-            {mensaje.texto}
-          </div>
-        )}
+        {mensaje.texto && <div className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</div>}
 
         {/* Formulario */}
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          
           {/* Campo Nombre */}
           <div className="campo">
             <label htmlFor="nombre">Nombre completo</label>
@@ -150,13 +138,11 @@ const Registro = () => {
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder="Ej: Juan Pérez"
-                className={errores.nombre ? 'input-error' : ''}
+                className={errores.nombre ? "input-error" : ""}
                 autoFocus
               />
               {/* Mostrar error de validación */}
-              {errores.nombre && (
-                <div className="mensaje-error-campo">{errores.nombre}</div>
-              )}
+              {errores.nombre && <div className="mensaje-error-campo">{errores.nombre}</div>}
             </div>
           </div>
 
@@ -173,11 +159,9 @@ const Registro = () => {
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder="correo@ejemplo.com"
-                className={errores.email ? 'input-error' : ''}
+                className={errores.email ? "input-error" : ""}
               />
-              {errores.email && (
-                <div className="mensaje-error-campo">{errores.email}</div>
-              )}
+              {errores.email && <div className="mensaje-error-campo">{errores.email}</div>}
             </div>
           </div>
 
@@ -194,20 +178,14 @@ const Registro = () => {
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder="Mínimo 8 caracteres"
-                className={errores.password ? 'input-error' : ''}
+                className={errores.password ? "input-error" : ""}
               />
-              {errores.password && (
-                <div className="mensaje-error-campo">{errores.password}</div>
-              )}
+              {errores.password && <div className="mensaje-error-campo">{errores.password}</div>}
             </div>
           </div>
 
           {/* Errores generales (ej. backend) */}
-          {errores.submit && (
-            <div className="mensaje mensaje-error">
-              {errores.submit}
-            </div>
-          )}
+          {errores.submit && <div className="mensaje mensaje-error">{errores.submit}</div>}
 
           {/* Botón submit */}
           <button type="submit" className="boton-primario">
@@ -222,11 +200,11 @@ const Registro = () => {
 // Función auxiliar para mostrar etiqueta legible del tipo de usuario
 const getTipoLabel = (tipo) => {
   const tipos = {
-    est: 'Estudiante',
-    profesor: 'Profesor',
-    admin: 'Administrador'
+    est: "Estudiante",
+    profesor: "Profesor",
+    admin: "Administrador",
   };
-  return tipos[tipo] || '';
+  return tipos[tipo] || "";
 };
 
 export default Registro;

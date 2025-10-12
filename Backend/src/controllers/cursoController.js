@@ -10,12 +10,7 @@ const crearCurso = async (req, res) => {
     const saltRounds = 10;
     const codigoHashed = await bcrypt.hash(codigoGenerado, saltRounds);
 
-    const nuevoCurso = await cursoService.crearCurso(
-      nombre,
-      fecha_ini,
-      fecha_fin,
-      codigoHashed
-    );
+    const nuevoCurso = await cursoService.crearCurso(nombre, fecha_ini, fecha_fin, codigoHashed);
 
     res.status(201).json({
       message: "Curso creado exitosamente",
@@ -26,9 +21,7 @@ const crearCurso = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al crear curso:", error);
-    res
-      .status(500)
-      .json({ error: "Error interno del servidor al crear el curso." });
+    res.status(500).json({ error: "Error interno del servidor al crear el curso." });
   }
 };
 

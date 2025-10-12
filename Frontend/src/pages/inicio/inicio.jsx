@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import './Inicio.css';
+import { Link } from "react-router-dom";
+import "./Inicio.css";
 
 const Inicio = () => {
   return (

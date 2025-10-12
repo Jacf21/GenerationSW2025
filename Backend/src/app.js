@@ -35,18 +35,18 @@ app.use("/api/auth", authRoutes);
 // ===============================
 // 🔌 RUTA DE PRUEBA DE CONEXIÓN A LA BASE DE DATOS
 // ===============================
-app.get('/test-db', async (req, res) => {
+app.get("/test-db", async (req, res) => {
   try {
     // Realizamos una consulta de prueba
-    const result = await db.query('SELECT NOW()');
+    const result = await db.query("SELECT NOW()");
     res.json({
-      message: '✅ Conexión exitosa a la base de datos',
-      timestamp: result.rows[0].now
+      message: "✅ Conexión exitosa a la base de datos",
+      timestamp: result.rows[0].now,
     });
   } catch (error) {
     res.status(500).json({
-      message: '❌ Error al conectar con la base de datos',
-      error: error.message
+      message: "❌ Error al conectar con la base de datos",
+      error: error.message,
     });
   }
 });
@@ -55,8 +55,8 @@ app.get('/test-db', async (req, res) => {
 // ⚠️ MANEJO GLOBAL DE ERRORES
 // ===============================
 app.use((err, req, res, next) => {
-  console.error('Error detectado:', err.stack);
-  res.status(500).json({ message: 'Error interno del servidor' });
+  console.error("Error detectado:", err.stack);
+  res.status(500).json({ message: "Error interno del servidor" });
 });
 
 export default app;
