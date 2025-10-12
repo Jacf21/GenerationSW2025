@@ -6,6 +6,10 @@ import Inicio from "./pages/inicio/inicio";
 import CrearCurso from "./pages/crearCurso/CrearCursoPage";
 import "./App.css";
 import "./styles/variables.css";
+import Registro from "./pages/Registro/Registro";
+// import Login from './pages/Login/Login';
+import "./App.css";
+import "./index.css";
 
 function App() {
   return (
@@ -18,6 +22,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Inicio />} />
               <Route path="/crear-curso" element={<CrearCurso />} />
+              <Route path="/registro" element={<Registro />} />
+              {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
           </main>
         </div>
