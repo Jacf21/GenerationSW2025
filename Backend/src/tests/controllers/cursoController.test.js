@@ -1,19 +1,45 @@
-const request = require("supertest");
-const express = require("express");
-const { crearCurso } = require("../../controllers/cursoController");
-const cursoService = require("../../services/cursoServices");
-const utilsCurso = require("../../utils/cursoUtils");
-const bcrypt = require("bcryptjs");
+import { jest } from "@jest/globals";
+import express from "express";
+import request from "supertest";
 
-jest.mock("../../services/cursoServices");
-jest.mock("../../utils/cursoUtils");
-jest.mock("bcryptjs");
+// --------------------
+// Mock de los módulos
+// --------------------
+await jest.unstable_mockModule("../../services/cursoServices.js", () => ({
+  crearCurso: jest.fn(),
+}));
 
+await jest.unstable_mockModule("../../utils/cursoUtils.js", () => ({
+  generarCodigoUnico: jest.fn(),
+}));
+
+await jest.unstable_mockModule("bcryptjs", () => ({
+  hash: jest.fn(),
+}));
+
+// --------------------
+// Importar los módulos mockeados
+// --------------------
+const cursoService = await import("../../services/cursoServices.js");
+const utilsCurso = await import("../../utils/cursoUtils.js");
+const { hash } = await import("bcryptjs");
+const { crearCurso } = await import("../../controllers/cursoController.js"); // named export
+
+// --------------------
+// Configuración de Express
+// --------------------
 const app = express();
 app.use(express.json());
 app.post("/cursos", crearCurso);
 
+// --------------------
+// Tests
+// --------------------
 describe("POST /cursos - crearCurso", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("debe crear un curso exitosamente", async () => {
     const mockCodigo = "ABC123";
     const mockCodigoHashed = "hashed_ABC123";
@@ -26,7 +52,7 @@ describe("POST /cursos - crearCurso", () => {
     };
 
     utilsCurso.generarCodigoUnico.mockResolvedValue(mockCodigo);
-    bcrypt.hash.mockResolvedValue(mockCodigoHashed);
+    hash.mockResolvedValue(mockCodigoHashed);
     cursoService.crearCurso.mockResolvedValue(mockCurso);
 
     const response = await request(app).post("/cursos").send({
@@ -41,6 +67,7 @@ describe("POST /cursos - crearCurso", () => {
     expect(response.body.curso.codigo).toBe(mockCodigo);
     expect(utilsCurso.generarCodigoUnico).toHaveBeenCalled();
     expect(cursoService.crearCurso).toHaveBeenCalled();
+    expect(hash).toHaveBeenCalledWith(mockCodigo, 10);
   });
 
   it("debe manejar un error interno del servidor", async () => {

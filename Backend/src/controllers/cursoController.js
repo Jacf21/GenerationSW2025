@@ -1,6 +1,6 @@
 import * as cursoService from "../services/cursoServices.js";
 import * as utilsCurso from "../utils/cursoUtils.js";
-import bcrypt from "bcryptjs";
+import { hash } from "bcryptjs";
 
 export const crearCurso = async (req, res) => {
   const { nombre, fecha_ini, fecha_fin } = req.body;
@@ -8,7 +8,7 @@ export const crearCurso = async (req, res) => {
   try {
     const codigoGenerado = await utilsCurso.generarCodigoUnico();
     const saltRounds = 10;
-    const codigoHashed = await bcrypt.hash(codigoGenerado, saltRounds);
+    const codigoHashed = await hash(codigoGenerado, saltRounds);
 
     const nuevoCurso = await cursoService.crearCurso(nombre, fecha_ini, fecha_fin, codigoHashed);
 

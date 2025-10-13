@@ -4,13 +4,14 @@ import useCrearCurso from "../../hooks/useCrearCurso";
 import "./cursoform.css";
 
 const CrearCursoPage = () => {
-  const { formData, mensaje, isLoading, handleChange, handleSubmit } = useCrearCurso();
+  const { formData, errores, mensaje, isLoading, handleChange, handleSubmit } = useCrearCurso();
 
   return (
     <div className="crear-curso-container">
       <h1>Crear Nuevo Curso</h1>
       <CursoFormulario
         formData={formData}
+        errores={errores}
         mensaje={mensaje}
         handleChange={handleChange}
         handleSubmit={handleSubmit}

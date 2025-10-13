@@ -1,8 +1,8 @@
 import React from "react";
 
-const CursoFormulario = ({ formData, mensaje, handleChange, handleSubmit, isLoading }) => {
+const CursoFormulario = ({ formData, errores, mensaje, handleChange, handleSubmit, isLoading }) => {
   return (
-    <form className="crear-curso-card" onSubmit={handleSubmit}>
+    <form className="crear-curso-card" onSubmit={handleSubmit} role="form">
       <h2>Crear Nuevo Curso</h2>
 
       {/* Mensajes */}
@@ -12,8 +12,9 @@ const CursoFormulario = ({ formData, mensaje, handleChange, handleSubmit, isLoad
 
       {/* Campos del formulario */}
       <div className="campo">
-        <label>Nombre del Curso:</label>
+        <label htmlFor="nombre">Nombre del Curso:</label>
         <input
+          id="nombre"
           type="text"
           name="nombre"
           value={formData.nombre}
@@ -21,11 +22,13 @@ const CursoFormulario = ({ formData, mensaje, handleChange, handleSubmit, isLoad
           required
           disabled={isLoading}
         />
+        {errores?.nombre && <p className="error">{errores.nombre}</p>}
       </div>
 
       <div className="campo">
-        <label>Fecha de Inicio:</label>
+        <label htmlFor="fecha_ini">Fecha de Inicio:</label>
         <input
+          id="fecha_ini"
           type="date"
           name="fecha_ini"
           value={formData.fecha_ini}
@@ -33,11 +36,13 @@ const CursoFormulario = ({ formData, mensaje, handleChange, handleSubmit, isLoad
           required
           disabled={isLoading}
         />
+        {errores?.fecha_ini && <p className="error">{errores.fecha_ini}</p>}
       </div>
 
       <div className="campo">
-        <label>Fecha de Fin:</label>
+        <label htmlFor="fecha_fin">Fecha de Fin:</label>
         <input
+          id="fecha_fin"
           type="date"
           name="fecha_fin"
           value={formData.fecha_fin}
@@ -45,6 +50,21 @@ const CursoFormulario = ({ formData, mensaje, handleChange, handleSubmit, isLoad
           required
           disabled={isLoading}
         />
+        {errores?.fecha_fin && <p className="error">{errores.fecha_fin}</p>}
+      </div>
+
+      <div className="campo">
+        <label htmlFor="descripcion">Descripción del Curso:</label>
+        <input
+          id="descripcion"
+          type="text"
+          name="descripcion"
+          value={formData.descripcion}
+          onChange={handleChange}
+          required
+          disabled={isLoading}
+        />
+        {errores?.descripcion && <p className="error">{errores.descripcion}</p>}
       </div>
 
       <button type="submit" disabled={isLoading}>

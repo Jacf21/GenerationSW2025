@@ -91,11 +91,18 @@ export default defineConfig([
   },
 
   {
-    files: ["**/*.test.{js,jsx,ts,tsx}", "**/__tests__/**/*.{js,jsx,ts,tsx}"],
+    files: ["**/src/tests/**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       globals: {
-        ...globals.jest,
+        jest: "readonly", // ✅ le dice a ESLint que 'jest' es global
+        describe: "readonly",
+        it: "readonly",
+        test: "readonly",
+        expect: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
       },
     },
-  },
+  }
+
 ]);

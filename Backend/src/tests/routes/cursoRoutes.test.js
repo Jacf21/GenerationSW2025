@@ -1,11 +1,17 @@
-const request = require("supertest");
-const express = require("express");
-const cursoRouter = require("../../routes/cursoRoutes");
+import { jest } from "@jest/globals";
+import express from "express";
+import request from "supertest";
 
-jest.mock("../../controllers/cursoController", () => ({
+// Mock del controller antes de importar las rutas
+await jest.unstable_mockModule("../../controllers/cursoController.js", () => ({
   crearCurso: jest.fn((req, res) => res.status(201).json({ message: "Curso creado" })),
 }));
 
+// Importa después de mockear
+const { crearCurso } = await import("../../controllers/cursoController.js");
+const cursoRouter = (await import("../../routes/cursoRoutes.js")).default; // asumiendo export default
+
+// Configuración de Express
 const app = express();
 app.use(express.json());
 app.use("/cursos", cursoRouter);
