@@ -49,6 +49,7 @@ describe("POST /cursos - crearCurso", () => {
       fecha_ini: "2025-01-01",
       fecha_fin: "2025-02-01",
       codigo: mockCodigoHashed,
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
     };
 
     utilsCurso.generarCodigoUnico.mockResolvedValue(mockCodigo);
@@ -59,6 +60,7 @@ describe("POST /cursos - crearCurso", () => {
       nombre: "React Básico",
       fecha_ini: "2025-01-01",
       fecha_fin: "2025-02-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
     });
 
     expect(response.status).toBe(201);
@@ -77,6 +79,7 @@ describe("POST /cursos - crearCurso", () => {
       nombre: "Node.js",
       fecha_ini: "2025-03-01",
       fecha_fin: "2025-04-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
     });
 
     expect(response.status).toBe(500);
