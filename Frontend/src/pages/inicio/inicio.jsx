@@ -13,6 +13,9 @@ const Inicio = () => {
         <Link to="/login" className="boton boton-login">
           Iniciar Sesión
         </Link>
+        {<Link to="/login" className="boton boton-login">
+          Iniciar Sesión
+        </Link> }
       </div>
     </div>
   );
