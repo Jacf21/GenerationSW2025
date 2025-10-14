@@ -3,7 +3,7 @@
   width: 100%;
   max-width: 440px;
   margin: 0 auto;
-  padding: var(--espacio-md);
+  padding-top: var(--espacio-md);
 }
 
 .crear-curso-card {
@@ -25,9 +25,9 @@
 /* Campos del formulario */
 .campo {
   display: flex;
-  flex-direction: column; /* hace que label e input estén uno debajo del otro */
-  gap: 0.5rem;            /* espacio entre label y input */
-  margin-bottom: var(--espacio-lg); /* espacio entre campos */
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--espacio-lg);
 }
 
 .campo label {
