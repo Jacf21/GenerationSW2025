@@ -21,11 +21,13 @@ function App() {
         <div className="layout">
           <Sidebar />
           <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Inicio />} />
-              <Route path="/crear-curso" element={<CrearCurso />} />
-              <Route path="/registro" element={<Registro />} />
-            </Routes>
+            <div className="page-container">
+              <Routes>
+                <Route path="/" element={<Inicio />} />
+                <Route path="/crear-curso" element={<CrearCurso />} />
+                <Route path="/registro" element={<Registro />} />
+              </Routes>
+            </div>
           </main>
         </div>
         <Footer />

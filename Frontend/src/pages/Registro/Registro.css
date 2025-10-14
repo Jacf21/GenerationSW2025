@@ -1,11 +1,15 @@
 .registro-container {
   width: 100%;
-  max-width: 440px;
-  margin: 0 auto;
-  padding: var(--espacio-md);
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--espacio-xl);
 }
 
 .registro-card {
+  width: 100%;
+  max-width: 400px; /* Reducido de 440px */
   background-color: var(--fondo-input);
   border-radius: var(--radio-lg);
   box-shadow: var(--sombra-lg);
@@ -100,12 +104,13 @@
 
 .boton-primario {
   width: 100%;
-  padding: 0.75rem;
+  padding: var(--espacio-sm) var(--espacio-lg);
   background-color: var(--color-primario);
   color: white;
   border: none;
   border-radius: var(--radio-md);
   font-weight: 500;
+  font-size: var(--texto-base);
   cursor: pointer;
   transition: all 0.2s;
   margin-top: var(--espacio-lg);

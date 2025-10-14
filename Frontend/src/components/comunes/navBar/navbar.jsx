@@ -16,6 +16,7 @@ const NavBar = () => {
       <div className="navbar-menu">
         <Link to="/" className="nav-link">Inicio</Link>
         <Link to="/registro" className="nav-link">Registro</Link>
+        <Link to="/Login" className="nav-link">Login</Link>
         <button 
           className="theme-toggle" 
           onClick={toggleTheme}
