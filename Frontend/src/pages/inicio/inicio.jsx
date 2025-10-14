@@ -10,9 +10,9 @@ const Inicio = () => {
         <Link to="/registro" className="boton boton-registro">
           Registrarse
         </Link>
-        {/* <Link to="/login" className="boton boton-login">
+        {<Link to="/login" className="boton boton-login">
           Iniciar Sesión
-        </Link> */}
+        </Link> }
       </div>
     </div>
   );

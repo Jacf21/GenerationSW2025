@@ -1,8 +1,66 @@
+@import url('./styles/globales.css');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  background: var(--color-secundario);
+  color: var(--color-texto);
+  margin: 0;
+  min-height: 100vh;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+  padding-top: var(--navbar-height);
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: var(--espacio-xl);
+  background-color: var(--color-fondo);
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+    max-width: 100%;
+    margin: var(--espaciado-sm);
+  }
+  .main-content {
+    margin-left: 0;
+    padding: var(--espacio-lg);
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+  
+  .main-content {
+    margin-left: 0;
+    padding: var(--espacio-md);
+  }
 }
 
 .logo {
@@ -39,4 +97,19 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Ejemplo de estilos para componentes */
+nav, .sidebar, footer {
+  border-radius: var(--borde-radio);
+  box-shadow: var(--sombra-suave);
+  margin-bottom: var(--espaciado-sm);
+}
+
+footer {
+  background: var(--color-footer);
+  color: #fff;
+  padding: var(--espaciado-md);
+  text-align: center;
+  font-size: 1rem;
 }
