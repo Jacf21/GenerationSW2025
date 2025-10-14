@@ -1,8 +1,7 @@
 .navbar {
-  background-color: var(--color-fondo-alt);
-  border-bottom: 1px solid var(--color-borde);
-  padding: 0 var(--espacio-xl);
-  height: var(--navbar-height);
+  background-color: var(--color-primario);
+  padding: 0 var(--espacio-lg);
+  height: 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -21,40 +20,23 @@
 
 .navbar-brand h1 {
   margin: 0;
-  color: var(--color-texto);
-  font-size: var(--texto-xl);
-  font-weight: 600;
+  font-size: 1.5rem;
+  color: white;
 }
 
 .navbar-menu {
   display: flex;
-  align-items: center;
   gap: var(--espacio-md);
 }
 
 .nav-link {
-  color: var(--color-texto);
-  font-size: var(--texto-base);
-  padding: var(--espacio-sm) var(--espacio-md);
-  border-radius: var(--radio-md);
-  transition: background-color 0.2s ease;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radio-sm);
+  transition: background-color 0.2s;
 }
 
 .nav-link:hover {
-  background-color: var(--color-borde);
-}
-
-.theme-toggle {
-  background: none;
-  color: var(--color-texto);
-  padding: var(--espacio-sm);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--texto-lg);
-}
-
-.theme-toggle:hover {
-  background-color: var(--color-borde);
+  background-color: var(--color-primario-hover);
 }
