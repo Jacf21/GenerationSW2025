@@ -79,27 +79,5 @@
   color: var(--error);
   border: 1px solid var(--error);
 }
-
+/* 
 /* Botón principal */
-.boton-primario {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: var(--color-primario);
-  color: white;
-  border: none;
-  border-radius: var(--radio-md);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  margin-top: var(--espacio-lg);
-}
-
-.boton-primario:hover {
-  background-color: var(--color-primario-hover);
-  transform: translateY(-1px);
-}
-
-.boton-primario:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
-}

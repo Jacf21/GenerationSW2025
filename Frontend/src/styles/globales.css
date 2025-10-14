@@ -3,7 +3,7 @@
   /* 📐 Dimensiones del layout */
   --navbar-height: 64px;
   --sidebar-width: 250px;
-  --footer-height: 150px;
+  --footer-height: 80px; /* O el valor que prefieras */
   --container-max-width: 1200px;
 
   /* 🎨 Colores principales */

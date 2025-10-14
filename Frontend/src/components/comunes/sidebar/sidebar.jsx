@@ -18,6 +18,9 @@ const Sidebar = () => {
           <li>
             <Link to="/configuracion">Configuración</Link>
           </li>
+          <li>
+            <Link to="/crear-curso" className="nav-link">Crear Curso</Link>
+          </li>
         </ul>
       </nav>
     </aside>
