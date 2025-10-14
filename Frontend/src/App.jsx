@@ -7,14 +7,16 @@ import CrearCurso from "./pages/crearCurso/CrearCursoPage";
 import "./App.css";
 import "./styles/variables.css";
 import Registro from "./pages/Registro/Registro";
-// import Login from './pages/Login/Login';
+import useTheme from "./hooks/useTheme";
 import "./App.css";
 import "./index.css";
 
 function App() {
+  const { theme } = useTheme();
+
   return (
     <Router>
-      <div className="App">
+      <div className="App" data-theme={theme}>
         <NavBar />
         <div className="layout">
           <Sidebar />
@@ -23,7 +25,6 @@ function App() {
               <Route path="/" element={<Inicio />} />
               <Route path="/crear-curso" element={<CrearCurso />} />
               <Route path="/registro" element={<Registro />} />
-              {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
           </main>
         </div>
