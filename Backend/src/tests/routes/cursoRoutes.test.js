@@ -22,6 +22,7 @@ describe("Rutas de cursos", () => {
       nombre: "Curso de React",
       fecha_ini: "2025-01-01",
       fecha_fin: "2025-02-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
     });
 
     expect(res.statusCode).toBe(201);
@@ -40,6 +41,7 @@ describe("Rutas de cursos", () => {
       nombre: "Curso React",
       fecha_ini: "2025-03-01",
       fecha_fin: "2025-02-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
     });
 
     expect(res.statusCode).toBe(400);

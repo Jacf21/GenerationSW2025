@@ -23,7 +23,8 @@ describe("cursoService", () => {
         "React Básico",
         "2025-01-01",
         "2025-02-01",
-        "codigo123"
+        "codigo123",
+        "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb"
       );
 
       expect(pool.query).toHaveBeenCalledTimes(1);

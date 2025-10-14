@@ -3,14 +3,20 @@ import * as utilsCurso from "../utils/cursoUtils.js";
 import { hash } from "bcryptjs";
 
 export const crearCurso = async (req, res) => {
-  const { nombre, fecha_ini, fecha_fin } = req.body;
+  const { nombre, fecha_ini, fecha_fin, descripcion } = req.body;
 
   try {
     const codigoGenerado = await utilsCurso.generarCodigoUnico();
     const saltRounds = 10;
     const codigoHashed = await hash(codigoGenerado, saltRounds);
 
-    const nuevoCurso = await cursoService.crearCurso(nombre, fecha_ini, fecha_fin, codigoHashed);
+    const nuevoCurso = await cursoService.crearCurso(
+      nombre,
+      fecha_ini,
+      fecha_fin,
+      codigoHashed,
+      descripcion
+    );
 
     res.status(201).json({
       message: "Curso creado exitosamente",
