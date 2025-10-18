@@ -8,13 +8,13 @@ const app = express();
 // Middleware CORS
 app.use(
   cors({
-    origin: "http://localhost:5173", // permite solo tu frontend
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // si necesitas enviar cookies
+    credentials: true,
   })
 );
 
-app.use(express.json()); // para parsear JSON
+app.use(express.json());
 
 // Rutas
 app.use("/api/curso", cursoRoutes);

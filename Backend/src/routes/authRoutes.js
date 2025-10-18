@@ -1,9 +1,16 @@
 import express from "express";
-import { register } from "../controllers/authController.js";
-import { validateRegister } from "../middleware/validateRequest.js";
+import { body } from "express-validator";
+import { loginUser } from "../controllers/authController.js";
 
 const router = express.Router();
 
-router.post("/register", validateRegister, register);
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("Email inválido"),
+    body("password").notEmpty().withMessage("Contraseña requerida"),
+  ],
+  loginUser
+);
 
 export default router;
