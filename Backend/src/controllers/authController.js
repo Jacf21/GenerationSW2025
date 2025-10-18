@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
 import { findUserByEmail } from "../services/userService.js";
 import { generateToken } from "../utils/generateToken.js";
+import { emailService } from "../services/emailService.js";
 import db from "../config/db.js";
 
 export const loginUser = async (req, res) => {
@@ -93,11 +94,19 @@ export const register = async (req, res) => {
       [nombre, email, hashedPassword, tipo, aprobado] // Insertamos el usuario con la contraseña encriptada
     );
 
-    // 5. Respuesta exitosa con el id del nuevo usuario
+    // 5. Enviar correo de confirmación
+    try {
+      await emailService.enviarCorreoRegistro(email, nombre, tipo);
+    } catch (emailError) {
+      console.error("Error al enviar correo:", emailError);
+      // No detenemos el registro si falla el correo
+    }
+
+    // 6. Respuesta exitosa con el id del nuevo usuario
     res.status(201).json({
       message: requiereAprobacion
-        ? "Usuario registrado exitosamente. Pendiente de aprobación por un administrador."
-        : "Usuario registrado exitosamente",
+        ? "Usuario registrado exitosamente. Revisa tu correo para más información."
+        : "Usuario registrado exitosamente. Te hemos enviado un correo de confirmación.",
       userId: result.rows[0].id,
       tipo: result.rows[0].tipo,
       aprobado: result.rows[0].aprobado,
