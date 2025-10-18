@@ -2,10 +2,7 @@ import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
 import { findUserByEmail } from "../services/userService.js";
 import { generateToken } from "../utils/generateToken.js";
-<<<<<<< HEAD
 import { emailService } from "../services/emailService.js";
-=======
->>>>>>> bcb0e6f (creacion de los dashboard para diferentes usuaarios)
 import db from "../config/db.js";
 
 export const loginUser = async (req, res) => {
