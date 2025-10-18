@@ -1,0 +1,52 @@
+.admin-dashboard {
+  padding: 2rem;
+  background-color: var(--color-fondo, #f9fafb);
+  min-height: 100vh;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+  color: var(--color-primario, #007bff);
+  margin-bottom: 0.5rem;
+}
+
+.admin-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.admin-card {
+  background: white;
+  border: 1px solid var(--color-borde, #ddd);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 280px;
+  box-shadow: var(--sombra-sm, 0 2px 5px rgba(0, 0, 0, 0.1));
+  text-align: center;
+}
+
+.admin-card h2 {
+  color: var(--color-texto, #333);
+  margin-bottom: 0.5rem;
+}
+
+.admin-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: var(--color-primario, #007bff);
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.admin-btn:hover {
+  background-color: var(--color-primario-hover, #0056b3);
+}
