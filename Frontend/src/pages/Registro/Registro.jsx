@@ -67,12 +67,13 @@ const Registro = () => {
   const [showModal, setShowModal] = useState(true);
   const [mensaje, setMensaje] = useState({ tipo: "", texto: "" });
 
+  // Agregamos confirmPassword al estado inicial
   const { valores, errores, handleChange, handleBlur, handleKeyDown, handleSubmit, setValores } =
     useFormulario({
       nombre: "",
       email: "",
       password: "",
-      confirmPassword: "",
+      confirmPassword: "", // Nuevo campo
       tipo: "",
     });
 
@@ -84,8 +85,9 @@ const Registro = () => {
     setShowModal(false);
   };
 
+  // Modificamos onSubmit para validar contraseñas
   const onSubmit = async (datos) => {
-    // Solo comparamos los strings de las contraseñas
+    // Validar que las contraseñas coincidan
     if (datos.password !== datos.confirmPassword) {
       setMensaje({
         tipo: "error",
@@ -95,6 +97,7 @@ const Registro = () => {
     }
 
     try {
+      // Eliminamos confirmPassword antes de enviar al backend
       const { confirmPassword, ...datosEnvio } = datos;
       await api.registro(datosEnvio);
       setMensaje({
@@ -193,6 +196,7 @@ const Registro = () => {
             </div>
           </div>
 
+          {/* Nuevo Campo Confirmar Contraseña */}
           <div className="campo">
             <label htmlFor="confirmPassword">Confirmar Contraseña</label>
             <div className="input-container">
@@ -202,22 +206,30 @@ const Registro = () => {
                 name="confirmPassword"
                 value={valores.confirmPassword}
                 onChange={handleChange}
-                onBlur={handleBlur}
+                onBlur={(e) => {
+                  handleBlur(e);
+                  // Validación adicional al perder el foco
+                  if (valores.password !== e.target.value) {
+                    setMensaje({
+                      tipo: "error",
+                      texto: "Las contraseñas no coinciden",
+                    });
+                  } else {
+                    setMensaje({ tipo: "", texto: "" });
+                  }
+                }}
                 onKeyDown={handleKeyDown}
                 placeholder="Repite tu contraseña"
                 className={errores.confirmPassword ? "input-error" : ""}
               />
               {errores.confirmPassword && (
-                <div className="mensaje-error-campo">
-                  {errores.confirmPassword}
-                </div>
+                <div className="mensaje-error-campo">{errores.confirmPassword}</div>
               )}
             </div>
           </div>
 
-          {errores.submit && (
-            <div className="mensaje mensaje-error">{errores.submit}</div>
-          )}
+          {/* Errores generales (ej. backend) */}
+          {errores.submit && <div className="mensaje mensaje-error">{errores.submit}</div>}
 
           <button type="submit" className="boton-primario">
             Crear cuenta
