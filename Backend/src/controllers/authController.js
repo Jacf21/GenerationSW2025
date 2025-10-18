@@ -20,7 +20,7 @@ export const register = async (req, res) => {
     }
 
     // 2. Validar el tipo de usuario (solo puede ser: est, profesor o admin)
-    const tiposValidos = ["est", "profesor", "admin"];
+    const tiposValidos = ["est", "profesor", "admin", "edit"];
     if (!tiposValidos.includes(tipo)) {
       return res.status(400).json({
         message: "Tipo de usuario no válido",
@@ -31,16 +31,24 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     // "10" es el número de salt rounds (nivel de seguridad)
 
+    // Determinamos si el usuario necesita aprobación
+    const requiereAprobacion = tipo === "profesor" || tipo === "edit";
+    const aprobado = !requiereAprobacion; // true para est y admin, false para profesor y editor
+
     // 4. Insertar nuevo usuario en la base de datos y devolver su id
     const result = await db.query(
-      "INSERT INTO users (nombre, email, password, tipo) VALUES ($1, $2, $3, $4) RETURNING id",
-      [nombre, email, hashedPassword, tipo] // Insertamos el usuario con la contraseña encriptada
+      "INSERT INTO users (nombre, email, password, tipo, aprobado) VALUES ($1, $2, $3, $4, $5) RETURNING id, tipo, aprobado",
+      [nombre, email, hashedPassword, tipo, aprobado] // Insertamos el usuario con la contraseña encriptada
     );
 
     // 5. Respuesta exitosa con el id del nuevo usuario
     res.status(201).json({
-      message: "Usuario registrado exitosamente",
+      message: requiereAprobacion
+        ? "Usuario registrado exitosamente. Pendiente de aprobación por un administrador."
+        : "Usuario registrado exitosamente",
       userId: result.rows[0].id,
+      tipo: result.rows[0].tipo,
+      aprobado: result.rows[0].aprobado,
     });
   } catch (error) {
     // Manejo de errores inesperados (problemas con la BD, servidor, etc.)

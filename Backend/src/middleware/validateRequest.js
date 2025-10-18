@@ -13,7 +13,7 @@ export const validateRegister = (req, res, next) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Debe tener formato básico usuario@dominio.ext
   if (!emailRegex.test(email)) {
     return res.status(400).json({
-      message: "Formato de email debe ser válido @gmail.com  ",
+      message: "Formato de email debe ser válido @gmail.com",
     });
   }
 
@@ -24,8 +24,8 @@ export const validateRegister = (req, res, next) => {
     });
   }
 
-  // 4. Validar tipo de usuario (solo se permiten estos valores)
-  const tiposValidos = ["est", "profesor", "admin"];
+  // Actualizamos los tipos válidos incluyendo 'edit'
+  const tiposValidos = ["est", "profesor", "admin", "edit"];
   if (!tiposValidos.includes(tipo)) {
     return res.status(400).json({
       message: "Tipo de usuario no válido",

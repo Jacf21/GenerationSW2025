@@ -102,6 +102,12 @@
   border: 1px solid var(--error);
 }
 
+.mensaje-pendiente {
+  background-color: rgba(251, 191, 36, 0.1);
+  color: var(--advertencia);
+  border: 1px solid var(--advertencia);
+}
+
 .boton-primario {
   width: 100%;
   padding: var(--espacio-sm) var(--espacio-lg);
@@ -200,4 +206,16 @@
   color: var(--color-primario);
   font-weight: 600;
   margin-left: 0.25rem;
+}
+
+.tipo-descripcion {
+  font-size: 0.875rem;
+  color: var(--texto-secundario);
+  margin-top: var(--espacio-xs);
+}
+
+.requiere-aprobacion {
+  color: var(--advertencia);
+  font-size: 0.75rem;
+  margin-top: var(--espacio-xs);
 }

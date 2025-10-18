@@ -26,13 +26,13 @@ const TipoUsuarioSelector = ({ onSelect }) => {
     {
       id: "profesor",
       nombre: "Profesor",
-      descripcion: "Para docentes que impartirán clases",
+      descripcion: "Para docentes que impartirán clases (requiere aprobación)",
       icon: <FaChalkboardTeacher className="tipo-icon" />,
     },
     {
-      id: "ProfesorEditor",
-      nombre: "Profesor Editor",
-      descripcion: "Para docentes con permisos de edición",
+      id: "edit",
+      nombre: "Editor",
+      descripcion: "Para docentes con permisos de edición (requiere aprobación)",
       icon: <FaChalkboardTeacher className="tipo-icon" />,
     },
     {
@@ -208,7 +208,7 @@ const getTipoLabel = (tipo) => {
   const tipos = {
     est: "Estudiante",
     profesor: "Profesor",
-    ProfesorEditor: "Profesor Editor",
+    edit: "Editor",
     admin: "Administrador",
   };
   return tipos[tipo] || "";
