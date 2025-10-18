@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../../context/AuthContex";
+import { FaMoon, FaSun } from "react-icons/fa";
+import useTheme from "../../../hooks/useTheme";
+import "./navbar.css";
 
 function NavBar() {
   const { user, logout, isAuthenticated, userRole } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const renderLinksByRole = () => {
     switch (userRole) {
@@ -49,6 +53,10 @@ function NavBar() {
             </button>
           </>
         )}
+
+        <button className="theme-toggle" onClick={toggleTheme} aria-label="Cambiar tema">
+          {theme === "light" ? <FaMoon /> : <FaSun />}
+        </button>
       </div>
     </nav>
   );

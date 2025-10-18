@@ -1,11 +1,8 @@
-@import url('./styles/globales.css');
-
-html, 
-body, 
-#root {
+html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: var(--font-base);
 }
 
 #root {
@@ -19,71 +16,81 @@ body,
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  flex: 1 0 auto; /* permite crecer */
   width: 100%;
   background-color: var(--color-fondo);
   color: var(--color-texto);
   transition: all 0.3s ease;
 }
 
+/* Layout interno (sidebar + contenido) */
 .layout {
   display: flex;
-  flex: 1 0 auto; /* Cambiado para mejor control del espacio */
+  flex: 1 0 auto; /* se adapta al contenido */
   width: 100%;
-  padding-top: var(--navbar-height);
-  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
   background-color: var(--color-fondo);
+  padding-top: var(--navbar-height);
 }
 
-.main-content {
-  flex: 1;
-  margin-left: var(--sidebar-width);
-  padding: var(--espacio-xl);
-  background-color: var(--color-fondo);
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--fondo-input);
+  padding: var(--espacio-lg) var(--espacio-md);
+  box-shadow: var(--sombra-lg);
+  border-radius: var(--radio-lg);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease;
-  min-height: 100%;
-  width: 100%;
+  gap: var(--espacio-md);
 }
 
+/* Contenido principal */
+.main-content {
+  flex: 1;
+  padding: var(--espacio-xl);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* No centramos verticalmente: permite que el contenido grande empuje el footer */
+}
+
+/* Contenedor interno */
 .page-container {
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: var(--espacio-xl);
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Footer mejorado */
+/* Footer */
 .footer {
-  flex-shrink: 0; /* Evita que el footer se encoja */
   background-color: var(--color-footer);
   color: var(--color-texto-dark);
-  padding: var(--espacio-xl);
+  padding: calc(var(--espacio-md) + 5px);
   text-align: center;
   width: 100%;
   min-height: var(--footer-height);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
-  position: relative;
-  z-index: 10;
+  flex-shrink: 0; /* evita que se reduzca */
 }
 
-/* Estilos responsive */
+/* Responsive */
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
   }
-  
-  .main-content {
-    margin-left: 0;
-    padding: var(--espacio-md);
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
   }
-  
+
   .page-container {
     padding: var(--espacio-md);
   }

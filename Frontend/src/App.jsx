@@ -7,8 +7,12 @@ import CrearCurso from "./pages/crearCurso/CrearCursoPage";
 import Registro from "./pages/Registro/Registro";
 import useTheme from "./hooks/useTheme";
 import LoginPage from "./pages/Login/Login";
-import AuthProvider from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContex";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminDashboard from "./pages/admin/adminDashboard";
+import EstudianteDashboard from "./pages/estudiante/estudianteDashboard";
+import ProfesorDashboard from "./pages/profesor/profesorDashboard";
+import EditorDashboard from "./pages/editor/editorDashboard";
 
 import "./index.css";
 import "./App.css";
@@ -36,7 +40,7 @@ function App() {
                   {/* 🔒 Secciones protegidas por tipo */}
                   <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
                     <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="/gestionar-usuarios" element={<GestionUsuarios />} />
+                    {/* <Route path="/gestionar-usuarios" element={<GestionUsuarios />} /> */}
                   </Route>
 
                   <Route element={<PrivateRoute allowedRoles={["profesor"]} />}>
