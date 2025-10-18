@@ -65,16 +65,17 @@ const TipoUsuarioSelector = ({ onSelect }) => {
 };
 
 const Registro = () => {
-  const navigate = useNavigate(); // Hook para redirigir después de registro
-  const [showModal, setShowModal] = useState(true); // Estado para mostrar/ocultar modal
-  const [mensaje, setMensaje] = useState({ tipo: "", texto: "" }); // Estado para mensajes de éxito o error
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(true);
+  const [mensaje, setMensaje] = useState({ tipo: "", texto: "" });
 
-  // Usamos el hook personalizado para manejar el formulario
+  // Agregamos confirmPassword al estado inicial
   const { valores, errores, handleChange, handleBlur, handleKeyDown, handleSubmit, setValores } =
     useFormulario({
       nombre: "",
       email: "",
       password: "",
+      confirmPassword: "", // Nuevo campo
       tipo: "",
     });
 
@@ -87,10 +88,21 @@ const Registro = () => {
     setShowModal(false); // cerramos el modal
   };
 
-  // Función que maneja el envío del formulario
+  // Modificamos onSubmit para validar contraseñas
   const onSubmit = async (datos) => {
+    // Validar que las contraseñas coincidan
+    if (datos.password !== datos.confirmPassword) {
+      setMensaje({
+        tipo: "error",
+        texto: "Las contraseñas no coinciden",
+      });
+      return;
+    }
+
     try {
-      await api.registro(datos); // llamada al backend
+      // Eliminamos confirmPassword antes de enviar al backend
+      const { confirmPassword, ...datosEnvio } = datos;
+      await api.registro(datosEnvio);
       setMensaje({
         tipo: "exito",
         texto: "Registro exitoso! Redirigiendo...",
@@ -187,6 +199,38 @@ const Registro = () => {
                 className={errores.password ? "input-error" : ""}
               />
               {errores.password && <div className="mensaje-error-campo">{errores.password}</div>}
+            </div>
+          </div>
+
+          {/* Nuevo Campo Confirmar Contraseña */}
+          <div className="campo">
+            <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+            <div className="input-container">
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={valores.confirmPassword}
+                onChange={handleChange}
+                onBlur={(e) => {
+                  handleBlur(e);
+                  // Validación adicional al perder el foco
+                  if (valores.password !== e.target.value) {
+                    setMensaje({
+                      tipo: "error",
+                      texto: "Las contraseñas no coinciden",
+                    });
+                  } else {
+                    setMensaje({ tipo: "", texto: "" });
+                  }
+                }}
+                onKeyDown={handleKeyDown}
+                placeholder="Repite tu contraseña"
+                className={errores.confirmPassword ? "input-error" : ""}
+              />
+              {errores.confirmPassword && (
+                <div className="mensaje-error-campo">{errores.confirmPassword}</div>
+              )}
             </div>
           </div>
 
