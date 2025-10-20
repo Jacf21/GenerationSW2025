@@ -3,6 +3,7 @@ import { useAuth } from "../../../context/AuthContex";
 import { FaMoon, FaSun } from "react-icons/fa";
 import useTheme from "../../../hooks/useTheme";
 import "./navbar.css";
+import icono from "../../../assets/python1.png";
 
 function NavBar() {
   const { user, logout, isAuthenticated, userRole } = useAuth();
@@ -13,31 +14,54 @@ function NavBar() {
       case "admin":
         return (
           <>
-            <Link to="/admin">Panel Admin</Link>
-            <Link to="/gestionar-usuarios">Usuarios</Link>
+            <Link to="/admin">
+              <img src={icono} alt="Admin Panel" className="admin-icon" />
+              <span>Python tutorial</span>
+            </Link>
           </>
         );
       case "profesor":
         return (
           <>
-            <Link to="/profesor">Mis Cursos</Link>
-            <Link to="/crear-curso">Crear Curso</Link>
+            <Link to="/profesor">
+              <img src={icono} alt="Admin Panel" className="admin-icon" />
+              <span>Python tutorial</span>
+            </Link>
           </>
         );
       case "est":
-        return <Link to="/estudiante">Mis Clases</Link>;
+        return (
+          <>
+            <Link to="/estudiante">
+              <img src={icono} alt="Admin Panel" className="admin-icon" />
+              <span>Python tutorial</span>
+            </Link>
+          </>
+        );
       case "edit":
-        return <Link to="/editor">Editor</Link>;
+        return (
+          <>
+            <Link to="/editor">
+              <img src={icono} alt="Admin Panel" className="admin-icon" />
+              <span>Python tutorial</span>
+            </Link>
+          </>
+        );
       default:
-        return <Link to="/">Inicio</Link>;
+        return (
+          <>
+            <Link to="/">
+              <img src={icono} alt="Admin Panel" className="admin-icon" />
+              <span>Python tutorial</span>
+            </Link>
+          </>
+        );
     }
   };
 
   return (
     <nav className="navbar">
-      <div className="nav-left">
-        {isAuthenticated ? renderLinksByRole() : <Link to="/">Inicio</Link>}
-      </div>
+      <div className="nav-left">{renderLinksByRole()}</div>
 
       <div className="nav-right">
         {!isAuthenticated ? (

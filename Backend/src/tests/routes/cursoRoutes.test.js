@@ -8,7 +8,6 @@ await jest.unstable_mockModule("../../controllers/cursoController.js", () => ({
 }));
 
 // Importa después de mockear
-const { crearCurso } = await import("../../controllers/cursoController.js");
 const cursoRouter = (await import("../../routes/cursoRoutes.js")).default; // asumiendo export default
 
 // Configuración de Express

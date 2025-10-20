@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContex";
 import { login as loginService } from "../services/authService";
@@ -9,7 +9,28 @@ export const useLogin = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      switch (user.tipo) {
+        case "admin":
+          navigate("/admin");
+          break;
+        case "profesor":
+          navigate("/profesor");
+          break;
+        case "est":
+          navigate("/estudiante");
+          break;
+        case "edit":
+          navigate("/editor");
+          break;
+        default:
+          navigate("/");
+      }
+    }
+  }, [user, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();

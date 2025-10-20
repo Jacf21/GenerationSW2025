@@ -1,12 +1,9 @@
 import express from "express";
 import { body } from "express-validator";
 import { loginUser } from "../controllers/authController.js";
-import { register } from "../controllers/authController.js";
-import { validateRegister } from "../middleware/validateRequest.js";
 
 const router = express.Router();
 
-router.post("/register", validateRegister, register);
 router.post(
   "/login",
   [
