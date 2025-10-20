@@ -1,8 +1,35 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useLogin } from "../../hooks/useLogin";
+import { useAuth } from "../../context/AuthContex";
 
 function LoginPage() {
   const { email, password, error, loading, setEmail, setPassword, handleLogin } = useLogin();
+  const { userRole, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Redirigir según rol
+      switch (userRole) {
+        case "admin":
+          navigate("/admin");
+          break;
+        case "profesor":
+          navigate("/profesor");
+          break;
+        case "est":
+          navigate("/estudiante");
+          break;
+        case "edit":
+          navigate("/editor");
+          break;
+        default:
+          navigate("/");
+      }
+    }
+  }, [isAuthenticated, userRole, navigate]);
 
   return (
     <div className="login-container">

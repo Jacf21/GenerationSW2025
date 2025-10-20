@@ -68,6 +68,35 @@
   background-color: var(--color-primario-hover, #0056b3);
 }
 
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--color-primario);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.admin-link:hover {
+  color: var(--color-primario-hover);
+}
+
+.admin-icon {
+  width: 90px;
+  height: 45px;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+  position: relative;
+  top: 2px;
+}
+
+.admin-icon:hover {
+  transform: scale(1.1);
+}
+
 /* Adaptación móvil */
 @media (max-width: 768px) {
   .navbar {

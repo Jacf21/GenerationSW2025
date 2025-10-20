@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/admin/adminDashboard";
 import EstudianteDashboard from "./pages/estudiante/estudianteDashboard";
 import ProfesorDashboard from "./pages/profesor/profesorDashboard";
 import EditorDashboard from "./pages/editor/editorDashboard";
+import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
 
 import "./index.css";
 import "./App.css";
@@ -33,14 +34,13 @@ function App() {
                 <Routes>
                   {/* Público */}
                   <Route path="/" element={<Inicio />} />
-                  <Route path="/crear-curso" element={<CrearCurso />} />
                   <Route path="/registro" element={<Registro />} />
                   <Route path="/login" element={<LoginPage />} />
 
                   {/* 🔒 Secciones protegidas por tipo */}
                   <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
                     <Route path="/admin" element={<AdminDashboard />} />
-                    {/* <Route path="/gestionar-usuarios" element={<GestionUsuarios />} /> */}
+                    <Route path="/gestionar-usuarios" element={<GestionarUsers />} />
                   </Route>
 
                   <Route element={<PrivateRoute allowedRoles={["profesor"]} />}>

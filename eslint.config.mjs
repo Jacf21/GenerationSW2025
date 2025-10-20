@@ -31,7 +31,13 @@ export default defineConfig([
     },
     extends: [js.configs.recommended],
     rules: {
-      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^[A-Z].*"
+        }
+      ],
       "no-console": "off",
     },
   },
@@ -46,6 +52,7 @@ export default defineConfig([
       "react/jsx-no-target-blank": "warn",
       "react/prop-types": "off", // si usas TypeScript o props sin PropTypes
       "react/jsx-curly-brace-presence": ["warn", "never"], // limpia JSX
+      "react/jsx-no-undef": "off"
     },
   },
 

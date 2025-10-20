@@ -19,7 +19,7 @@ const Sidebar = () => {
       case "admin":
         return [
           { to: "/admin", label: "Panel Admin" },
-          { to: "/usuarios", label: "Gestionar Usuarios" },
+          { to: "/gestionar-usuarios", label: "Gestionar Usuarios" },
           { to: "/reportes", label: "Reportes" },
         ];
       case "profesor":

@@ -47,11 +47,7 @@ const TipoUsuarioSelector = ({ onSelect }) => {
       <h2>Selecciona el tipo de usuario</h2>
       <div className="tipos-grid">
         {tipos.map((tipo) => (
-          <button
-            key={tipo.id}
-            className="tipo-card"
-            onClick={() => onSelect(tipo.id)}
-          >
+          <button key={tipo.id} className="tipo-card" onClick={() => onSelect(tipo.id)}>
             {tipo.icon}
             <h3>{tipo.nombre}</h3>
             <p>{tipo.descripcion}</p>
@@ -98,7 +94,7 @@ const Registro = () => {
 
     try {
       // Eliminamos confirmPassword antes de enviar al backend
-      const { confirmPassword, ...datosEnvio } = datos;
+      const { ...datosEnvio } = datos;
       await api.registro(datosEnvio);
       setMensaje({
         tipo: "exito",
@@ -130,9 +126,7 @@ const Registro = () => {
           Registrándose como: <span>{getTipoLabel(valores.tipo)}</span>
         </div>
 
-        {mensaje.texto && (
-          <div className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</div>
-        )}
+        {mensaje.texto && <div className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</div>}
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="campo">
@@ -150,9 +144,7 @@ const Registro = () => {
                 className={errores.nombre ? "input-error" : ""}
                 autoFocus
               />
-              {errores.nombre && (
-                <div className="mensaje-error-campo">{errores.nombre}</div>
-              )}
+              {errores.nombre && <div className="mensaje-error-campo">{errores.nombre}</div>}
             </div>
           </div>
 
@@ -170,9 +162,7 @@ const Registro = () => {
                 placeholder="correo@ejemplo.com"
                 className={errores.email ? "input-error" : ""}
               />
-              {errores.email && (
-                <div className="mensaje-error-campo">{errores.email}</div>
-              )}
+              {errores.email && <div className="mensaje-error-campo">{errores.email}</div>}
             </div>
           </div>
 
@@ -190,9 +180,7 @@ const Registro = () => {
                 placeholder="Mínimo 8 caracteres"
                 className={errores.password ? "input-error" : ""}
               />
-              {errores.password && (
-                <div className="mensaje-error-campo">{errores.password}</div>
-              )}
+              {errores.password && <div className="mensaje-error-campo">{errores.password}</div>}
             </div>
           </div>
 
