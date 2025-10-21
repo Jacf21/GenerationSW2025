@@ -2,7 +2,7 @@ const API_URL = "http://localhost:5000/api";
 
 export const api = {
   async registro(datos) {
-    const response = await fetch(`${API_URL}/auth/register`, {
+    const response = await fetch(`${API_URL}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

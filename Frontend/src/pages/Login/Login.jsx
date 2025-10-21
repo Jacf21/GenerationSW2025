@@ -1,132 +1,75 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { loginUser } from "../../services/authService"; // Necesitaremos crear este servicio
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useLogin } from "../../hooks/useLogin";
+import { useAuth } from "../../context/AuthContex";
 
-const Login = () => {
+function LoginPage() {
+  const { email, password, error, loading, setEmail, setPassword, handleLogin } = useLogin();
+  const { userRole, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
-  });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setIsLoading(true);
-
-    try {
-      const response = await loginUser(formData);
-
-      if (response.token) {
-        // Guardar el token en localStorage o sessionStorage según rememberMe
-        const storage = formData.rememberMe ? localStorage : sessionStorage;
-        storage.setItem("token", response.token);
-        storage.setItem("user", JSON.stringify(response.user));
-
-        // Redirigir según el rol del usuario
-        const redirectPath = response.user.role === "admin" ? "/dashboard" : "/perfil";
-        navigate(redirectPath);
+  useEffect(() => {
+    if (isAuthenticated) {
+      // Redirigir según rol
+      switch (userRole) {
+        case "admin":
+          navigate("/admin");
+          break;
+        case "profesor":
+          navigate("/profesor");
+          break;
+        case "est":
+          navigate("/estudiante");
+          break;
+        case "edit":
+          navigate("/editor");
+          break;
+        default:
+          navigate("/");
       }
-    } catch (err) {
-      setError(err.response?.data?.message || "Error al iniciar sesión");
-    } finally {
-      setIsLoading(false);
     }
-  };
+  }, [isAuthenticated, userRole, navigate]);
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2>Iniciar Sesión</h2>
-        <p className="login-subtitle">Bienvenido de vuelta</p>
+        <h2>Iniciar sesión</h2>
 
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className="mensaje mensaje-error">{error}</div>}
 
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="form-group">
-            <div className="input-container">
-              <FaEnvelope className="input-icon" />
-              <input
-                type="email"
-                name="email"
-                placeholder="Correo electrónico"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                disabled={isLoading}
-              />
-            </div>
+        <form onSubmit={handleLogin}>
+          <div className="campo">
+            <label htmlFor="email">Correo electrónico</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Ejemplo: usuario@correo.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
-          <div className="form-group">
-            <div className="input-container">
-              <FaLock className="input-icon" />
-              <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                placeholder="Contraseña"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                disabled={isLoading}
-                minLength="8"
-              />
-              <button
-                type="button"
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-                disabled={isLoading}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </button>
-            </div>
+          <div className="campo">
+            <label htmlFor="password">Contraseña</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Ingresa tu contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
           </div>
 
-          <div className="form-options">
-            <label className="remember-me">
-              <input
-                type="checkbox"
-                name="rememberMe"
-                checked={formData.rememberMe}
-                onChange={handleChange}
-                disabled={isLoading}
-              />{" "}
-              Recordarme
-            </label>
-            <Link to="/recuperar-password" className="forgot-password">
-              ¿Olvidaste tu contraseña?
-            </Link>
-          </div>
-
-          <button
-            type="submit"
-            className={`login-button ${isLoading ? "loading" : ""}`}
-            disabled={isLoading}
-          >
-            {isLoading ? "Iniciando sesión..." : "Iniciar Sesión"}
+          <button className="boton-login" type="submit" disabled={loading}>
+            {loading ? "Ingresando..." : "Ingresar"}
           </button>
         </form>
-
-        <div className="register-link">
-          ¿No tienes una cuenta? <Link to="/registro">Regístrate aquí</Link>
-        </div>
       </div>
     </div>
   );
-};
+}
 
-export default Login;
+export default LoginPage;

@@ -8,7 +8,6 @@ await jest.unstable_mockModule("../../controllers/cursoController.js", () => ({
 }));
 
 // Importa después de mockear
-const { crearCurso } = await import("../../controllers/cursoController.js");
 const cursoRouter = (await import("../../routes/cursoRoutes.js")).default; // asumiendo export default
 
 // Configuración de Express
@@ -22,6 +21,7 @@ describe("Rutas de cursos", () => {
       nombre: "Curso de React",
       fecha_ini: "2025-01-01",
       fecha_fin: "2025-02-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
     });
 
     expect(res.statusCode).toBe(201);
@@ -40,6 +40,7 @@ describe("Rutas de cursos", () => {
       nombre: "Curso React",
       fecha_ini: "2025-03-01",
       fecha_fin: "2025-02-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
     });
 
     expect(res.statusCode).toBe(400);

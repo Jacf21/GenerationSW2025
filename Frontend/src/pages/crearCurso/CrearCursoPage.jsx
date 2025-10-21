@@ -8,7 +8,6 @@ const CrearCursoPage = () => {
 
   return (
     <div className="crear-curso-container">
-      <h1>Crear Nuevo Curso</h1>
       <CursoFormulario
         formData={formData}
         errores={errores}

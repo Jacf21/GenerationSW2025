@@ -1,13 +1,13 @@
 // src/services/cursoServices.js
-import pool from "../config/db.js"; // ✅ Import ESM, con extensión .js
+import pool from "../config/db.js";
 
-export const crearCurso = async (nombre, fecha_ini, fecha_fin, codigoHashed) => {
+export const crearCurso = async (nombre, fecha_ini, fecha_fin, codigoHashed, descripcion) => {
   const query = `
-    INSERT INTO curso (nombre, fecha_ini, fecha_fin, codigo)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO curso (nombre, fecha_ini, fecha_fin, codigo, descripcion)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING id, nombre;
   `;
-  const values = [nombre, fecha_ini, fecha_fin, codigoHashed];
+  const values = [nombre, fecha_ini, fecha_fin, codigoHashed, descripcion];
 
   // Usamos pool.query para ejecutar la consulta
   const result = await pool.query(query, values);

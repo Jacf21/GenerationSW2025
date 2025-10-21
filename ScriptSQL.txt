@@ -1,0 +1,19 @@
+-- Creación de la tabla users
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    aprobado BOOLEAN NOT NULL,
+    tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('est', 'profesor', 'admin', 'edit'))
+);
+
+-- Creación de la tabla 'curso'
+CREATE TABLE curso (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    fecha_ini DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    descripcion VARCHAR(255) NOT NULL,
+    codigo VARCHAR(100) NOT NULL
+);
