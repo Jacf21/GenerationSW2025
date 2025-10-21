@@ -1,0 +1,141 @@
+.page-user-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: var(--espacio-lg);
+  background-color: var(--fondo-input); /* Fondo del cuadro (puedes cambiarlo) */
+  border-radius: var(--radio-lg, 12px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--borde, #e5e7eb);
+}
+
+/* ===== Título ===== */
+.page-user-container h1 {
+  color: var(--texto);
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--espacio-xl);
+}
+
+/* ===== Filtros ===== */
+.filters-container {
+  display: flex;
+  gap: var(--espacio-md);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--espacio-lg);
+  flex-wrap: wrap;
+}
+
+.filters-container select {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-md);
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.filters-container select:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* ===== Botón cambiar estado ===== */
+.filters-container button {
+  background-color: var(--color-primario);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radio-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filters-container button:hover:not(:disabled) {
+  background-color: var(--color-primario-hover, #4f46e5);
+  transform: scale(1.03);
+}
+
+.filters-container button:disabled {
+  background-color: var(--borde);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ===== Tabla ===== */
+.table-container {
+  overflow-x: auto;
+  border-radius: var(--radio-md);
+  box-shadow: var(--sombra-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--fondo);
+}
+
+.table thead {
+  background-color: var(--color-primario);
+  color: #fff;
+}
+
+.table th,
+.table td {
+  padding: var(--espacio-md);
+  text-align: left;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto);
+}
+
+.table th {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.table tr:hover {
+  background-color: rgba(79, 70, 229, 0.05);
+  transition: background-color 0.2s;
+}
+
+/* ===== Fila seleccionada ===== */
+.table tr.selected {
+  background-color: rgba(79, 70, 229, 0.15);
+  border-left: 3px solid var(--color-primario);
+}
+
+/* ===== Estado aprobado/no aprobado ===== */
+.estado {
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radio-md);
+  text-align: center;
+  display: inline-block;
+}
+
+.estado-true {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--exito);
+  border: 1px solid var(--exito);
+}
+
+.estado-false {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+/* ===== Estado de carga ===== */
+.loading {
+  text-align: center;
+  color: var(--texto-secundario);
+  font-size: 1rem;
+  margin-top: var(--espacio-lg);
+}

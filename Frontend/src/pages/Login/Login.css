@@ -1,0 +1,115 @@
+/* Contenedor principal */
+.login-container {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding-top: var(--espacio-md);
+}
+
+/* Tarjeta del formulario */
+.login-card {
+  background-color: var(--fondo-input);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-lg);
+  padding: var(--espacio-xl);
+}
+
+/* Título */
+.login-card h2 {
+  text-align: center;
+  margin-bottom: var(--espacio-xl);
+  color: var(--texto);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Campos */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--espacio-lg);
+}
+
+.campo label {
+  display: block;
+  color: var(--texto);
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: var(--espacio-xs);
+}
+
+.campo input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-md);
+  background-color: var(--fondo);
+  color: var(--texto);
+  transition: all 0.2s;
+}
+
+.campo input::placeholder {
+  color: var(--texto-secundario);
+  opacity: 0.7;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Mensajes de error */
+.mensaje {
+  padding: var(--espacio-md);
+  border-radius: var(--radio-md);
+  margin-bottom: var(--espacio-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.mensaje-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+/* Botón principal */
+.boton-login {
+  width: 100%;
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  border-radius: var(--radio-md);
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.boton-login:hover {
+  background-color: var(--color-primario-hover);
+}
+
+.boton-login:active {
+  transform: scale(0.98);
+}
+
+.boton-login:disabled {
+  background-color: var(--borde);
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-card {
+    padding: var(--espacio-lg);
+  }
+
+  .login-card h2 {
+    font-size: 1.25rem;
+  }
+}

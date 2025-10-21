@@ -1,0 +1,111 @@
+.mis-cursos-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: var(--espacio-lg);
+  background-color: var(--fondo-input);
+  border-radius: var(--radio-lg, 12px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--borde, #e5e7eb);
+}
+
+/* ===== Título ===== */
+.mis-cursos-container h1 {
+  color: var(--texto);
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--espacio-xl);
+}
+
+/* ===== Tabla ===== */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radio-md);
+  box-shadow: var(--sombra-sm);
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--fondo);
+}
+
+.table-wrapper thead {
+  background-color: var(--color-primario);
+  color: #fff;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  padding: var(--espacio-md);
+  text-align: left;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto);
+}
+
+.table-wrapper th {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.table-wrapper tr:hover {
+  background-color: rgba(79, 70, 229, 0.05);
+  transition: background-color 0.2s;
+}
+
+/* ===== Fila seleccionada ===== */
+.table-wrapper tr.selected {
+  background-color: rgba(79, 70, 229, 0.15);
+  border-left: 3px solid var(--color-primario);
+}
+
+/* ===== Estado: sin cursos ===== */
+.no-cursos {
+  text-align: center;
+  color: var(--texto-secundario);
+  font-size: 1rem;
+  margin-top: var(--espacio-lg);
+}
+
+/* ===== Estado de carga o error ===== */
+.loading,
+.error {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: var(--espacio-md);
+}
+
+.loading {
+  color: var(--texto-secundario);
+}
+
+.error {
+  color: var(--error);
+}
+
+/* ===== Detalle del curso seleccionado ===== */
+.curso-detalle {
+  margin-top: var(--espacio-lg);
+  padding: var(--espacio-lg);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background-color: rgba(79, 70, 229, 0.05);
+}
+
+.curso-detalle h2 {
+  color: var(--color-primario);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: var(--espacio-md);
+}
+
+.curso-detalle p {
+  margin: 0.4rem 0;
+  color: var(--texto);
+}
+
+.curso-detalle strong {
+  color: var(--texto-destacado, #111827);
+}

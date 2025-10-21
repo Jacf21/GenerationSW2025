@@ -1,6 +1,7 @@
-const cursoService = require("../services/cursoServices");
+// src/utils/cursoUtils.js
+import * as cursoService from "../services/cursoServices.js"; // ✅ Import ESM
 
-const generarCodigoUnico = async () => {
+export const generarCodigoUnico = async () => {
   const generarCodigo = () => {
     return Math.random().toString(36).substring(2, 8).toUpperCase();
   };
@@ -15,5 +16,3 @@ const generarCodigoUnico = async () => {
 
   return codigo;
 };
-
-module.exports = { generarCodigoUnico };

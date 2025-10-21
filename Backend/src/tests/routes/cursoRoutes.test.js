@@ -1,11 +1,17 @@
-const request = require("supertest");
-const express = require("express");
-const cursoRouter = require("../../routes/cursoRoutes");
+import { jest } from "@jest/globals";
+import express from "express";
+import request from "supertest";
 
-jest.mock("../../controllers/cursoController", () => ({
+// Mock del controller antes de importar las rutas
+await jest.unstable_mockModule("../../controllers/cursoController.js", () => ({
   crearCurso: jest.fn((req, res) => res.status(201).json({ message: "Curso creado" })),
+  getMisCursos: jest.fn((req, res) => res.status(200).json([])),
 }));
 
+// Importa después de mockear
+const cursoRouter = (await import("../../routes/cursoRoutes.js")).default; // asumiendo export default
+
+// Configuración de Express
 const app = express();
 app.use(express.json());
 app.use("/cursos", cursoRouter);
@@ -16,6 +22,8 @@ describe("Rutas de cursos", () => {
       nombre: "Curso de React",
       fecha_ini: "2025-01-01",
       fecha_fin: "2025-02-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
+      id_usuario: "1",
     });
 
     expect(res.statusCode).toBe(201);
@@ -34,6 +42,8 @@ describe("Rutas de cursos", () => {
       nombre: "Curso React",
       fecha_ini: "2025-03-01",
       fecha_fin: "2025-02-01",
+      descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
+      id_usuario: "1",
     });
 
     expect(res.statusCode).toBe(400);

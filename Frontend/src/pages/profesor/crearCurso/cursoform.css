@@ -1,0 +1,83 @@
+/* Contenedor del formulario */
+.crear-curso-container {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  padding-top: var(--espacio-md);
+}
+
+.crear-curso-card {
+  background-color: var(--fondo-input);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-lg);
+  padding: var(--espacio-xl);
+}
+
+/* Título del formulario */
+.crear-curso-card h2 {
+  text-align: center;
+  margin-bottom: var(--espacio-xl);
+  color: var(--texto);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Campos del formulario */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--espacio-lg);
+}
+
+.campo label {
+  display: block;
+  color: var(--texto);
+  font-weight: 500;
+  font-size: 0.875rem;
+  margin-bottom: var(--espacio-xs);
+}
+
+.campo input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-md);
+  background-color: var(--fondo);
+  color: var(--texto);
+  transition: all 0.2s;
+}
+
+.campo input::placeholder {
+  color: var(--texto-secundario);
+  opacity: 0.7;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+/* Mensajes de éxito o error */
+.mensaje {
+  padding: var(--espacio-md);
+  border-radius: var(--radio-md);
+  margin-bottom: var(--espacio-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.mensaje-exito {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--exito);
+  border: 1px solid var(--exito);
+}
+
+.mensaje-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+/* 
+/* Botón principal */

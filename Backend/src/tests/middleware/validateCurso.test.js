@@ -1,4 +1,5 @@
-const { validarCrearCurso } = require("../../middleware/validateCurso");
+import { jest } from "@jest/globals";
+import { validarCrearCurso } from "../../middleware/validateCurso.js";
 
 describe("Middleware validarCrearCurso", () => {
   let req, res, next;

@@ -1,0 +1,122 @@
+:root {
+  --navbar-height: 64px; /* You can adjust this value as needed */
+}
+
+.navbar {
+  background-color: var(--color-fondo-alt);
+  border-bottom: 1px solid var(--color-borde);
+  height: var(--navbar-height, 60px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--espacio-xl, 2rem);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: var(--sombra-sm, 0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* Sección izquierda (links principales) */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-md, 1rem);
+}
+
+/* Sección derecha (login/logout y usuario) */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-md, 1rem);
+}
+
+/* Enlaces generales */
+.navbar a {
+  color: var(--color-texto, #333);
+  text-decoration: none;
+  padding: var(--espacio-sm, 0.5rem) var(--espacio-md, 1rem);
+  border-radius: var(--radio-md, 6px);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  background-color: var(--color-borde, #ddd);
+  color: var(--color-primario, #000);
+}
+
+/* Texto de usuario */
+.nav-usuario {
+  color: var(--color-texto, #333);
+  font-weight: 500;
+}
+
+/* Botón de cerrar sesión */
+.nav-btn-cerrar {
+  background-color: var(--color-primario, #007bff);
+  color: white;
+  border: none;
+  border-radius: var(--radio-md, 6px);
+  padding: var(--espacio-sm, 0.5rem) var(--espacio-md, 1rem);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.nav-btn-cerrar:hover {
+  background-color: var(--color-primario-hover, #0056b3);
+}
+
+.admin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--color-primario);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.admin-link:hover {
+  color: var(--color-primario-hover);
+}
+
+.admin-icon {
+  width: 90px;
+  height: 45px;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+  position: relative;
+  top: 2px;
+}
+
+.admin-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Adaptación móvil */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--espacio-md, 1rem);
+    height: auto;
+  }
+
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: var(--espacio-sm, 0.5rem);
+    margin-top: 0.5rem;
+  }
+
+  .nav-btn-cerrar {
+    width: 100%;
+    text-align: center;
+  }
+}
