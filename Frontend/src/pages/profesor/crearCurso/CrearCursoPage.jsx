@@ -1,6 +1,6 @@
 import React from "react";
-import CursoFormulario from "../../components/formulario/crearCursoForm";
-import useCrearCurso from "../../hooks/useCrearCurso";
+import CursoFormulario from "../../../components/formulario/crearCursoForm";
+import useCrearCurso from "../../../hooks/useCrearCurso";
 import "./cursoform.css";
 
 const CrearCursoPage = () => {

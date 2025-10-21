@@ -24,7 +24,7 @@ const Sidebar = () => {
         ];
       case "profesor":
         return [
-          { to: "/profesor", label: "Mis Cursos" },
+          { to: "/mis-cursos", label: "Mis Cursos" },
           { to: "/crear-curso", label: "Crear Curso" },
           { to: "/perfil", label: "Mi Perfil" },
         ];

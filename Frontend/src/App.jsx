@@ -3,7 +3,8 @@ import NavBar from "./components/comunes/navBar/navbar";
 import Sidebar from "./components/comunes/sidebar/sidebar";
 import Footer from "./components/comunes/footer/footer";
 import Inicio from "./pages/inicio/inicio";
-import CrearCurso from "./pages/crearCurso/CrearCursoPage";
+import CrearCurso from "./pages/profesor/crearCurso/CrearCursoPage";
+import MisCursosPage from "./pages/profesor/misCursos/misCursosPage";
 import Registro from "./pages/Registro/Registro";
 import useTheme from "./hooks/useTheme";
 import LoginPage from "./pages/Login/Login";
@@ -46,6 +47,7 @@ function App() {
                   <Route element={<PrivateRoute allowedRoles={["profesor"]} />}>
                     <Route path="/profesor" element={<ProfesorDashboard />} />
                     <Route path="/crear-curso" element={<CrearCurso />} />
+                    <Route path="/mis-cursos" element={<MisCursosPage />} />
                   </Route>
 
                   <Route element={<PrivateRoute allowedRoles={["est"]} />}>
