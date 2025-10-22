@@ -4,12 +4,14 @@ import "./VerificacionModal.css";
 const VerificacionModal = ({ isOpen, onVerify, onClose }) => {
   const [codigo, setCodigo] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); // Nuevo estado para éxito
   const [timeLeft, setTimeLeft] = useState(300);
 
   useEffect(() => {
     if (!isOpen) return;
     setCodigo("");
     setError("");
+    setSuccess("");
     setTimeLeft(300);
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
@@ -32,14 +34,19 @@ const VerificacionModal = ({ isOpen, onVerify, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
     if (codigo.length !== 6) {
       setError("El código debe tener 6 dígitos");
       return;
     }
     try {
-      await onVerify(codigo);
+      const res = await onVerify(codigo);
+      setSuccess(res.message);
+      setError("");
     } catch (err) {
       setError(err.message);
+      setSuccess("");
     }
   };
 
@@ -61,10 +68,16 @@ const VerificacionModal = ({ isOpen, onVerify, onClose }) => {
             onChange={(e) => setCodigo(e.target.value.replace(/\D/g, ""))}
             placeholder="000000"
             style={{ fontSize: "2rem", textAlign: "center", letterSpacing: "0.5em" }}
+            disabled={!!success}
           />
           <div className="timer">Tiempo restante: {formatTime(timeLeft)}</div>
           {error && <div className="error-message">{error}</div>}
-          <button type="submit" className="verify-button" disabled={codigo.length !== 6 || timeLeft === 0}>
+          {success && <div className="success-message">{success}</div>}
+          <button
+            type="submit"
+            className="verify-button"
+            disabled={codigo.length !== 6 || timeLeft === 0 || !!success}
+          >
             Verificar
           </button>
         </form>

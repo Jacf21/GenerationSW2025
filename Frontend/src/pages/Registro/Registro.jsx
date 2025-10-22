@@ -100,15 +100,12 @@ const Registro = () => {
   };
 
   const handleVerificar = async (codigo) => {
-    try {
-      const datos = { ...datosPendientes, codigo, email: emailVerificar };
-      await api.verificarCodigo(datos);
-      setShowVerificacion(false);
-      setMensaje({ tipo: "exito", texto: "¡Cuenta creada y verificada!" });
-      setTimeout(() => navigate("/login"), 2000);
-    } catch (error) {
-      setMensaje({ tipo: "error", texto: error.message });
-    }
+    const datos = { ...datosPendientes, codigo, email: emailVerificar };
+    const res = await api.verificarCodigo(datos);
+    setShowVerificacion(false);
+    setMensaje({ tipo: "exito", texto: "¡Cuenta creada y verificada!" });
+    setTimeout(() => navigate("/login"), 2000);
+    return res; // Devuelve el mensaje de éxito al modal
   };
 
   return (
@@ -126,7 +123,9 @@ const Registro = () => {
             Registrándose como: <span>{getTipoLabel(valores.tipo)}</span>
           </div>
 
-          {mensaje.texto && <div className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</div>}
+          {mensaje.texto && (
+            <div className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</div>
+          )}
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="campo">
