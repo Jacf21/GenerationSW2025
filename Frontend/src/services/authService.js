@@ -6,3 +6,10 @@ export const login = async (email, password) => {
     body: JSON.stringify({ email, password }),
   });
 };
+
+export const enviarCodigo = async (email) => {
+  return apiRequest("/auth/send-code", {
+    method: "POST",
+    body: JSON.stringify({ email }),
+  });
+};

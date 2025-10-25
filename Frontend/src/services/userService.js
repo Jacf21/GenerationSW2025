@@ -13,3 +13,19 @@ export const setAprobadoUser = async (id) => {
     method: "PATCH",
   });
 };
+
+export const api = {
+  async registro(datos) {
+    return apiRequest("/user/register", {
+      method: "POST",
+      body: JSON.stringify(datos),
+    });
+  },
+
+  async verificarCodigo(datos) {
+    return apiRequest("/user/verify", {
+      method: "POST",
+      body: JSON.stringify(datos),
+    });
+  },
+};

@@ -1,7 +1,7 @@
 import pool from "../config/db.js";
 
 export const findUserByEmail = async (email) => {
-  const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+  const result = await pool.query("SELECT * FROM users WHERE LOWER(email) = LOWER($1)", [email]);
   return result.rows[0];
 };
 
@@ -17,6 +17,14 @@ export const getUsers = async () => {
 export const aprobarUser = async (id) => {
   const result = await pool.query(
     "UPDATE users SET aprobado = not aprobado WHERE id = $1 RETURNING *",
+    [id]
+  );
+  return result.rows[0];
+};
+
+export const getUserById = async (id) => {
+  const result = await pool.query(
+    "SELECT id, nombre, email, tipo, aprobado FROM users WHERE id = $1",
     [id]
   );
   return result.rows[0];
