@@ -1,0 +1,96 @@
+.verificacion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--fondo-overlay, rgba(0, 0, 0, 0.5));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.verificacion-modal {
+  background-color: var(--fondo-card, var(--color-fondo-alt, #fff));
+  padding: var(--espacio-xl, 2rem);
+  border-radius: var(--radio-lg, 0.75rem);
+  box-shadow: var(--sombra-lg, 0 10px 15px -3px rgba(0,0,0,0.1));
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: var(--espacio-sm, 0.5rem);
+  right: var(--espacio-sm, 0.5rem);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--texto-secundario, #4b5563);
+}
+
+.codigo-input {
+  margin: var(--espacio-lg, 1.5rem) 0;
+  text-align: center;
+}
+
+.codigo-input input {
+  font-size: 2rem;
+  letter-spacing: 0.5em;
+  text-align: center;
+  width: 100%;
+  padding: var(--espacio-md, 1rem);
+  border: 2px solid var(--borde, #e5e7eb);
+  border-radius: var(--radio-md, 0.5rem);
+  background-color: var(--fondo-input, #fff);
+  color: var(--texto, #111827);
+}
+
+.timer {
+  text-align: center;
+  color: var(--texto-secundario, #4b5563);
+  margin: var(--espacio-md, 1rem) 0;
+}
+
+.verify-button,
+.resend-button {
+  width: 100%;
+  padding: var(--espacio-md, 1rem);
+  border: none;
+  border-radius: var(--radio-md, 0.5rem);
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: var(--espacio-md, 1rem);
+  transition: all 0.2s;
+}
+
+.verify-button {
+  background-color: var(--color-primario, #059669);
+  color: white;
+}
+
+.verify-button:disabled {
+  background-color: var(--color-primario-hover, #047857);
+  cursor: not-allowed;
+}
+
+.resend-button {
+  background-color: transparent;
+  color: var(--color-primario, #059669);
+  border: 1px solid var(--color-primario, #059669);
+}
+
+.resend-button:disabled {
+  color: var(--texto-secundario, #4b5563);
+  border-color: var(--borde, #e5e7eb);
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: var(--color-error, #dc2626);
+  text-align: center;
+  margin: var(--espacio-md, 1rem) 0;
+}

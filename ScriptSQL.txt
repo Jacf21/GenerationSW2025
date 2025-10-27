@@ -11,9 +11,11 @@ CREATE TABLE users (
 -- Creación de la tabla 'curso'
 CREATE TABLE curso (
     id SERIAL PRIMARY KEY,
+    id_usuario INT NOT NULL,
     nombre VARCHAR(255) NOT NULL,
     fecha_ini DATE NOT NULL,
     fecha_fin DATE NOT NULL,
     descripcion VARCHAR(255) NOT NULL,
-    codigo VARCHAR(100) NOT NULL
+    codigo VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES users(id) ON DELETE CASCADE
 );

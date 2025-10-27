@@ -1,68 +1,76 @@
 import bcrypt from "bcrypt";
 import { emailService } from "../services/emailService.js";
-import db from "../config/db.js";
+import pool from "../config/db.js";
+import { setCodigo, getCodigo, deleteCodigo } from "../utils/codigoVerificacionStore.js";
 
 export const register = async (req, res) => {
-  const { nombre, email, password, tipo } = req.body; // Extrae los datos enviados desde el frontend
+  const { nombre, email, tipo } = req.body;
 
   try {
-    // 1. Verificar si el email ya está registrado en la BD
-    const userExists = await db.query(
-      "SELECT * FROM users WHERE email = $1", // Consulta por email
-      [email] // Parametro seguro (previene SQL Injection)
-    );
+    // 1️⃣ Verificar si el email ya está registrado
+    const userExists = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
     if (userExists.rows.length > 0) {
-      // Si el email ya existe, devolvemos error 400
-      return res.status(400).json({
-        message: "El email ya está registrado",
-      });
+      return res.status(400).json({ message: "El email ya está registrado" });
     }
 
-    // 2. Validar el tipo de usuario (solo puede ser: est, profesor o admin)
+    // 2️⃣ Validar tipo de usuario
     const tiposValidos = ["est", "profesor", "admin", "edit"];
     if (!tiposValidos.includes(tipo)) {
-      return res.status(400).json({
-        message: "Tipo de usuario no válido",
-      });
+      return res.status(400).json({ message: "Tipo de usuario no válido" });
     }
 
-    // 3. Hashear la contraseña antes de guardarla (nunca se guarda en texto plano)
+    // 3️⃣ Generar código de verificación
+    const codigo = Math.floor(100000 + Math.random() * 900000).toString();
+    setCodigo(email, codigo);
+
+    // 4️⃣ Enviar correo con el código
+    await emailService.enviarCodigoVerificacion(email, nombre, codigo);
+
+    res.status(200).json({
+      message: "Código de verificación enviado al correo",
+      email,
+    });
+  } catch (error) {
+    console.error("Error en registro:", error);
+    res.status(500).json({ message: "Error al registrar usuario" });
+  }
+};
+
+export const verificarCodigo = async (req, res) => {
+  const { email, codigo, nombre, password, tipo } = req.body;
+
+  try {
+    // 1️⃣ Verificar código guardado en memoria
+    const codigoGuardado = getCodigo(email);
+    if (!codigoGuardado || codigoGuardado !== String(codigo)) {
+      return res.status(400).json({ message: "Código incorrecto o expirado" });
+    }
+
+    // 2️⃣ Crear usuario
     const hashedPassword = await bcrypt.hash(password, 10);
-    // "10" es el número de salt rounds (nivel de seguridad)
-
-    // Determinamos si el usuario necesita aprobación
     const requiereAprobacion = tipo === "profesor" || tipo === "edit";
-    const aprobado = !requiereAprobacion; // true para est y admin, false para profesor y editor
+    const aprobado = !requiereAprobacion;
 
-    // 4. Insertar nuevo usuario en la base de datos y devolver su id
-    const result = await db.query(
-      "INSERT INTO users (nombre, email, password, tipo, aprobado) VALUES ($1, $2, $3, $4, $5) RETURNING id, tipo, aprobado",
-      [nombre, email, hashedPassword, tipo, aprobado] // Insertamos el usuario con la contraseña encriptada
+    const result = await pool.query(
+      "INSERT INTO users (nombre, email, password, tipo, aprobado, verificado) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, tipo, aprobado",
+      [nombre, email, hashedPassword, tipo, aprobado, true]
     );
 
-    // 5. Enviar correo de confirmación
-    try {
-      await emailService.enviarCorreoRegistro(email, nombre, tipo);
-    } catch (emailError) {
-      console.error("Error al enviar correo:", emailError);
-      // No detenemos el registro si falla el correo
-    }
+    // 3️⃣ Enviar correo de bienvenida
+    await emailService.registro(email, nombre, tipo);
 
-    // 6. Respuesta exitosa con el id del nuevo usuario
+    // 4️⃣ Borrar código temporal
+    deleteCodigo(email);
+
     res.status(201).json({
-      message: requiereAprobacion
-        ? "Usuario registrado exitosamente. Revisa tu correo para más información."
-        : "Usuario registrado exitosamente. Te hemos enviado un correo de confirmación.",
+      message: "Usuario creado y verificado exitosamente",
       userId: result.rows[0].id,
       tipo: result.rows[0].tipo,
       aprobado: result.rows[0].aprobado,
     });
   } catch (error) {
-    // Manejo de errores inesperados (problemas con la BD, servidor, etc.)
-    console.error("Error en registro:", error);
-    res.status(500).json({
-      message: "Error al registrar usuario",
-    });
+    console.error("Error en verificación:", error);
+    res.status(500).json({ message: "Error al verificar código" });
   }
 };

@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContex.jsx";
 import * as cursoService from "../services/cursoService.js"; // ⚠️ Importación como objeto
 
 const useCrearCurso = () => {
+  const { user } = useAuth();
+
   const initialFormData = {
     nombre: "",
     fecha_ini: "",
@@ -66,8 +69,10 @@ const useCrearCurso = () => {
       return;
     }
 
+    console.log(user.id);
+
     try {
-      const data = await cursoService.crearCursoAPI(formData);
+      const data = await cursoService.crearCursoAPI(formData, user.id);
       setMensaje({
         type: "success",
         text: `Curso "${data.curso.nombre}" creado con éxito! con código "${data.curso.codigo}"`,

@@ -5,6 +5,7 @@ import request from "supertest";
 // Mock del controller antes de importar las rutas
 await jest.unstable_mockModule("../../controllers/cursoController.js", () => ({
   crearCurso: jest.fn((req, res) => res.status(201).json({ message: "Curso creado" })),
+  getMisCursos: jest.fn((req, res) => res.status(200).json([])),
 }));
 
 // Importa después de mockear
@@ -22,6 +23,7 @@ describe("Rutas de cursos", () => {
       fecha_ini: "2025-01-01",
       fecha_fin: "2025-02-01",
       descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
+      id_usuario: "1",
     });
 
     expect(res.statusCode).toBe(201);
@@ -41,6 +43,7 @@ describe("Rutas de cursos", () => {
       fecha_ini: "2025-03-01",
       fecha_fin: "2025-02-01",
       descripcion: "recasnskjvgbkdbnljbvksdnblkdbjsndfbldknbldfnbldnb",
+      id_usuario: "1",
     });
 
     expect(res.statusCode).toBe(400);

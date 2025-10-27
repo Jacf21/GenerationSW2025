@@ -41,6 +41,7 @@ export const useLogin = () => {
       const res = await loginService(email, password);
 
       login({
+        id: res.id,
         nombre: res.nombre,
         tipo: res.tipo,
         token: res.token,

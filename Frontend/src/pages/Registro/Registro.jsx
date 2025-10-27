@@ -1,19 +1,10 @@
-// Importamos hooks de React
-import { useState } from "react";
-// Hook de react-router-dom para navegar entre páginas
-import { useNavigate } from "react-router-dom";
-// Custom hook para manejar formularios y validaciones
 import { useFormulario } from "../../hooks/useFormulario";
-// Servicio API para hacer peticiones al backend
-import { api } from "../../services/api";
-// Componente modal reutilizable
+import { useRegistro } from "../../hooks/useRegistro";
 import Modal from "../../components/comunes/Modal/modal";
-// Iconos de react-icons
+import VerificacionModal from "../../components/VerificacionModal/VerificacionModal";
 import { FaUserGraduate, FaChalkboardTeacher, FaUserCog } from "react-icons/fa";
-// Estilos CSS del componente
 import "./Registro.css";
 
-// Selector de tipo de usuario dentro del modal
 const TipoUsuarioSelector = ({ onSelect }) => {
   const tipos = [
     {
@@ -59,79 +50,42 @@ const TipoUsuarioSelector = ({ onSelect }) => {
 };
 
 const Registro = () => {
-  const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(true);
-  const [mensaje, setMensaje] = useState({ tipo: "", texto: "" });
+  const {
+    showModal,
+    setShowModal,
+    showVerificacion,
+    setShowVerificacion,
+    mensaje,
+    enviarRegistro,
+    verificarCodigo,
+    handleTipoSelect,
+  } = useRegistro();
 
-  // Agregamos confirmPassword al estado inicial
   const { valores, errores, handleChange, handleBlur, handleKeyDown, handleSubmit, setValores } =
-    useFormulario({
-      nombre: "",
-      email: "",
-      password: "",
-      confirmPassword: "", // Nuevo campo
-      tipo: "",
-    });
-
-  const handleTipoSelect = (tipo) => {
-    setValores((prev) => ({
-      ...prev,
-      tipo,
-    }));
-    setShowModal(false);
-  };
-
-  // Modificamos onSubmit para validar contraseñas
-  const onSubmit = async (datos) => {
-    // Validar que las contraseñas coincidan
-    if (datos.password !== datos.confirmPassword) {
-      setMensaje({
-        tipo: "error",
-        texto: "Las contraseñas no coinciden",
-      });
-      return;
-    }
-
-    try {
-      // Eliminamos confirmPassword antes de enviar al backend
-      const { ...datosEnvio } = datos;
-      await api.registro(datosEnvio);
-      setMensaje({
-        tipo: "exito",
-        texto: "Registro exitoso! Redirigiendo...",
-      });
-      setTimeout(() => navigate("/"), 2000);
-    } catch (error) {
-      setMensaje({
-        tipo: "error",
-        texto: error.message || "Error al registrar usuario",
-      });
-    }
-  };
-
-  if (showModal) {
-    return (
-      <Modal isOpen={showModal} onClose={() => navigate("/")}>
-        <TipoUsuarioSelector onSelect={handleTipoSelect} />
-      </Modal>
-    );
-  }
+    useFormulario({ nombre: "", email: "", password: "", confirmPassword: "", tipo: "" });
 
   return (
-    <div className="registro-container">
-      <div className="registro-card">
-        <h2>Crear Cuenta</h2>
+    <>
+      {showModal && (
+        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+          <TipoUsuarioSelector onSelect={(tipo) => handleTipoSelect(tipo, setValores)} />
+        </Modal>
+      )}
 
-        <div className="tipo-seleccionado">
-          Registrándose como: <span>{getTipoLabel(valores.tipo)}</span>
-        </div>
+      <div className="registro-container">
+        <div className="registro-card">
+          <h2>Crear Cuenta</h2>
+          <div className="tipo-seleccionado">
+            Registrándose como: <span>{getTipoLabel(valores.tipo)}</span>
+          </div>
 
-        {mensaje.texto && <div className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</div>}
+          {mensaje.texto && (
+            <div className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</div>
+          )}
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="campo">
-            <label htmlFor="nombre">Nombre completo</label>
-            <div className="input-container">
+          <form onSubmit={handleSubmit(enviarRegistro)} noValidate>
+            <div className="campo">
+              <label htmlFor="nombre">Nombre completo</label>
               <input
                 type="text"
                 id="nombre"
@@ -142,15 +96,12 @@ const Registro = () => {
                 onKeyDown={handleKeyDown}
                 placeholder="Ej: Juan Pérez"
                 className={errores.nombre ? "input-error" : ""}
-                autoFocus
               />
               {errores.nombre && <div className="mensaje-error-campo">{errores.nombre}</div>}
             </div>
-          </div>
 
-          <div className="campo">
-            <label htmlFor="email">Email</label>
-            <div className="input-container">
+            <div className="campo">
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
@@ -164,11 +115,9 @@ const Registro = () => {
               />
               {errores.email && <div className="mensaje-error-campo">{errores.email}</div>}
             </div>
-          </div>
 
-          <div className="campo">
-            <label htmlFor="password">Contraseña</label>
-            <div className="input-container">
+            <div className="campo">
+              <label htmlFor="password">Contraseña</label>
               <input
                 type="password"
                 id="password"
@@ -182,30 +131,16 @@ const Registro = () => {
               />
               {errores.password && <div className="mensaje-error-campo">{errores.password}</div>}
             </div>
-          </div>
 
-          {/* Nuevo Campo Confirmar Contraseña */}
-          <div className="campo">
-            <label htmlFor="confirmPassword">Confirmar Contraseña</label>
-            <div className="input-container">
+            <div className="campo">
+              <label htmlFor="confirmPassword">Confirmar Contraseña</label>
               <input
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
                 value={valores.confirmPassword}
                 onChange={handleChange}
-                onBlur={(e) => {
-                  handleBlur(e);
-                  // Validación adicional al perder el foco
-                  if (valores.password !== e.target.value) {
-                    setMensaje({
-                      tipo: "error",
-                      texto: "Las contraseñas no coinciden",
-                    });
-                  } else {
-                    setMensaje({ tipo: "", texto: "" });
-                  }
-                }}
+                onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 placeholder="Repite tu contraseña"
                 className={errores.confirmPassword ? "input-error" : ""}
@@ -214,17 +149,20 @@ const Registro = () => {
                 <div className="mensaje-error-campo">{errores.confirmPassword}</div>
               )}
             </div>
-          </div>
 
-          {/* Errores generales (ej. backend) */}
-          {errores.submit && <div className="mensaje mensaje-error">{errores.submit}</div>}
-
-          <button type="submit" className="boton-primario">
-            Crear cuenta
-          </button>
-        </form>
+            <button type="submit" className="boton-primario">
+              Crear cuenta
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+
+      <VerificacionModal
+        isOpen={showVerificacion}
+        onVerify={verificarCodigo}
+        onClose={() => setShowVerificacion(false)}
+      />
+    </>
   );
 };
 

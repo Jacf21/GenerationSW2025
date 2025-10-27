@@ -1,9 +1,15 @@
 import { renderHook, act } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest"; // ✅ IMPORTAR VI
-import useCrearCurso from "../../hooks/useCrearCurso";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import * as cursoService from "../../services/cursoService";
 
-// ✅ Mock del servicio
+vi.mock("../../context/AuthContex.jsx", () => ({
+  useAuth: () => ({
+    user: { id: 1, nombre: "Usuario Test" },
+  }),
+}));
+
+import useCrearCurso from "../../hooks/useCrearCurso";
+
 vi.mock("../../services/cursoService", () => ({
   crearCursoAPI: vi.fn(),
 }));
