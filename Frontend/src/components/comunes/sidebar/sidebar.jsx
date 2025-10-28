@@ -1,38 +1,49 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContex";
+import {
+  FaHome,
+  FaUserPlus,
+  FaSignInAlt,
+  FaUsers,
+  FaChartBar,
+  FaChalkboardTeacher,
+  FaBook,
+  FaCog,
+  FaEdit,
+  FaUserCircle,
+} from "react-icons/fa";
 import "./sidebar.css";
 
 const Sidebar = () => {
   const { isAuthenticated, userRole } = useAuth();
 
-  // Links según rol o estado
   const getMenuByRole = () => {
     if (!isAuthenticated) {
       return [
-        { to: "/", label: "Inicio" },
-        { to: "/login", label: "Iniciar sesión" },
-        { to: "/registro", label: "Registrarse" },
+        { to: "/", label: "Inicio", icon: <FaHome /> },
+        { to: "/login", label: "Iniciar sesión", icon: <FaSignInAlt /> },
+        { to: "/registro", label: "Registrarse", icon: <FaUserPlus /> },
       ];
     }
 
     switch (userRole) {
       case "admin":
         return [
-          { to: "/admin", label: "Panel Admin" },
-          { to: "/gestionar-usuarios", label: "Gestionar Usuarios" },
-          { to: "/reportes", label: "Reportes" },
+          { to: "/admin", label: "Panel Admin", icon: <FaHome /> },
+          { to: "/gestionar-usuarios", label: "Gestionar Usuarios", icon: <FaUsers /> },
+          { to: "/reportes", label: "Reportes", icon: <FaChartBar /> },
         ];
       case "profesor":
         return [
-          { to: "/mis-cursos", label: "Mis Cursos" },
-          { to: "/crear-curso", label: "Crear Curso" },
-          { to: "/perfil", label: "Mi Perfil" },
+          { to: "/mis-cursos", label: "Mis Cursos", icon: <FaChalkboardTeacher /> },
+          { to: "/crear-curso", label: "Crear Curso", icon: <FaEdit /> },
+          { to: "/perfil", label: "Mi Perfil", icon: <FaUserCircle /> },
         ];
       case "est":
         return [
-          { to: "/estudiante", label: "Mis Clases" },
-          { to: "/perfil", label: "Mi Perfil" },
-          { to: "/configuracion", label: "Configuración" },
+          { to: "/estudiante", label: "Mis Clases", icon: <FaBook /> },
+          { to: "/perfil", label: "Mi Perfil", icon: <FaUserCircle /> },
+          { to: "/configuracion", label: "Configuración", icon: <FaCog /> },
         ];
       case "edit":
         return [
@@ -41,9 +52,7 @@ const Sidebar = () => {
           { to: "/perfil", label: "Mi Perfil" },
         ];
       default:
-        return [
-          { to: "/", label: "Inicio" }, // Fallback por si hay error
-        ];
+        return [{ to: "/", label: "Inicio", icon: <FaHome /> }];
     }
   };
 
@@ -51,15 +60,14 @@ const Sidebar = () => {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-header">
-        <h2>Menú</h2>
-      </div>
-
       <nav className="sidebar-nav">
         <ul>
           {menuItems.map((item) => (
-            <li key={item.to}>
-              <Link to={item.to}>{item.label}</Link>
+            <li key={item.to} className="tooltip-container">
+              <Link to={item.to} className="sidebar-icon">
+                {item.icon}
+                <span className="tooltip-text">{item.label}</span>
+              </Link>
             </li>
           ))}
         </ul>
