@@ -1,5 +1,6 @@
 import React from "react";
 import "./gestionarUsers.css";
+import { FaCheck, FaTimes } from "react-icons/fa"; // Importar iconos
 import CustomTable from "../../../components/customTable";
 import { useUsers } from "../../../hooks/useUsers";
 
@@ -14,6 +15,14 @@ const GestionarUsers = () => {
     { key: "tipo", label: "Tipo" },
     { key: "aprobado", label: "Estado" },
   ];
+
+  const renderEstado = (aprobado) => {
+    return (
+      <span className={`estado-badge ${aprobado ? "aprobado" : "pendiente"}`}>
+        {aprobado ? "Aprobado" : "Pendiente"}
+      </span>
+    );
+  };
 
   return (
     <div className="page-user-container">
@@ -64,7 +73,11 @@ const GestionarUsers = () => {
                   className={selectedUser?.id === row.id ? "selected" : ""}
                 >
                   {columns.map((col) => (
-                    <td key={col.key}>{row[col.key]?.toString()}</td>
+                    <td key={col.key}>
+                      {col.key === "aprobado"
+                        ? renderEstado(row[col.key])
+                        : row[col.key]?.toString()}
+                    </td>
                   ))}
                 </tr>
               ))}

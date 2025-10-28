@@ -1,141 +1,247 @@
 .page-user-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 2rem auto;
+  width: calc(100vw - var(--sidebar-width) - var(--espacio-xl));
+  height: calc(100vh - var(--navbar-height) - var(--espacio-xl));
+  margin: var(--espacio-md);
   padding: var(--espacio-lg);
-  background-color: var(--fondo-input); /* Fondo del cuadro (puedes cambiarlo) */
-  border-radius: var(--radio-lg, 12px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--borde, #e5e7eb);
-}
-
-/* ===== Título ===== */
-.page-user-container h1 {
-  color: var(--texto);
-  font-size: 1.75rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: var(--espacio-xl);
-}
-
-/* ===== Filtros ===== */
-.filters-container {
+  background-color: var(--color-fondo-alt);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-md);
+  border: 1px solid var(--color-borde);
+  position: relative;
+  overflow: hidden;
   display: flex;
-  gap: var(--espacio-md);
-  justify-content: center;
+  flex-direction: column;
+}
+
+/* Título más compacto */
+.page-user-container h1 {
+  color: var(--color-texto);
+  font-size: var(--texto-xl);
+  font-weight: 600;
+  margin-bottom: var(--espacio-md);
+  padding-bottom: var(--espacio-sm);
+  border-bottom: 2px solid var(--color-primario);
+}
+
+/* Contenedor de filtros */
+.filters-container {
+  padding: var(--espacio-sm);
+  background-color: var(--color-fondo);
+  border-radius: var(--radio-md);
+  margin-bottom: var(--espacio-md);
+  display: flex;
+  gap: var(--espacio-sm);
   align-items: center;
-  margin-bottom: var(--espacio-lg);
   flex-wrap: wrap;
 }
 
+/* Selects de filtros */
 .filters-container select {
-  padding: 0.6rem 0.75rem;
-  border: 1px solid var(--borde);
+  padding: var(--espacio-sm) var(--espacio-md);
+  border: 1px solid var(--color-borde);
   border-radius: var(--radio-md);
-  background-color: var(--fondo);
-  color: var(--texto);
-  font-size: 0.9rem;
+  background-color: var(--fondo-input);
+  color: var(--color-texto);
+  font-size: var(--texto-base);
+  min-width: 200px;
   transition: all 0.2s ease;
 }
 
 .filters-container select:focus {
   outline: none;
   border-color: var(--color-primario);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 2px var(--color-primario-claro);
 }
 
-/* ===== Botón cambiar estado ===== */
+/* Botón de cambiar estado */
 .filters-container button {
   background-color: var(--color-primario);
-  color: #fff;
+  color: white;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: var(--espacio-sm) var(--espacio-lg);
   border-radius: var(--radio-md);
-  font-size: 0.9rem;
+  font-size: var(--texto-base);
   font-weight: 500;
-  cursor: pointer;
+  min-width: 150px;
   transition: all 0.2s ease;
 }
 
 .filters-container button:hover:not(:disabled) {
-  background-color: var(--color-primario-hover, #4f46e5);
-  transform: scale(1.03);
+  background-color: var(--color-primario-hover);
+  transform: translateY(-1px);
 }
 
 .filters-container button:disabled {
-  background-color: var(--borde);
+  background-color: var(--color-secundario);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-/* ===== Tabla ===== */
+/* Contenedor de tabla con altura dinámica */
 .table-container {
-  overflow-x: auto;
+  flex: 1;
+  overflow: auto;
   border-radius: var(--radio-md);
+  background-color: var(--color-fondo);
   box-shadow: var(--sombra-sm);
+  position: relative;
+  min-height: 0; /* Importante para el scroll */
 }
 
+/* Tabla con cabecera fija */
 .table {
   width: 100%;
-  border-collapse: collapse;
-  background-color: var(--fondo);
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background-color: var(--color-primario);
-  color: #fff;
-}
-
-.table th,
-.table td {
-  padding: var(--espacio-md);
-  text-align: left;
-  font-size: 0.95rem;
-  border-bottom: 1px solid var(--borde);
-  color: var(--texto);
 }
 
 .table th {
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  padding: var(--espacio-sm) var(--espacio-md);
+  color: white;
+  font-weight: 500;
+  text-align: left;
+  white-space: nowrap;
 }
 
-.table tr:hover {
-  background-color: rgba(79, 70, 229, 0.05);
-  transition: background-color 0.2s;
+.table td {
+  padding: var(--espacio-sm) var(--espacio-md);
+  border-bottom: 1px solid var(--color-borde);
 }
 
-/* ===== Fila seleccionada ===== */
+/* Mejoras visuales para las filas */
+.table tbody tr:hover {
+  background-color: var(--color-primario-hover);
+  color: white;
+}
+
 .table tr.selected {
-  background-color: rgba(79, 70, 229, 0.15);
-  border-left: 3px solid var(--color-primario);
+  background-color: var(--color-primario-claro);
+  border-left: 4px solid var(--color-primario);
 }
 
-/* ===== Estado aprobado/no aprobado ===== */
-.estado {
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radio-md);
+/* Estado aprobado/no aprobado más visual */
+.table td:last-child {
   text-align: center;
-  display: inline-block;
 }
 
-.estado-true {
-  background-color: rgba(16, 185, 129, 0.1);
-  color: var(--exito);
-  border: 1px solid var(--exito);
+.estado-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 0.875rem;
 }
 
-.estado-false {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: var(--error);
-  border: 1px solid var(--error);
+.estado-icon.aprobado {
+  background-color: var(--color-exito-claro, #dcfce7);
+  color: var(--color-exito, #16a34a);
 }
 
-/* ===== Estado de carga ===== */
-.loading {
+.estado-icon.no-aprobado {
+  background-color: var(--color-error-claro, #fee2e2);
+  color: var(--color-error, #dc2626);
+}
+
+/* Ajustar el hover para que no afecte el color de los iconos */
+.table tbody tr:hover .estado-icon {
+  background-color: white;
+}
+
+.table tbody tr:hover .estado-icon.aprobado {
+  color: var(--color-exito);
+}
+
+.table tbody tr:hover .estado-icon.no-aprobado {
+  color: var(--color-error);
+}
+
+/* Eliminar los estilos anteriores del pseudo-elemento */
+.table td:last-child::before {
+  display: none;
+}
+
+.table td:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos para los badges de estado */
+.estado-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: normal;
   text-align: center;
-  color: var(--texto-secundario);
-  font-size: 1rem;
-  margin-top: var(--espacio-lg);
+  min-width: 80px;
+}
+
+.estado-badge.aprobado {
+  background-color: rgba(22, 163, 74, 0.1);
+  color: var(--color-exito, #16a34a);
+  border: none;
+}
+
+.estado-badge.pendiente {
+  background-color: rgba(217, 119, 6, 0.1);
+  color: var(--color-advertencia, #d97706);
+  border: none;
+}
+
+/* Centrar el badge en la celda */
+.table td:last-child {
+  text-align: center;
+}
+
+/* Quitar el hover effect del badge */
+.table tbody tr:hover .estado-badge {
+  background-color: inherit;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .page-user-container {
+    margin: var(--espacio-sm);
+    padding: var(--espacio-md);
+  }
+
+  .filters-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .filters-container select {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-user-container {
+    margin: var(--espacio-md);
+    padding: var(--espacio-md);
+    width: calc(100% - var(--espacio-md) * 2);
+  }
+
+  .filters-container {
+    flex-direction: column;
+    gap: var(--espacio-sm);
+  }
+
+  .filters-container select,
+  .filters-container button {
+    width: 100%;
+    min-width: unset;
+  }
 }

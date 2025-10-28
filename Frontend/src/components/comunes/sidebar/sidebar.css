@@ -1,42 +1,73 @@
 .sidebar {
-  width: 240px;
-  background-color: var(--fondo-input);
+  width: 70px;
+  background-color: var(--color-fondo-alt);
   box-shadow: var(--sombra-lg);
   border-radius: var(--radio-lg);
-  padding: var(--espacio-lg);
   height: 100vh;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-md);
-}
-
-.sidebar-header h2 {
-  color: var(--texto);
-  font-size: 1.25rem;
-  text-align: center;
-  margin-bottom: var(--espacio-md);
+  align-items: center;
+  transition: width 0.3s ease;
 }
 
 .sidebar-nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  width: 100%;
 }
 
 .sidebar-nav li {
-  margin-bottom: var(--espacio-md);
+  margin: 1rem 0;
+  position: relative;
 }
 
-.sidebar-nav a {
-  display: block;
+.sidebar-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-texto);
+  font-size: 1.5rem;
   text-decoration: none;
-  color: var(--texto);
-  padding: 0.75rem 1rem;
-  border-radius: var(--radio-md);
-  transition: background 0.2s;
+  padding: 0.75rem;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
 }
 
-.sidebar-nav a:hover {
+.sidebar-icon:hover {
   background-color: var(--color-primario-transparente);
   color: var(--color-primario);
+  transform: scale(1.1);
+}
+
+/* Tooltip estilo moderno tipo WhatsApp */
+.tooltip-container {
+  position: relative;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--color-primario);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: var(--radio-lg);
+  white-space: nowrap;
+  font-size: 0.85rem;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-50%) translateX(5px);
 }
