@@ -22,11 +22,21 @@ const handleResponse = async (response) => {
 
 const apiRequest = async (endpoint, options = {}) => {
   const url = `${BASE_URL}${endpoint}`;
-  const defaultHeaders = { "Content-Type": "application/json" };
+
+  // ✅ Detectamos si el body es FormData
+  const isFormData = options.body instanceof FormData;
+
+  const defaultHeaders = {};
+
+  // ✅ Solo agregamos Content-Type si NO es FormData
+  if (!isFormData) {
+    defaultHeaders["Content-Type"] = "application/json";
+  }
 
   const config = {
-    ...options,
-    headers: { ...defaultHeaders, ...options.headers },
+    method: options.method || "GET",
+    headers: { ...defaultHeaders, ...(options.headers || {}) },
+    body: options.body,
   };
 
   const response = await fetch(url, config);

@@ -19,3 +19,8 @@ Backend/dist/
 
 # IDE
 .idea/
+
+#google sevices
+google-service-account.json
+credentials_oauth.json
+token.json

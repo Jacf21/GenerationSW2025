@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
 export const emailTemplates = {
   codigoVerificacion: (nombre, codigo) => ({
     subject: "Verifica tu cuenta",
@@ -20,7 +24,7 @@ export const emailTemplates = {
         <p>Nos alegra informarte que tu cuenta ha sido <strong>aprobada</strong>.</p>
         <p>Ya puedes ingresar al sistema con tus credenciales.</p>
         <div style="text-align:center;margin-top:25px;">
-          <a href="https://dev-recode.app/login" target="_blank"
+          <a href="${process.env.DIRECTION}${process.env.PORTFRONT}/login" target="_blank"
             style="display:inline-block;background:#28a745;color:white;
             padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;">
             Ingresar al Sistema
@@ -61,7 +65,7 @@ export const emailTemplates = {
         <p>Tu cuenta de tipo <strong>${tipo}</strong> ha sido creada correctamente.</p>
         <p>Gracias por unirte a nuestra comunidad. Esperamos que disfrutes de la experiencia.</p>
         <div style="text-align:center;margin-top:25px;">
-          <a href="https://dev-recode.app/login" target="_blank"
+          <a href="${process.env.DIRECTION}${process.env.PORTFRONT}/login" target="_blank"
             style="display:inline-block;background:#4f46e5;color:white;
             padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:bold;">
             Iniciar Sesión

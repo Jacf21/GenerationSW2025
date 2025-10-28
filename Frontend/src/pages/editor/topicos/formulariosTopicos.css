@@ -1,0 +1,211 @@
+/* ================================
+   CONTENEDOR GENERAL DE FORMULARIO
+=================================== */
+.formulario-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto var(--espacio-xxl);
+  padding: var(--espacio-lg);
+  background-color: var(--fondo-input);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-lg);
+}
+
+/* Título del formulario */
+.formulario-container h2 {
+  text-align: center;
+  color: var(--texto);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: var(--espacio-xl);
+}
+
+/* ================================
+   CAMPOS GENERALES
+=================================== */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--espacio-lg);
+}
+
+.campo label {
+  color: var(--texto);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-md);
+  background-color: var(--fondo);
+  color: var(--texto);
+  transition: all 0.2s ease;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.campo textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ================================
+   BOTONES
+=================================== */
+.boton {
+  width: 100%;
+  display: inline-block;
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radio-md);
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.boton:hover {
+  background-color: var(--color-primario-hover);
+  transform: translateY(-1px);
+}
+
+.boton:active {
+  transform: translateY(1px);
+}
+
+/* Botones secundarios (por si hay más acciones) */
+.boton-secundario {
+  background-color: var(--borde);
+  color: var(--texto);
+}
+
+.boton-secundario:hover {
+  background-color: var(--texto-secundario);
+}
+
+/* ================================
+   MENSAJES DE ESTADO
+=================================== */
+.mensaje {
+  padding: var(--espacio-md);
+  border-radius: var(--radio-md);
+  margin-bottom: var(--espacio-lg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.mensaje-exito {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid var(--exito);
+  color: var(--exito);
+}
+
+.mensaje-error {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid var(--error);
+  color: var(--error);
+}
+
+/* Texto cuando no hay contenidos */
+.texto-vacio {
+  padding: var(--espacio-md);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--texto-secundario);
+}
+
+/* Lista de contenidos */
+.contenido-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-md);
+  margin-top: var(--espacio-md);
+}
+
+/* Item de contenido */
+.contenido-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--fondo);
+  padding: var(--espacio-md);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-md);
+  box-shadow: var(--sombra-sm);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.contenido-item:hover {
+  transform: translateY(-2px);
+  background-color: var(--fondo-hover);
+}
+
+/* Información del contenido */
+.contenido-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contenido-titulo {
+  font-size: 1rem;
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.contenido-enlace {
+  font-size: 0.875rem;
+  text-decoration: underline;
+  color: var(--color-primario);
+  transition: opacity 0.2s ease;
+}
+
+.contenido-enlace:hover {
+  opacity: 0.8;
+}
+
+/* Botón eliminar */
+.boton-eliminar {
+  background-color: var(--error);
+  color: #fff;
+  border: none;
+  border-radius: var(--radio-sm);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.boton-eliminar:hover {
+  background-color: var(--error-hover);
+}
+
+
+/* ================================
+   RESPONSIVE
+=================================== */
+@media (max-width: 600px) {
+  .formulario-container {
+    padding: var(--espacio-md);
+  }
+
+  .formulario-container h2 {
+    font-size: 1.3rem;
+  }
+}

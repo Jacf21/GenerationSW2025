@@ -37,7 +37,7 @@ const Sidebar = () => {
       case "edit":
         return [
           { to: "/editor", label: "Panel de Edición" },
-          { to: "/contenidos", label: "Gestionar Contenido" },
+          { to: "/topico", label: "Gestionar Topicos" },
           { to: "/perfil", label: "Mi Perfil" },
         ];
       default:
