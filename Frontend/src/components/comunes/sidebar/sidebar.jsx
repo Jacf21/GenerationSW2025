@@ -47,9 +47,9 @@ const Sidebar = () => {
         ];
       case "edit":
         return [
-          { to: "/editor", label: "Panel de Edición" },
-          { to: "/topico", label: "Gestionar Topicos" },
-          { to: "/perfil", label: "Mi Perfil" },
+          { to: "/editor", label: "Panel de Edición", icon: <FaEdit /> },
+          { to: "/topico", label: "Gestionar Topicos", icon: <FaBook /> },
+          { to: "/perfil", label: "Mi Perfil", icon: <FaUserCircle /> },
         ];
       default:
         return [{ to: "/", label: "Inicio", icon: <FaHome /> }];
