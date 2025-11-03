@@ -11,6 +11,9 @@ import {
   FaCog,
   FaEdit,
   FaUserCircle,
+  FaPlusCircle,
+  FaFileUpload,
+  FaListUl,
 } from "react-icons/fa";
 import "./sidebar.css";
 
@@ -47,9 +50,10 @@ const Sidebar = () => {
         ];
       case "edit":
         return [
-          { to: "/editor", label: "Panel de Edición" },
-          { to: "/topico", label: "Gestionar Topicos" },
-          { to: "/perfil", label: "Mi Perfil" },
+          { to: "/editor", label: "Panel de Edición", icon: <FaHome /> },
+          { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> },
+          { to: "/agregar-contenido", label: "Agregar Contenido", icon: <FaFileUpload /> },
+          { to: "/contenido", label: "Lista de Contenidos", icon: <FaListUl /> },
         ];
       default:
         return [{ to: "/", label: "Inicio", icon: <FaHome /> }];

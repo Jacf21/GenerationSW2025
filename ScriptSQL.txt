@@ -27,7 +27,6 @@ CREATE TABLE topico (
     titulo VARCHAR(255) NOT NULL,
     orden INT NOT NULL,
     descripcion TEXT,
-    drive_folder_id VARCHAR(255)
 );
 
 -- Creación de la tabla 'contenidoTopico'
@@ -36,6 +35,6 @@ CREATE TABLE contenidoTopico (
     id_topico INT NOT NULL,
     tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('text', 'img', 'video', 'audio', 'slide', 'eval')),
     url VARCHAR(255) NOT NULL,
-    drive_file_id VARCHAR(255),
+    storage_path VARCHAR(255),
     FOREIGN KEY (id_topico) REFERENCES topico(id) ON DELETE CASCADE
 );

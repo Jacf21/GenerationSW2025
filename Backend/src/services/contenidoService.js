@@ -1,40 +1,66 @@
 import pool from "../config/db.js";
-import { subirArchivo, eliminarArchivo } from "../config/googleDrive.js";
+import { supabase } from "../config/supabase.js";
+import fs from "fs";
 
 export const subirContenido = async (id_topico, tipo, file) => {
   try {
-    //Buscar el tópico para obtener su carpeta Drive
-    const topicoRes = await pool.query("SELECT drive_folder_id FROM topico WHERE id = $1", [
-      id_topico,
-    ]);
+    const topicoRes = await pool.query("SELECT * FROM topico WHERE id = $1", [id_topico]);
     if (topicoRes.rowCount === 0) throw new Error("Tópico no encontrado");
 
-    const folderId = topicoRes.rows[0].drive_folder_id;
+    const filename = `topicos/${id_topico}/${Date.now()}-${file.originalname}`;
+    const fileBuffer = fs.readFileSync(file.path);
 
-    //Subir el archivo al Drive
-    const driveFile = await subirArchivo(file.path, file.originalname, file.mimetype, folderId);
+    const { data, error } = await supabase.storage
+      .from("tutorial-media")
+      .upload(filename, fileBuffer, {
+        contentType: file.mimetype,
+        upsert: true,
+      });
 
-    //Guardar registro en la base de datos
+    if (error) throw error;
+
+    const { data: publicData } = supabase.storage.from("tutorial-media").getPublicUrl(filename);
+
+    const publicUrl = publicData.publicUrl;
+
     const insert = await pool.query(
-      `INSERT INTO contenidoTopico (id_topico, tipo, url, drive_file_id)
+      `INSERT INTO contenidoTopico (id_topico, tipo, url, storage_path)
        VALUES ($1, $2, $3, $4)
        RETURNING *`,
-      [id_topico, tipo, driveFile.webViewLink, driveFile.id]
+      [id_topico, tipo, publicUrl, filename]
     );
 
     return insert.rows[0];
   } catch (error) {
-    console.error("Error en crearContenido:", error);
+    console.error("Error en subirContenido:", error);
     throw error;
   }
 };
 
-export const eliminarContenido = async (id, drive_file_id) => {
-  if (drive_file_id) await eliminarArchivo(drive_file_id);
-  await pool.query("DELETE FROM contenidoTopico WHERE id = $1;", [id]);
+export const eliminarContenido = async (id, storage_path) => {
+  try {
+    if (storage_path) {
+      await supabase.storage
+        .from("tutorial-media")
+        .remove([storage_path])
+        .catch(() => null);
+    }
+    await pool.query("DELETE FROM contenidoTopico WHERE id = $1;", [id]);
+  } catch (err) {
+    console.error("Error al eliminar contenido:", err);
+    throw err;
+  }
 };
 
 export const obtenerContenido = async (id) => {
   const { rows } = await pool.query("SELECT * FROM contenidoTopico WHERE id = $1;", [id]);
   return rows[0];
+};
+
+export const obtenerContenidosPorTopico = async (id_topico) => {
+  const { rows } = await pool.query(
+    "SELECT * FROM contenidoTopico WHERE id_topico = $1 ORDER BY id DESC;",
+    [id_topico]
+  );
+  return rows;
 };

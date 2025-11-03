@@ -19,7 +19,8 @@ export default function useTopicos() {
 
       const contenidosData = {};
       for (let topico of t) {
-        contenidosData[topico.id] = await obtenerContenidosPorTopico(topico.id);
+        const respuesta = await obtenerContenidosPorTopico(topico.id);
+        contenidosData[topico.id] = respuesta.data; // 🔥 importante
       }
       setContenidos(contenidosData);
     } catch (err) {
@@ -36,9 +37,10 @@ export default function useTopicos() {
 
   const agregarContenido = (contenido) => {
     const id_topico = contenido.id_topico;
+
     setContenidos({
       ...contenidos,
-      [id_topico]: [...contenidos[id_topico], contenido],
+      [id_topico]: [...(contenidos[id_topico] || []), contenido],
     });
   };
 
