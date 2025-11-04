@@ -1,6 +1,6 @@
 import pool from "../config/db.js";
 import { supabase } from "../config/supabase.js";
-import fs from "fs";
+import * as fs from "fs";
 
 export const subirContenido = async (id_topico, tipo, file) => {
   try {
@@ -10,12 +10,10 @@ export const subirContenido = async (id_topico, tipo, file) => {
     const filename = `topicos/${id_topico}/${Date.now()}-${file.originalname}`;
     const fileBuffer = fs.readFileSync(file.path);
 
-    const { data, error } = await supabase.storage
-      .from("tutorial-media")
-      .upload(filename, fileBuffer, {
-        contentType: file.mimetype,
-        upsert: true,
-      });
+    const { error } = await supabase.storage.from("tutorial-media").upload(filename, fileBuffer, {
+      contentType: file.mimetype,
+      upsert: true,
+    });
 
     if (error) throw error;
 
