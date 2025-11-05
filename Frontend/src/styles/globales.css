@@ -9,6 +9,7 @@
   /* 🎨 Colores principales */
   --color-primario: #059669;
   --color-primario-hover: #047857;
+  --color-primario-claro: #d1fae5;
   --color-secundario: #6b7280;
   --color-acento: #14b8a6;
 
@@ -73,6 +74,7 @@
   --color-fondo: #111827;
   --color-fondo-alt: #1f2937;
   --color-texto: #f9fafb;
+  --color-primario-claro: #064e3b;
   --color-texto-secundario: #9ca3af;
   --color-borde: #374151;
   --color-footer: #0f172a;

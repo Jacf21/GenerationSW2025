@@ -5,6 +5,7 @@ CREATE TABLE users (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     aprobado BOOLEAN NOT NULL,
+    verificado BOOLEAN NOT NULL,
     tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('est', 'profesor', 'admin', 'edit'))
 );
 
@@ -18,4 +19,22 @@ CREATE TABLE curso (
     descripcion VARCHAR(255) NOT NULL,
     codigo VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Creación de la tabla 'topico'
+CREATE TABLE topico (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    orden INT NOT NULL,
+    descripcion TEXT,
+);
+
+-- Creación de la tabla 'contenidoTopico'
+CREATE TABLE contenidoTopico (
+    id SERIAL PRIMARY KEY,
+    id_topico INT NOT NULL,
+    tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('text', 'img', 'video', 'audio', 'slide', 'eval')),
+    url VARCHAR(255) NOT NULL,
+    storage_path VARCHAR(255),
+    FOREIGN KEY (id_topico) REFERENCES topico(id) ON DELETE CASCADE
 );

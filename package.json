@@ -23,6 +23,7 @@
     "vitest": "^0.34.6"
   },
   "dependencies": {
+    "googleapis": "^164.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.4"
   }

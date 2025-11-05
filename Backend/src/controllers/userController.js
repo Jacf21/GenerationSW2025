@@ -1,4 +1,5 @@
-import { getUsers, aprobarUser } from "../services/userService.js";
+import { getUsers, aprobarUser, getUserById } from "../services/userService.js";
+import { emailService } from "../services/emailService.js";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -26,7 +27,18 @@ export const cambiarAprobacionUser = async (req, res) => {
       return res.status(400).json({ message: "Falta el parámetro 'id' del usuario" });
     }
 
+    const usuario = await getUserById(id);
+    if (!usuario) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
     const userActualizado = await aprobarUser(id);
+
+    if (userActualizado.aprobado) {
+      await emailService.enviarNotificacionAprobacion(usuario.email, usuario.nombre);
+    } else {
+      await emailService.enviarNotificacionDesaprobacion(usuario.email, usuario.nombre);
+    }
 
     if (!userActualizado) {
       return res.status(404).json({ message: "Usuario no encontrado" });

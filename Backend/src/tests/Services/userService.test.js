@@ -21,9 +21,18 @@ describe("userModel", () => {
 
       const result = await userModel.findUserByEmail("test@example.com");
 
-      expect(pool.query).toHaveBeenCalledWith("SELECT * FROM users WHERE email = $1", [
-        "test@example.com",
-      ]);
+      expect(pool.query).toHaveBeenCalled();
+
+      // Obtenemos los argumentos de la primera llamada
+      const [query, params] = pool.query.mock.calls[0];
+
+      // Comprobamos que la query contenga las partes clave (sin importar espacios o case)
+      expect(query.toLowerCase().replace(/\s+/g, " ")).toContain(
+        "select * from users where lower(email) = lower($1)"
+      );
+
+      // Verificamos que los parámetros sean correctos
+      expect(params).toEqual(["test@example.com"]);
       expect(result).toEqual(mockUser);
     });
 

@@ -15,6 +15,9 @@ import EstudianteDashboard from "./pages/estudiante/estudianteDashboard";
 import ProfesorDashboard from "./pages/profesor/profesorDashboard";
 import EditorDashboard from "./pages/editor/editorDashboard";
 import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
+import TopicosPage from "./pages/editor/topicos/topicosPage";
+import ContenidoFormPage from "./pages/editor/topicos/contenidoFormPage";
+import TopicosViewerPage from "./pages/editor/topicos/TopicosViewerPage";
 
 import "./index.css";
 import "./App.css";
@@ -56,6 +59,9 @@ function App() {
 
                   <Route element={<PrivateRoute allowedRoles={["edit"]} />}>
                     <Route path="/editor" element={<EditorDashboard />} />
+                    <Route path="/crear-topico" element={<TopicosPage />} />
+                    <Route path="/agregar-contenido" element={<ContenidoFormPage />} />
+                    <Route path="/contenido" element={<TopicosViewerPage />} />
                   </Route>
                 </Routes>
               </div>
