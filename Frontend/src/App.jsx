@@ -18,6 +18,10 @@ import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
 import TopicosPage from "./pages/editor/topicos/topicosPage";
 import ContenidoFormPage from "./pages/editor/topicos/contenidoFormPage";
 import TopicosViewerPage from "./pages/editor/topicos/TopicosViewerPage";
+import TopicoList from "./pages/editor/topicos/TopicosList";
+
+
+
 
 import "./index.css";
 import "./App.css";
@@ -34,37 +38,36 @@ function App() {
           <div className="layout">
             <Sidebar />
             <main className="main-content">
-              <div className="page-container">
-                <Routes>
-                  {/* Público */}
-                  <Route path="/" element={<Inicio />} />
-                  <Route path="/registro" element={<Registro />} />
-                  <Route path="/login" element={<LoginPage />} />
+              <Routes>
+                {/* Público */}
+                <Route path="/" element={<Inicio />} />
+                <Route path="/registro" element={<Registro />} />
+                <Route path="/login" element={<LoginPage />} />
 
-                  {/* 🔒 Secciones protegidas por tipo */}
-                  <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
-                    <Route path="/admin" element={<AdminDashboard />} />
-                    <Route path="/gestionar-usuarios" element={<GestionarUsers />} />
-                  </Route>
+                {/* 🔒 Secciones protegidas por tipo */}
+                <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
+                  <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/gestionar-usuarios" element={<GestionarUsers />} />
+                </Route>
 
-                  <Route element={<PrivateRoute allowedRoles={["profesor"]} />}>
-                    <Route path="/profesor" element={<ProfesorDashboard />} />
-                    <Route path="/crear-curso" element={<CrearCurso />} />
-                    <Route path="/mis-cursos" element={<MisCursosPage />} />
-                  </Route>
+                <Route element={<PrivateRoute allowedRoles={["profesor"]} />}>
+                  <Route path="/profesor" element={<ProfesorDashboard />} />
+                  <Route path="/crear-curso" element={<CrearCurso />} />
+                  <Route path="/mis-cursos" element={<MisCursosPage />} />
+                </Route>
 
-                  <Route element={<PrivateRoute allowedRoles={["est"]} />}>
-                    <Route path="/estudiante" element={<EstudianteDashboard />} />
-                  </Route>
+                <Route element={<PrivateRoute allowedRoles={["est"]} />}>
+                  <Route path="/estudiante" element={<EstudianteDashboard />} />
+                </Route>
 
-                  <Route element={<PrivateRoute allowedRoles={["edit"]} />}>
-                    <Route path="/editor" element={<EditorDashboard />} />
-                    <Route path="/crear-topico" element={<TopicosPage />} />
-                    <Route path="/agregar-contenido" element={<ContenidoFormPage />} />
-                    <Route path="/contenido" element={<TopicosViewerPage />} />
-                  </Route>
-                </Routes>
-              </div>
+                <Route element={<PrivateRoute allowedRoles={["edit"]} />}>
+                  <Route path="/editor" element={<EditorDashboard />} />
+                  <Route path="/crear-topico" element={<TopicosPage />} />
+                  <Route path="/lista-topicos" element={<TopicoList />} />
+                  <Route path="/agregar-contenido" element={<ContenidoFormPage />} />
+                  <Route path="/contenido" element={<TopicosViewerPage />} />
+                </Route>
+              </Routes>
             </main>
           </div>
           <Footer />

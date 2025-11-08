@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContex";
 import {
-  FaHome,
+  FaHome,          // Dashboard
+  FaPlusCircle,    // Crear Tópico
+  FaTasks,         // Gestión de Tópicos
+  FaFileUpload,    // Subida de Contenido
+  FaFileAlt,       // Lista / Ver Contenido
+  FaLayerGroup,    // Gestión de Contenidos
   FaUserPlus,
   FaSignInAlt,
   FaUsers,
@@ -11,10 +16,9 @@ import {
   FaCog,
   FaEdit,
   FaUserCircle,
-  FaPlusCircle,
-  FaFileUpload,
-  FaListUl,
+  FaListUl
 } from "react-icons/fa";
+
 import "./sidebar.css";
 
 const Sidebar = () => {
@@ -50,10 +54,12 @@ const Sidebar = () => {
         ];
       case "edit":
         return [
-          { to: "/editor", label: "Panel de Edición", icon: <FaHome /> },
-          { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> },
-          { to: "/agregar-contenido", label: "Agregar Contenido", icon: <FaFileUpload /> },
-          { to: "/contenido", label: "Lista de Contenidos", icon: <FaListUl /> },
+          { to: "/editor", label: "Dashboard Editor", icon: <FaHome /> },           // Editor - Dashboard
+          { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> },   // Editor - Crear Tópico
+          { to: "/lista-topicos", label: "Gestión de Tópicos", icon: <FaTasks /> }, // Editor - Gestión de Tópicos
+          { to: "/agregar-contenido", label: "Subir Contenido", icon: <FaFileUpload /> }, // Editor - Subida de Contenido
+          { to: "/contenido", label: "Lista / Ver Contenido", icon: <FaFileAlt /> }, // Editor - Lista / Ver Contenido
+          { to: "/contenido", label: "Gestión de Contenidos", icon: <FaLayerGroup /> }, // Editor - Gestión de Contenidos
         ];
       default:
         return [{ to: "/", label: "Inicio", icon: <FaHome /> }];

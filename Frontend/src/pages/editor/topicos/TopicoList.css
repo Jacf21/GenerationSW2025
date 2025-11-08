@@ -1,0 +1,163 @@
+/* === Contenedor general === */
+.topicos-page {
+  width: 90%;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #0e1621;
+  color: #e4e6eb;
+  font-family: "Inter", sans-serif;
+}
+
+.topicos-header {
+  display: flex;
+  flex-direction: column; /* título arriba, botón abajo */
+  gap: 10px;              /* espacio entre título y botón */
+  margin-bottom: 1.5rem;
+}
+
+.topicos-header h1 {
+  width: 100%; /* fondo a todo el ancho */
+  font-size: 2rem;
+  color: var(--texto);
+  background-color: var(--color-primario);
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Contenedor del botón */
+.header-actions {
+  align-self: flex-end; /* coloca el botón a la derecha */
+}
+
+.btn-nuevo {
+  background-color: var(--color-primario);
+  color: #fff;
+  border: none;
+  padding: 0.8rem 4rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-nuevo:hover {
+  background-color: var(--color-primario-hover);
+  transform: scale(1.05);
+}
+
+
+/* === Buscador y filtros === */
+.topicos-filtros {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.topicos-filtros input,
+.topicos-filtros select {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #2a3a4f;
+  background-color: #1b2635;
+  color: #e9ecef;
+  font-size: 0.9rem;
+}
+
+.topicos-filtros input::placeholder {
+  color: #7b8899;
+}
+
+/* === Tabla === */
+.tabla-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-profesional {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #1b2635;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Encabezados */
+.tabla-profesional th,
+.tabla-profesional td {
+  padding: 1rem;
+  text-align: left;
+  border: 1px solid #2a3a4f;
+}
+
+.tabla-profesional th {
+  background-color: #223047;
+  color: #00d4ff;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+/* Filas alternas */
+.tabla-profesional tr:nth-child(even) {
+  background-color: #182334;
+}
+
+.tabla-profesional tr:nth-child(odd) {
+  background-color: #141e2b;
+}
+
+.tabla-profesional tr:hover {
+  background-color: #223954;
+  transition: background-color 0.3s ease;
+}
+
+/* Celdas */
+.tabla-profesional td {
+  color: #e9ecef;
+}
+
+/* Celdas vacías */
+.sin-topicos {
+  text-align: center;
+  color: #7b8899;
+  padding: 1.5rem;
+}
+
+/* === Botones de acción en la tabla === */
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Colores específicos para cada acción */
+.btn-ver {
+  background-color: #007bff;
+}
+
+.btn-editar {
+  background-color: #28a745;
+}
+
+.btn-eliminar {
+  background-color: #dc3545;
+}

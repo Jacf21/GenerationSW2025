@@ -2,7 +2,7 @@ import { useState } from "react";
 import useTopicos from "../../../hooks/useTopico";
 import SidebarTopicos from "../../../components/comunes/topicos/sidevarTopicos";
 import VistaPreviaContenido from "../../../components/comunes/topicos/vistaPreviaContenido";
-import "./topicosViewerPage.css";
+import "./TopicosViewerPage.css";
 
 export default function TopicosViewerPage() {
   const { topicos, contenidos, loading } = useTopicos();

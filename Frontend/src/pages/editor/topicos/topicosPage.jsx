@@ -1,24 +1,19 @@
 import TopicoForm from "../../../components/formulario/topicoForm.jsx";
 import useTopicos from "../../../hooks/useTopico.js";
-import "./formulariosTopicos.css";
+
+import "./TopicosPage.css";
 
 export default function TopicosPage() {
   const { topicos, loading, agregarTopico } = useTopicos();
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading) return <p className="loading-text">Cargando...</p>;
 
   return (
-    <div className="topicos-container">
-      <h1>Tópicos</h1>
+    <div className="topicos-page">
+      <div className="topicos-header">
+        <h1>Crear Nuevo Topico</h1>
+      </div>
       <TopicoForm onCreado={agregarTopico} />
-
-      <ul>
-        {topicos.map((t) => (
-          <li key={t.id}>
-            {t.titulo} - <a href={`/contenido/${t.id}`}>Ver Contenidos</a>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

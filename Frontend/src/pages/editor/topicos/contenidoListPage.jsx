@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import ContenidoList from "../../../components/contenidoList.jsx";
 import useTopicos from "../../../hooks/useTopico.js";
-import "./formulariosTopicos.css";
+import "./contenidoListPage.css";
 
 export default function ContenidoListPage() {
   const { id_topico } = useParams();
