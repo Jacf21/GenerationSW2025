@@ -1,63 +1,68 @@
 import { useState, useEffect } from "react";
-import { obtenerTopicos } from "../services/topicoService.js";
-import { obtenerContenidosPorTopico } from "../services/contenidoService.js";
+import * as topicoService from "../services/topicoService";
 
 export default function useTopicos() {
   const [topicos, setTopicos] = useState([]);
-  const [contenidos, setContenidos] = useState({}); // { topicoId: [contenidos] }
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    cargarDatos();
-  }, []);
-
-  const cargarDatos = async () => {
-    setLoading(true);
+  const cargarTopicos = async () => {
     try {
-      const t = await obtenerTopicos();
-      setTopicos(t);
-
-      const contenidosData = {};
-      for (let topico of t) {
-        const respuesta = await obtenerContenidosPorTopico(topico.id);
-        contenidosData[topico.id] = respuesta.data; // 🔥 importante
-      }
-      setContenidos(contenidosData);
+      setLoading(true);
+      const data = await topicoService.obtenerTopicos();
+      setTopicos(data.data || []);
     } catch (err) {
-      console.error(err);
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  const agregarTopico = (topico) => {
-    setTopicos([...topicos, topico]);
-    setContenidos({ ...contenidos, [topico.id]: [] });
+  const agregarTopico = async (nuevoTopico) => {
+    try {
+      const data = await topicoService.crearTopico(nuevoTopico);
+      setTopicos((prevTopicos) => [...prevTopicos, data.data]);
+      return data.data;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
   };
 
-  const agregarContenido = (contenido) => {
-    const id_topico = contenido.id_topico;
-
-    setContenidos({
-      ...contenidos,
-      [id_topico]: [...(contenidos[id_topico] || []), contenido],
-    });
+  const actualizarTopico = async (id, topicoActualizado) => {
+    try {
+      const data = await topicoService.actualizarTopico(id, topicoActualizado);
+      setTopicos((prevTopicos) =>
+        prevTopicos.map((t) => (t.id === id ? data.data : t))
+      );
+      return data.data;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
   };
 
-  const eliminarContenido = (id_topico, id_contenido) => {
-    setContenidos({
-      ...contenidos,
-      [id_topico]: contenidos[id_topico].filter((c) => c.id !== id_contenido),
-    });
+  const eliminarTopico = async (id) => {
+    try {
+      await topicoService.eliminarTopico(id);
+      setTopicos((prevTopicos) => prevTopicos.filter((t) => t.id !== id));
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
   };
+
+  useEffect(() => {
+    cargarTopicos();
+  }, []);
 
   return {
     topicos,
-    contenidos,
     loading,
+    error,
+    cargarTopicos,
     agregarTopico,
-    agregarContenido,
-    eliminarContenido,
-    cargarDatos,
+    actualizarTopico,
+    eliminarTopico,
   };
 }

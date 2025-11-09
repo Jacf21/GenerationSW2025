@@ -18,10 +18,7 @@ import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
 import TopicosPage from "./pages/editor/topicos/topicosPage";
 import ContenidoFormPage from "./pages/editor/topicos/contenidoFormPage";
 import TopicosViewerPage from "./pages/editor/topicos/TopicosViewerPage";
-import TopicoList from "./pages/editor/topicos/TopicosList";
-
-
-
+import TopicosList from "./pages/editor/topicos/ListarTopicos/TopicosList";
 
 import "./index.css";
 import "./App.css";
@@ -63,9 +60,11 @@ function App() {
                 <Route element={<PrivateRoute allowedRoles={["edit"]} />}>
                   <Route path="/editor" element={<EditorDashboard />} />
                   <Route path="/crear-topico" element={<TopicosPage />} />
-                  <Route path="/lista-topicos" element={<TopicoList />} />
+                  <Route path="/lista-topicos" element={<TopicosList />} />
                   <Route path="/agregar-contenido" element={<ContenidoFormPage />} />
                   <Route path="/contenido" element={<TopicosViewerPage />} />
+                  <Route path="/editor/topicos" element={<TopicosList />} />
+                  {/* opcionales */}
                 </Route>
               </Routes>
             </main>

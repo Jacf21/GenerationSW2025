@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContex";
 import {
-  FaHome,          // Dashboard
-  FaPlusCircle,    // Crear Tópico
-  FaTasks,         // Gestión de Tópicos
-  FaFileUpload,    // Subida de Contenido
-  FaFileAlt,       // Lista / Ver Contenido
-  FaLayerGroup,    // Gestión de Contenidos
+  FaHome, // Dashboard
+  FaPlusCircle, // Crear Tópico
+  FaTasks, // Gestión de Tópicos
+  FaFileUpload, // Subida de Contenido
+  FaFileAlt, // Lista / Ver Contenido
+  FaLayerGroup, // Gestión de Contenidos
   FaUserPlus,
   FaSignInAlt,
   FaUsers,
@@ -16,7 +16,7 @@ import {
   FaCog,
   FaEdit,
   FaUserCircle,
-  FaListUl
+  FaListUl,
 } from "react-icons/fa";
 
 import "./sidebar.css";
@@ -54,8 +54,8 @@ const Sidebar = () => {
         ];
       case "edit":
         return [
-          { to: "/editor", label: "Dashboard Editor", icon: <FaHome /> },           // Editor - Dashboard
-          { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> },   // Editor - Crear Tópico
+          { to: "/editor", label: "Dashboard Editor", icon: <FaHome /> }, // Editor - Dashboard
+          { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> }, // Editor - Crear Tópico
           { to: "/lista-topicos", label: "Gestión de Tópicos", icon: <FaTasks /> }, // Editor - Gestión de Tópicos
           { to: "/agregar-contenido", label: "Subir Contenido", icon: <FaFileUpload /> }, // Editor - Subida de Contenido
           { to: "/contenido", label: "Lista / Ver Contenido", icon: <FaFileAlt /> }, // Editor - Lista / Ver Contenido
@@ -72,8 +72,9 @@ const Sidebar = () => {
     <aside className="sidebar">
       <nav className="sidebar-nav">
         <ul>
-          {menuItems.map((item) => (
-            <li key={item.to} className="tooltip-container">
+          {menuItems.map((item, idx) => (
+            // usar combinación única en key (to + label) o índice
+            <li key={`${item.to}-${item.label}-${idx}`} className="tooltip-container">
               <Link to={item.to} className="sidebar-icon">
                 {item.icon}
                 <span className="tooltip-text">{item.label}</span>
