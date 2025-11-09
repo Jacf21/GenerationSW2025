@@ -32,9 +32,7 @@ export default function useTopicos() {
   const actualizarTopico = async (id, topicoActualizado) => {
     try {
       const data = await topicoService.actualizarTopico(id, topicoActualizado);
-      setTopicos((prevTopicos) =>
-        prevTopicos.map((t) => (t.id === id ? data.data : t))
-      );
+      setTopicos((prevTopicos) => prevTopicos.map((t) => (t.id === id ? data.data : t)));
       return data.data;
     } catch (err) {
       setError(err.message);
