@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useTopicos from "../../../../../hooks/useTopico";
 import "./EditarTopico.css";
+import MensajesTopicos from "../../ListarTopicos/MensajesTopicos/MensajesTopicos";
 
 export default function EditarTopico({ topico, onClose }) {
   const { actualizarTopico } = useTopicos();
@@ -11,6 +12,7 @@ export default function EditarTopico({ topico, onClose }) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (topico) {
@@ -29,7 +31,10 @@ export default function EditarTopico({ topico, onClose }) {
 
     try {
       await actualizarTopico(topico.id, formData);
-      onClose();
+      setShowToast(true);
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (err) {
       setError(err.message || "Error al actualizar tópico");
     } finally {
@@ -88,6 +93,13 @@ export default function EditarTopico({ topico, onClose }) {
           </div>
         </form>
       </div>
+      {showToast && (
+        <MensajesTopicos
+          message="¡Tópico actualizado exitosamente!"
+          type="success"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useTopicos from "../../../../../hooks/useTopico";
 import "./CrearTopico.css";
+import MensajesTopicos from "../../ListarTopicos/MensajesTopicos/MensajesTopicos";
 
 export default function CrearTopico({ onClose }) {
   const { agregarTopico } = useTopicos();
@@ -11,6 +12,7 @@ export default function CrearTopico({ onClose }) {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +22,10 @@ export default function CrearTopico({ onClose }) {
     try {
       const payload = { ...formData, orden: formData.orden === "" ? 0 : Number(formData.orden) };
       await agregarTopico(payload);
-      onClose();
+      setShowToast(true);
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (err) {
       setError(err.message || "Error al crear tópico");
     } finally {
@@ -84,6 +89,13 @@ export default function CrearTopico({ onClose }) {
           </div>
         </form>
       </div>
+      {showToast && (
+        <MensajesTopicos
+          message="¡Tópico creado exitosamente!"
+          type="success"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 }
