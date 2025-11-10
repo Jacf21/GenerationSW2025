@@ -16,9 +16,9 @@ import ProfesorDashboard from "./pages/profesor/profesorDashboard";
 import EditorDashboard from "./pages/editor/editorDashboard";
 import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
 import TopicosPage from "./pages/editor/topicos/topicosPage";
-import ContenidoFormPage from "./pages/editor/topicos/contenidoFormPage";
 import TopicosViewerPage from "./pages/editor/topicos/TopicosViewerPage";
 import TopicosList from "./pages/editor/topicos/ListarTopicos/TopicosList";
+import GestionarContenido from "./pages/editor/contenido/gestionarContenido/gestionarContenido";
 
 import "./index.css";
 import "./App.css";
@@ -61,9 +61,9 @@ function App() {
                   <Route path="/editor" element={<EditorDashboard />} />
                   <Route path="/crear-topico" element={<TopicosPage />} />
                   <Route path="/lista-topicos" element={<TopicosList />} />
-                  <Route path="/agregar-contenido" element={<ContenidoFormPage />} />
                   <Route path="/contenido" element={<TopicosViewerPage />} />
                   <Route path="/editor/topicos" element={<TopicosList />} />
+                  <Route path="/contenidos" element={<GestionarContenido />} />
                   {/* opcionales */}
                 </Route>
               </Routes>
