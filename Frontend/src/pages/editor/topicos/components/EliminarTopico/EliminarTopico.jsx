@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import useTopicos from "../../../../../hooks/useTopico";
 import "./EliminarTopico.css";
+import MensajesTopicos from "../../ListarTopicos/MensajesTopicos/MensajesTopicos";
 
 export default function EliminarTopico({ topico, onClose }) {
   const { eliminarTopico } = useTopicos();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const handleEliminar = async () => {
     setLoading(true);
@@ -13,7 +15,10 @@ export default function EliminarTopico({ topico, onClose }) {
 
     try {
       await eliminarTopico(topico.id);
-      onClose();
+      setShowToast(true);
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (err) {
       setError(err.message || "Error al eliminar tópico");
     } finally {
@@ -54,6 +59,13 @@ export default function EliminarTopico({ topico, onClose }) {
           </button>
         </div>
       </div>
+      {showToast && (
+        <MensajesTopicos
+          message="¡Tópico eliminado exitosamente!"
+          type="success"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 }

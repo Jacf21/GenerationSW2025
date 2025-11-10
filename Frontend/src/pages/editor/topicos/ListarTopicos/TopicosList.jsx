@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import useTopicos from "../../../../hooks/useTopico";
-// Corregir las rutas relativas
 import CrearTopico from "../components/CrearTopico/CrearTopico";
 import EditarTopico from "../components/EditarTopico/EditarTopico";
 import EliminarTopico from "../components/EliminarTopico/EliminarTopico";
-
 import "./TopicosList.css";
 
 export default function ListarTopicos() {
-  const { topicos, loading } = useTopicos();
+  const { topicos, loading, cargarTopicos } = useTopicos();
   const [modal, setModal] = useState(null);
   const [topicoSeleccionado, setTopicoSeleccionado] = useState(null);
+  const [actualizando, setActualizando] = useState(false);
+
+  // Cargar tópicos inicialmente
+  useEffect(() => {
+    cargarTopicos();
+  }, []);
+
+  // Recargar cuando se cierra un modal
+  useEffect(() => {
+    if (!modal && actualizando) {
+      cargarTopicos();
+      setActualizando(false);
+    }
+  }, [modal, actualizando]);
 
   const abrirModal = (tipo, topico = null) => {
     setTopicoSeleccionado(topico);
@@ -19,6 +31,7 @@ export default function ListarTopicos() {
   };
 
   const cerrarModal = () => {
+    setActualizando(true); // Marca que necesitamos actualizar
     setModal(null);
     setTopicoSeleccionado(null);
   };
