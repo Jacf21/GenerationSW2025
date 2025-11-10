@@ -60,30 +60,16 @@ th, td {
   justify-content: center;
 }
 
-.btn-ver { color: #2563eb; }
+.btn-ver { 
+  color: #2563eb;
+  background: transparent;
+}
 .btn-editar { color: #16a34a; }
-.btn-eliminar { color: #dc2626; }
+.btn-eliminar { 
+  color: #dc2626;
+  background: transparent;
+}
 
 .btn-ver:hover { color: #1d4ed8; }
 .btn-editar:hover { color: #15803d; }
 .btn-eliminar:hover { color: #b91c1c; }
-
-/* 💡 Base para todos los modales */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-content {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  position: relative;
-  max-width: 600px;
-  width: 100%;
-}

@@ -68,3 +68,8 @@ export const obtenerContenidosPorTopico = async (id_topico) => {
   );
   return rows;
 };
+
+export const obtenerContenidos = async () => {
+  const { rows } = await pool.query("SELECT * FROM contenidoTopico ORDER BY id DESC;");
+  return rows;
+};

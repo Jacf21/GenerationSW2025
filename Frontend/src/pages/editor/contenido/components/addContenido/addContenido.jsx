@@ -1,4 +1,4 @@
-import ContenidoForm from "../../../../../components/formulario/ContenidoForm"; // Ajusta la ruta
+import ContenidoForm from "../../../../../components/formulario/ContenidoForm";
 import "./addContenido.css";
 
 export default function AddContenidoModal({ topicos, onClose, onSuccess }) {
@@ -16,8 +16,6 @@ export default function AddContenidoModal({ topicos, onClose, onSuccess }) {
             onClose(); // cierra el modal
           }}
         />
-
-        {/* Botón de cerrar */}
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"

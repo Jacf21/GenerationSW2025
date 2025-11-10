@@ -48,3 +48,16 @@ export const obtenerContenidosPorTopico = async (req, res) => {
     res.status(500).json({ error: "Error al obtener contenidos" });
   }
 };
+
+export const obtenerContenidos = async (req, res) => {
+  try {
+    const contenidos = await contenidoService.obtenerContenidos();
+    res.json({
+      message: "Contenidos obtenidos correctamente",
+      data: contenidos,
+    });
+  } catch (error) {
+    console.error("Error al obtener contenidos:", error);
+    res.status(500).json({ error: "Error al obtener contenidos" });
+  }
+};

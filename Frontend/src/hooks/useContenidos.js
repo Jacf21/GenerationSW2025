@@ -1,5 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
-import { obtenerContenidosPorTopico } from "../services/contenidoService";
+import {
+  obtenerContenidosPorTopico,
+  obtenerTodosLosContenidos,
+} from "../services/contenidoService";
 
 export default function useContenidos(idTopico) {
   const [contenidos, setContenidos] = useState([]);
@@ -7,13 +10,16 @@ export default function useContenidos(idTopico) {
   const [errorContenidos, setErrorContenidos] = useState(null);
 
   const fetchContenidos = useCallback(async () => {
-    if (!idTopico) {
-      setContenidos([]);
-      return;
-    }
     setLoadingContenidos(true);
     try {
-      const res = await obtenerContenidosPorTopico(idTopico);
+      let res;
+      if (!idTopico) {
+        // 🟢 Si no hay tópico seleccionado, traer todos los contenidos
+        res = await obtenerTodosLosContenidos();
+      } else {
+        // 🔵 Si hay tópico seleccionado, traer solo los contenidos de ese tópico
+        res = await obtenerContenidosPorTopico(idTopico);
+      }
       setContenidos(res);
     } catch (err) {
       console.error("Error al cargar contenidos:", err);

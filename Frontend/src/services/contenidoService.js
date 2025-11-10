@@ -20,3 +20,8 @@ export const obtenerContenidosPorTopico = async (id_topico) => {
   const res = await apiRequest(`/contenido/topico/${id_topico}`);
   return res.data || [];
 };
+
+export const obtenerTodosLosContenidos = async () => {
+  const res = await apiRequest(`/contenido/all`);
+  return res.data || [];
+};

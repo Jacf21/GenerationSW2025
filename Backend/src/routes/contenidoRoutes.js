@@ -4,6 +4,7 @@ import {
   crearContenido,
   eliminarContenido,
   obtenerContenidosPorTopico,
+  obtenerContenidos,
 } from "../controllers/contenidoController.js";
 
 const storage = multer.diskStorage({
@@ -18,5 +19,6 @@ const router = Router();
 router.post("/up", upload.single("archivo"), crearContenido);
 router.delete("/delete/:id", eliminarContenido);
 router.get("/topico/:id_topico", obtenerContenidosPorTopico);
+router.get("/all", obtenerContenidos);
 
 export default router;

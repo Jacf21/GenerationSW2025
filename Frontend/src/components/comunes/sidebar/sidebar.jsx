@@ -4,8 +4,6 @@ import {
   FaHome, // Dashboard
   FaPlusCircle, // Crear Tópico
   FaTasks, // Gestión de Tópicos
-  FaFileUpload, // Subida de Contenido
-  FaFileAlt, // Lista / Ver Contenido
   FaLayerGroup, // Gestión de Contenidos
   FaUserPlus,
   FaSignInAlt,
@@ -16,7 +14,6 @@ import {
   FaCog,
   FaEdit,
   FaUserCircle,
-  FaListUl,
 } from "react-icons/fa";
 
 import "./sidebar.css";

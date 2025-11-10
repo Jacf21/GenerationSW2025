@@ -86,9 +86,6 @@ export default function GestionarContenido() {
                     <button onClick={() => abrirModal("ver", contenido)} className="btn-ver">
                       <FaEye />
                     </button>
-                    <button onClick={() => abrirModal("editar", contenido)} className="btn-editar">
-                      <FaEdit />
-                    </button>
                     <button
                       onClick={() => abrirModal("eliminar", contenido)}
                       className="btn-eliminar"
