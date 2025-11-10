@@ -16,6 +16,7 @@ export const eliminarContenido = (id) => {
   return apiRequest(`/contenido/delete/${id}`, { method: "DELETE" });
 };
 
-export const obtenerContenidosPorTopico = (id_topico) => {
-  return apiRequest(`/contenido/topico/${id_topico}`);
+export const obtenerContenidosPorTopico = async (id_topico) => {
+  const res = await apiRequest(`/contenido/topico/${id_topico}`);
+  return res.data || [];
 };

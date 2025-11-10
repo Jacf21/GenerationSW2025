@@ -1,0 +1,16 @@
+@import "../../modalsBase.css";
+
+.delete-contenido-modal .modal-content {
+  text-align: center;
+  max-width: 400px;
+}
+
+.delete-contenido-modal h3 {
+  color: #991b1b;
+  margin-bottom: 0.75rem;
+}
+
+.delete-contenido-modal p {
+  color: #4b5563;
+  margin-bottom: 1.25rem;
+}

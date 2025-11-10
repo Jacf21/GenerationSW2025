@@ -57,9 +57,7 @@ const Sidebar = () => {
           { to: "/editor", label: "Dashboard Editor", icon: <FaHome /> }, // Editor - Dashboard
           { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> }, // Editor - Crear Tópico
           { to: "/lista-topicos", label: "Gestión de Tópicos", icon: <FaTasks /> }, // Editor - Gestión de Tópicos
-          { to: "/agregar-contenido", label: "Subir Contenido", icon: <FaFileUpload /> }, // Editor - Subida de Contenido
-          { to: "/contenido", label: "Lista / Ver Contenido", icon: <FaFileAlt /> }, // Editor - Lista / Ver Contenido
-          { to: "/contenido", label: "Gestión de Contenidos", icon: <FaLayerGroup /> }, // Editor - Gestión de Contenidos
+          { to: "/contenidos", label: "Gestión de Contenidos", icon: <FaLayerGroup /> }, // Editor - Gestión de Contenidos
         ];
       default:
         return [{ to: "/", label: "Inicio", icon: <FaHome /> }];
