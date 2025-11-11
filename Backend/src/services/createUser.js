@@ -15,7 +15,7 @@ export const iniciarRegistro = async ({ nombre, email, password, tipo }) => {
   const tiposValidos = ["est", "profesor", "admin", "edit"];
   if (!tiposValidos.includes(tipo)) {
     throw new Error("Tipo de usuario no válido");
-  }z
+  }
 
   // 3. Generar código y guardar en memoria
   const codigo = Math.floor(100000 + Math.random() * 900000).toString();

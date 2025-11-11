@@ -68,9 +68,9 @@ export default function ListarTopicos() {
                 <td>{topico.orden}</td>
                 <td>{topico.descripcion}</td>
                 <td className="acciones">
-                  <button onClick={() => abrirModal("ver", topico)} className="btn-ver">
+                  {/* <button onClick={() => abrirModal("ver", topico)} className="btn-ver">
                     <FaEye />
-                  </button>
+                  </button> */}
                   <button onClick={() => abrirModal("editar", topico)} className="btn-editar">
                     <FaEdit />
                   </button>

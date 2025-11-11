@@ -6,7 +6,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     aprobado BOOLEAN NOT NULL,
     verificado BOOLEAN NOT NULL,
-    tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('est', 'profesor', 'admin', 'edit'))
+    tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('est', 'profesor', 'admin', 'edit')),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Creación de la tabla 'curso'
@@ -18,6 +19,7 @@ CREATE TABLE curso (
     fecha_fin DATE NOT NULL,
     descripcion VARCHAR(255) NOT NULL,
     codigo VARCHAR(100) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -27,6 +29,7 @@ CREATE TABLE topico (
     titulo VARCHAR(255) NOT NULL,
     orden INT NOT NULL,
     descripcion TEXT,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Creación de la tabla 'contenidoTopico'
@@ -36,5 +39,29 @@ CREATE TABLE contenidoTopico (
     tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('text', 'img', 'video', 'audio', 'slide', 'eval')),
     url VARCHAR(255) NOT NULL,
     storage_path VARCHAR(255),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_topico) REFERENCES topico(id) ON DELETE CASCADE
+);
+
+-- Creación de la tabla 'pantallaTopico'
+CREATE TABLE pantallaTopico (
+    id SERIAL PRIMARY KEY,
+    id_topico INT NOT NULL,
+    id_editor INT NOT NULL,
+    visible BOOLEAN NOT NULL,
+    descripcion TEXT,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_topico) REFERENCES topico(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_editor) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Creacion de la tabla 'contenidoPantallaTopico'
+CREATE TABLE contenidoPantallaTopico (
+    id SERIAL PRIMARY KEY,
+    id_pantalla INT NOT NULL,
+    id_contenido INT NOT NULL,
+    posicion VARCHAR(50) NOT NULL CHECK (posicion IN ('izqup', 'derup', 'izqdown', 'derdown')),
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_pantalla) REFERENCES pantallaTopico(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_contenido) REFERENCES contenidoTopico(id) ON DELETE CASCADE
 );

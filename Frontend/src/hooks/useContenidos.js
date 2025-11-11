@@ -14,10 +14,8 @@ export default function useContenidos(idTopico) {
     try {
       let res;
       if (!idTopico) {
-        // 🟢 Si no hay tópico seleccionado, traer todos los contenidos
         res = await obtenerTodosLosContenidos();
       } else {
-        // 🔵 Si hay tópico seleccionado, traer solo los contenidos de ese tópico
         res = await obtenerContenidosPorTopico(idTopico);
       }
       setContenidos(res);

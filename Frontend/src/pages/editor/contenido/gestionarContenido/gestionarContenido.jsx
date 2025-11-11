@@ -16,7 +16,6 @@ export default function GestionarContenido() {
   const { contenidos, fetchContenidos, obtenerNombreArchivo, loadingContenidos } =
     useContenidos(selectedTopico);
 
-  // Un solo estado para controlar qué modal se abre
   const [modal, setModal] = useState(null);
   const [contenidoSeleccionado, setContenidoSeleccionado] = useState(null);
 
@@ -37,7 +36,7 @@ export default function GestionarContenido() {
         <div className="selector-topico">
           <label>Seleccionar Tópico:</label>
           <select value={selectedTopico} onChange={(e) => setSelectedTopico(e.target.value)}>
-            <option value="">-- Selecciona un tópico --</option>
+            <option value="">Todos los contenidos</option>
             {topicos.map((topico) => (
               <option key={topico.id} value={topico.id}>
                 {topico.titulo}
