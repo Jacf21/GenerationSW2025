@@ -20,6 +20,10 @@ import TopicosViewerPage from "./pages/editor/topicos/TopicosViewerPage";
 import TopicosList from "./pages/editor/topicos/ListarTopicos/TopicosList";
 import GestionarContenido from "./pages/editor/contenido/gestionarContenido/gestionarContenido";
 
+import Plantilla1 from "./pages/editor/Plantillas/Plantilla1";
+import Plantilla2 from "./pages/editor/Plantillas/Plantilla2";
+import Plantilla3 from "./pages/editor/Plantillas/Plantilla3";
+
 import "./index.css";
 import "./App.css";
 import "./styles/variables.css";
@@ -65,6 +69,11 @@ function App() {
                   <Route path="/editor/topicos" element={<TopicosList />} />
                   <Route path="/contenidos" element={<GestionarContenido />} />
                   {/* opcionales */}
+
+                  {/* Rutas de Plantillas */}
+                  <Route path="/plantillas/1" element={<Plantilla1 />} />
+                  <Route path="/plantillas/2" element={<Plantilla2 />} />
+                  <Route path="/plantillas/3" element={<Plantilla3 />} />
                 </Route>
               </Routes>
             </main>

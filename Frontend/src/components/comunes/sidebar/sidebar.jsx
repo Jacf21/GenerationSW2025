@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContex";
 import {
-  FaHome, // Dashboard
-  FaPlusCircle, // Crear Tópico
-  FaTasks, // Gestión de Tópicos
-  FaLayerGroup, // Gestión de Contenidos
+  FaHome,
+  FaPlusCircle,
+  FaTasks,
+  FaLayerGroup,
   FaUserPlus,
   FaSignInAlt,
   FaUsers,
@@ -14,12 +15,27 @@ import {
   FaCog,
   FaEdit,
   FaUserCircle,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
 
 import "./sidebar.css";
 
 const Sidebar = () => {
   const { isAuthenticated, userRole } = useAuth();
+  const [expandPlantillas, setExpandPlantillas] = useState(false);
+  const location = useLocation();
+
+  // Cierra el panel si cambias de ruta
+  useEffect(() => {
+    setExpandPlantillas(false);
+  }, [location.pathname]);
+
+  const plantillas = [
+    { id: 1, nombre: "Plantilla 1", to: "/plantillas/1" },
+    { id: 2, nombre: "Plantilla 2", to: "/plantillas/2" },
+    { id: 3, nombre: "Plantilla 3", to: "/plantillas/3" },
+  ];
 
   const getMenuByRole = () => {
     if (!isAuthenticated) {
@@ -51,10 +67,10 @@ const Sidebar = () => {
         ];
       case "edit":
         return [
-          { to: "/editor", label: "Dashboard Editor", icon: <FaHome /> }, // Editor - Dashboard
-          { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> }, // Editor - Crear Tópico
-          { to: "/lista-topicos", label: "Gestión de Tópicos", icon: <FaTasks /> }, // Editor - Gestión de Tópicos
-          { to: "/contenidos", label: "Gestión de Contenidos", icon: <FaLayerGroup /> }, // Editor - Gestión de Contenidos
+          { to: "/editor", label: "Dashboard Editor", icon: <FaHome /> },
+          // { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> },
+          { to: "/lista-topicos", label: "Gestión de Tópicos", icon: <FaTasks /> },
+          { to: "/contenidos", label: "Gestión de Contenidos", icon: <FaLayerGroup /> },
         ];
       default:
         return [{ to: "/", label: "Inicio", icon: <FaHome /> }];
@@ -68,7 +84,6 @@ const Sidebar = () => {
       <nav className="sidebar-nav">
         <ul>
           {menuItems.map((item, idx) => (
-            // usar combinación única en key (to + label) o índice
             <li key={`${item.to}-${item.label}-${idx}`} className="tooltip-container">
               <Link to={item.to} className="sidebar-icon">
                 {item.icon}
@@ -76,6 +91,44 @@ const Sidebar = () => {
               </Link>
             </li>
           ))}
+
+          {/* Icono Plantillas (igual al resto) */}
+          <li className="tooltip-container plantillas-section" aria-haspopup="true">
+            <button
+              className={`sidebar-icon plantillas-icon-btn ${expandPlantillas ? "active" : ""}`}
+              onClick={() => setExpandPlantillas((s) => !s)}
+              aria-expanded={expandPlantillas}
+              title="Plantillas"
+            >
+              <FaBook />
+              <span className="tooltip-text">Plantillas</span>
+            </button>
+
+            {/* Panel lateral a la derecha del sidebar */}
+            {expandPlantillas && (
+              <div className="plantillas-panel" role="menu">
+                <div className="plantillas-panel-header">
+                  <strong>Plantillas</strong>
+                  <button
+                    className="panel-close-btn"
+                    onClick={() => setExpandPlantillas(false)}
+                    aria-label="Cerrar"
+                  >
+                    <FaChevronUp />
+                  </button>
+                </div>
+                <ul className="plantillas-list">
+                  {plantillas.map((p) => (
+                    <li key={p.id}>
+                      <Link to={p.to} className="plantilla-link">
+                        {p.nombre}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
         </ul>
       </nav>
     </aside>
