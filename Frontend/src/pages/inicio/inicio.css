@@ -1,61 +1,215 @@
-.inicio {
+
+:root {
+
+  --color-fondo-principal: #12121242; 
+  --color-tarjeta-fondo: #1e1e1e; 
+  --texto-claro: #f0f0f0; 
+  --texto-secundario-claro: #a0a0a0;
+
+  
+  --color-primario-neon: #00bcd4; 
+  --color-secundario-neon: #ff007a; 
+  --gradiente-button: linear-gradient(45deg, #00bcd4, #0077b6);
+  --gradiente-button-hover: linear-gradient(45deg, #0077b6, #00bcd4);
+  --gradiente-registro: linear-gradient(45deg, #ff007a, #e7004f);
+
+ 
+  --espacio-sm: 8px;
+  --espacio-md: 16px;
+  --espacio-lg: 32px;
+  --espacio-xl: 60px;
+
+  /* Bordes y Sombras */
+  --radio-md: 16px;
+  --sombra-neon: 0 0 15px rgba(0, 188, 212, 0.4);
+}
+
+
+.page-container-dark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--color-fondo-principal);
+  color: var(--texto-claro);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; /* Para contener los efectos de fondo */
+  position: relative;
+}
+
+/* Efectos de desenfoque de fondo llamativos */
+.bg-blur-effect {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(100px);
+  z-index: 0;
+}
+
+.top-left {
+  top: -50px;
+  left: -50px;
+  background-color: var(--color-primario-neon);
+}
+
+.bottom-right {
+  bottom: -50px;
+  right: -50px;
+  background-color: var(--color-secundario-neon);
+}
+
+/* --- 3. Contenedor Principal (Gateway) --- */
+.inicio-gateway {
+  z-index: 1; /* Asegura que el contenido esté por encima del fondo */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 550px;
   padding: var(--espacio-xl);
+  background-color: var(--color-tarjeta-fondo);
+  border-radius: var(--radio-md);
+  /* Borde sutil de neón */
+  border: 1px solid rgba(0, 188, 212, 0.2);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   text-align: center;
+  transition: all 0.5s ease;
 }
 
-.inicio h1 {
-  font-size: 2.5rem;
-  color: var(--texto);
+.inicio-gateway:hover {
+  box-shadow: 0 0 40px rgba(0, 188, 212, 0.15); /* Sombra de neón al pasar el ratón */
+}
+
+/* --- 4. Títulos y Textos --- */
+.icono-portal {
+  margin-bottom: var(--espacio-md);
+}
+
+.neon-glow {
+  color: var(--color-primario-neon);
+  filter: drop-shadow(0 0 5px var(--color-primario-neon));
+  transition: all 0.5s;
+}
+
+.inicio-gateway:hover .neon-glow {
+  filter: drop-shadow(0 0 10px var(--color-primario-neon));
+}
+
+.title-animated {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: var(--espacio-sm);
+  letter-spacing: 1px;
+  color: var(--texto-claro);
+  text-transform: uppercase;
+}
+
+.highlight-text {
+  color: var(--color-primario-neon);
+  text-shadow: 0 0 8px rgba(0, 188, 212, 0.5); /* Efecto neón en el texto */
+}
+
+.subtitle-tech {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--texto-secundario-claro);
   margin-bottom: var(--espacio-lg);
 }
 
-.inicio p {
-  color: var(--texto-secundario);
+.inicio-description-tech p {
+  color: var(--texto-secundario-claro);
   margin-bottom: var(--espacio-xl);
-  font-size: 1.125rem;
+  line-height: 1.7;
 }
 
-.inicio-botones {
+/* --- 5. Botones (Tech Style) --- */
+.inicio-botones-tech {
   display: flex;
   gap: var(--espacio-md);
-  margin-top: var(--espacio-lg);
+  width: 100%;
   justify-content: center;
 }
 
-.boton {
-  padding: var(--espacio-md) var(--espacio-xl);
+.tech-button {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 28px;
   border-radius: var(--radio-md);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s;
-  min-width: 150px;
-  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  min-width: 180px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
-.boton-registro {
-  background-color: var(--color-primario);
-  color: white;
+.button-label {
+    position: relative;
+    z-index: 2; /* Asegura el texto sobre el efecto */
 }
 
-.boton-registro:hover {
-  background-color: var(--color-primario-hover);
-  transform: translateY(-2px);
+/* Botón Iniciar Sesión (Gradiente Cían) */
+.tech-login {
+  background: var(--gradiente-button);
+  color: var(--texto-claro);
+  box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
 }
 
-.boton-login {
-  border: 2px solid var(--color-primario);
-  color: var(--color-primario);
+.tech-login:hover {
+  background: var(--gradiente-button-hover);
+  transform: scale(1.05) translateY(-2px); /* Efecto de elevación sutil */
+  box-shadow: 0 8px 25px rgba(0, 188, 212, 0.5);
 }
 
-.boton-login:hover {
-  background-color: var(--color-primario);
-  color: white;
-  transform: translateY(-2px);
+/* Efecto 'Pulsación' (Click) para Iniciar Sesión */
+.tech-login:active {
+  transform: scale(1) translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 188, 212, 0.2);
+}
+
+
+/* Botón Registrarse (Gradiente Magenta Outline/Outline Simulado) */
+.tech-registro {
+  background-color: transparent;
+  color: var(--color-secundario-neon);
+  border: 2px solid var(--color-secundario-neon);
+  box-shadow: none;
+}
+
+.tech-registro:hover {
+  background: var(--gradiente-registro);
+  color: var(--texto-claro);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 0, 122, 0.4);
+  border: 2px solid transparent; /* Oculta el borde al llenar */
+}
+
+/* Efecto 'Pulsación' (Click) para Registrarse */
+.tech-registro:active {
+  transform: scale(1) translateY(0);
+  box-shadow: none;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 600px) {
+  .inicio-botones-tech {
+    flex-direction: column;
+    gap: var(--espacio-sm);
+  }
+  
+  .inicio-gateway {
+    padding: var(--espacio-lg) var(--espacio-md);
+  }
+  
+  .title-animated {
+    font-size: 2rem;
+  }
 }
