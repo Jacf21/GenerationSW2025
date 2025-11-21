@@ -34,9 +34,7 @@
   margin-bottom: var(--espacio-sm);
 }
 
-/* ========================= */
 /* TELÉFONO CON ICONOS AL LADO */
-/* ========================= */
 
 .telefono-y-iconos {
   display: flex;
@@ -48,9 +46,7 @@
   margin: 0;
 }
 
-/* ========================= */
 /* ICONOS SOCIALES */
-/* ========================= */
 
 .social-icons {
   display: flex;
@@ -59,11 +55,10 @@
 }
 
 .social-icons a {
-  font-size: 38px; /* MÁS GRANDES */
+  font-size: 38px; 
   transition: 0.3s;
 }
 
-/* WhatsApp verde */
 .icon-whatsapp {
   color: #25D366;
 }
@@ -72,7 +67,6 @@
   color: #1aa64d;
 }
 
-/* Facebook azul */
 .icon-facebook {
   color: #1877F2;
 }
@@ -81,18 +75,13 @@
   color: #0d4ea8;
 }
 
-/* Instagram rojo sólido */
 .icon-instagram {
-  color: #e00034; /* rojo */
+  color: #e00034; 
 }
 
 .icon-instagram:hover {
-  color: #a00028; /* rojo más oscuro */
+  color: #a00028; 
 }
-
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
 
 @media (max-width: 768px) {
   .footer-content {
