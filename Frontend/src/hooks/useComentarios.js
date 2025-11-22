@@ -34,7 +34,6 @@ export default function useComentarios(idTopico) {
 
   useEffect(() => {
     cargar();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idTopico]);
 
   return { comentarios, loading, error, cargar, crear, setComentarios };

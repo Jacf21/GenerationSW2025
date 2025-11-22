@@ -19,3 +19,16 @@ export const getMisCursos = (id_user) => {
     method: "GET",
   });
 };
+
+export const actualizarCurso = (id, datos) => {
+  return apiRequest(`/curso/update/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(datos),
+  });
+};
+
+export const desactivarCurso = (id) => {
+  return apiRequest(`/curso/${id}/desactivar`, {
+    method: "PATCH",
+  });
+};
