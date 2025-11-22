@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaTrash, FaCopy } from "react-icons/fa";
 import useMisCursos from "../../../hooks/useMisCursos";
 import EditarCurso from "../cursos/components/EditarCurso/EditarCurso.jsx";
 import DesactivarCurso from "../cursos/components/DesactivarCurso/DesactivarCurso.jsx";
+import MensajesTopicos from "../../editor/topicos/ListarTopicos/MensajesTopicos/MensajesTopicos.jsx";
 import "./misCursosPage.css";
 import "../../editor/topicos/ListarTopicos/TopicosList.css";
 
@@ -13,6 +14,7 @@ const MisCursosPage = () => {
   const [actualizando, setActualizando] = useState(false);
   const [filtroEstado, setFiltroEstado] = useState("todos");
   const [busqueda, setBusqueda] = useState("");
+  const [showCopyToast, setShowCopyToast] = useState(false);
 
   useEffect(() => {
     if (!modal && actualizando) {
@@ -100,7 +102,26 @@ const MisCursosPage = () => {
                 <td>{curso.descripcion}</td>
                 <td>{new Date(curso.fecha_ini).toLocaleDateString()}</td>
                 <td>{new Date(curso.fecha_fin).toLocaleDateString()}</td>
-                <td>{curso.codigo}</td>
+                <td>
+                  <div className="codigo-cell">
+                    <span className="codigo-text">{curso.codigo}</span>
+                    <button
+                      className="btn-copiar"
+                      title="Copiar código"
+                      onClick={async () => {
+                        try {
+                          await navigator.clipboard.writeText(String(curso.codigo || ""));
+                          setShowCopyToast(true);
+                          setTimeout(() => setShowCopyToast(false), 1500);
+                        } catch (e) {
+                          alert("No se pudo copiar el código");
+                        }
+                      }}
+                    >
+                      <FaCopy />
+                    </button>
+                  </div>
+                </td>
                 <td>
                   <span className={`badge ${curso.activo === false ? "badge-inactivo" : "badge-activo"}`}>
                     {curso.activo === false ? "Inactivo" : "Activo"}
@@ -118,6 +139,9 @@ const MisCursosPage = () => {
             ))}
           </tbody>
         </table>
+        {showCopyToast && (
+          <MensajesTopicos message="Código copiado" type="success" onClose={() => setShowCopyToast(false)} />
+        )}
       </div>
 
       {modal === "editar" && (

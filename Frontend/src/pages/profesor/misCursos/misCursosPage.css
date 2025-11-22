@@ -143,3 +143,18 @@
   color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
+
+.codigo-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-copiar {
+  padding: 5px 8px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--fondo-input);
+  color: var(--color-primario);
+}
