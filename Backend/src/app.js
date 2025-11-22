@@ -5,12 +5,19 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import contenidoRoutes from "./routes/contenidoRoutes.js";
 import topicoRoutes from "./routes/topicoRoutes.js";
+import comentarioRoutes from "./routes/comentarioRoutes.js";
 
 const app = express();
 
+const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error("Not allowed by CORS"));
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
   })
@@ -37,6 +44,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/topico", topicoRoutes);
 app.use("/api/contenido", contenidoRoutes);
+app.use("/api/comentarios", comentarioRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada" });

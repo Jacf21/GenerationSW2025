@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { FaEye, FaEdit, FaTrash, FaPlus } from "react-icons/fa";
+import { FaEye, FaEdit, FaTrash, FaPlus, FaComments } from "react-icons/fa";
 import useTopicos from "../../../../hooks/useTopico";
 import CrearTopico from "../components/CrearTopico/CrearTopico";
 import EditarTopico from "../components/EditarTopico/EditarTopico";
 import EliminarTopico from "../components/EliminarTopico/EliminarTopico";
+import ComentariosModal from "../components/ComentariosTopico/Comentarios";
 import "./TopicosList.css";
+import { useAuth } from "../../../../context/AuthContex";
 
 export default function ListarTopicos() {
   const { topicos, loading, cargarTopicos } = useTopicos();
   const [modal, setModal] = useState(null);
   const [topicoSeleccionado, setTopicoSeleccionado] = useState(null);
   const [actualizando, setActualizando] = useState(false);
+  const [comentariosTopico, setComentariosTopico] = useState(null);
+  const { user } = useAuth();
 
   // Cargar tópicos inicialmente
   useEffect(() => {
@@ -35,6 +39,9 @@ export default function ListarTopicos() {
     setModal(null);
     setTopicoSeleccionado(null);
   };
+
+  const abrirComentarios = (topico) => setComentariosTopico(topico);
+  const cerrarComentarios = () => setComentariosTopico(null);
 
   if (loading) {
     return <div className="loading">Cargando tópicos...</div>;
@@ -77,6 +84,9 @@ export default function ListarTopicos() {
                   <button onClick={() => abrirModal("eliminar", topico)} className="btn-eliminar">
                     <FaTrash />
                   </button>
+                  <button onClick={() => abrirComentarios(topico)} className="btn-comentarios">
+                    <FaComments />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -87,6 +97,13 @@ export default function ListarTopicos() {
       {modal === "crear" && <CrearTopico onClose={cerrarModal} />}
       {modal === "editar" && <EditarTopico topico={topicoSeleccionado} onClose={cerrarModal} />}
       {modal === "eliminar" && <EliminarTopico topico={topicoSeleccionado} onClose={cerrarModal} />}
+      {comentariosTopico && (
+        <ComentariosModal
+          topicoId={comentariosTopico.id}
+          onClose={cerrarComentarios}
+          usuario={user}
+        />
+      )}
     </div>
   );
 }
