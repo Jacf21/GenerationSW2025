@@ -39,3 +39,12 @@ CREATE TABLE contenidoTopico (
     storage_path VARCHAR(255),
     FOREIGN KEY (id_topico) REFERENCES topico(id) ON DELETE CASCADE
 );
+
+-- Matriculación de cursos (mejorada)
+CREATE TABLE IF NOT EXISTS matriculacurso (
+  id SERIAL PRIMARY KEY,
+  id_usuario INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  id_curso INTEGER NOT NULL REFERENCES curso(id) ON DELETE CASCADE,
+  fecha_matricula TIMESTAMP NOT NULL DEFAULT now(),
+  CONSTRAINT uq_matricula UNIQUE (id_usuario, id_curso)
+);

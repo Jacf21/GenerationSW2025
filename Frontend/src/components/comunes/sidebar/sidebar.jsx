@@ -62,6 +62,7 @@ const Sidebar = () => {
       case "est":
         return [
           { to: "/estudiante", label: "Mis Clases", icon: <FaBook /> },
+          { to: "/matriculacion", label: "Matriculación", icon: <FaPlusCircle /> },
           { to: "/perfil", label: "Mi Perfil", icon: <FaUserCircle /> },
           { to: "/configuracion", label: "Configuración", icon: <FaCog /> },
         ];

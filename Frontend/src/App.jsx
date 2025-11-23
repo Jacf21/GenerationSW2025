@@ -12,6 +12,7 @@ import { AuthProvider } from "./context/AuthContex";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminDashboard from "./pages/admin/adminDashboard";
 import EstudianteDashboard from "./pages/estudiante/estudianteDashboard";
+import MatriculacionPage from "./pages/estudiante/matriculacion/MatriculacionPage";
 import ProfesorDashboard from "./pages/profesor/profesorDashboard";
 import EditorDashboard from "./pages/editor/editorDashboard";
 import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
@@ -59,6 +60,7 @@ function App() {
 
                 <Route element={<PrivateRoute allowedRoles={["est"]} />}>
                   <Route path="/estudiante" element={<EstudianteDashboard />} />
+                  <Route path="/matriculacion" element={<MatriculacionPage />} />
                 </Route>
 
                 <Route element={<PrivateRoute allowedRoles={["edit"]} />}>

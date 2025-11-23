@@ -6,6 +6,7 @@ import userRoutes from "./routes/userRoutes.js";
 import contenidoRoutes from "./routes/contenidoRoutes.js";
 import topicoRoutes from "./routes/topicoRoutes.js";
 import comentarioRoutes from "./routes/comentarioRoutes.js";
+import matriculaRoutes from "./routes/matriculaRoutes.js";
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/topico", topicoRoutes);
 app.use("/api/contenido", contenidoRoutes);
 app.use("/api/comentarios", comentarioRoutes);
+app.use("/api/matricula", matriculaRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada" });
