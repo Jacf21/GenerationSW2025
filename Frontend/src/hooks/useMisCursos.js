@@ -8,22 +8,21 @@ const useMisCursos = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedCurso, setSelectedCurso] = useState(null);
+  const fetchCursos = async () => {
+    if (!user?.id) return;
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await cursoService.getMisCursos(user.id);
+      setCursos(Array.isArray(data) ? data : data.cursos || []);
+    } catch (err) {
+      setError(err.message || "Error al obtener los cursos");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchCursos = async () => {
-      if (!user?.id) return;
-      setIsLoading(true);
-      setError(null);
-      try {
-        const data = await cursoService.getMisCursos(user.id);
-        setCursos(Array.isArray(data) ? data : data.cursos || []);
-      } catch (err) {
-        setError(err.message || "Error al obtener los cursos");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchCursos();
   }, [user]);
 
@@ -35,6 +34,7 @@ const useMisCursos = () => {
     error,
     selectedCurso,
     handleRowSelect,
+    recargar: fetchCursos,
   };
 };
 

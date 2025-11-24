@@ -34,6 +34,42 @@ export const buscarCursoPorCodigo = async (codigo) => {
 };
 
 export const getCursos = async (id_user) => {
-  const result = await pool.query("SELECT * FROM curso where id_usuario = $1", [id_user]);
+  const result = await pool.query("SELECT * FROM curso WHERE id_usuario = $1", [id_user]);
   return result.rows;
+};
+
+export const actualizarCurso = async (id, datos) => {
+  const campos = [];
+  const valores = [];
+  let idx = 1;
+
+  if (datos.nombre !== undefined) {
+    campos.push(`nombre = $${idx++}`);
+    valores.push(datos.nombre);
+  }
+  if (datos.fecha_ini !== undefined) {
+    campos.push(`fecha_ini = $${idx++}`);
+    valores.push(datos.fecha_ini);
+  }
+  if (datos.fecha_fin !== undefined) {
+    campos.push(`fecha_fin = $${idx++}`);
+    valores.push(datos.fecha_fin);
+  }
+  if (datos.descripcion !== undefined) {
+    campos.push(`descripcion = $${idx++}`);
+    valores.push(datos.descripcion);
+  }
+
+  if (campos.length === 0) {
+    throw new Error("No hay campos para actualizar");
+  }
+
+  const query = `UPDATE curso SET ${campos.join(", ")} WHERE id = $${idx} RETURNING *`;
+  valores.push(id);
+  const result = await pool.query(query, valores);
+  return result.rows[0];
+};
+
+export const desactivarCurso = async (id) => {
+  await pool.query("UPDATE curso SET activo = FALSE WHERE id = $1", [id]);
 };

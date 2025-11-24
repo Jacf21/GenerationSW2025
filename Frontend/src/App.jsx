@@ -14,6 +14,7 @@ import AdminDashboard from "./pages/admin/adminDashboard";
 import EstudianteDashboard from "./pages/estudiante/estudianteDashboard";
 import PantallaEstudiantePage from "./pages/estudiante/Pantalla/verPantalla";
 import ListaPantallasEstudiantePage from "./pages/estudiante/Pantalla/listPantallaEstudiantePage";
+import MatriculacionPage from "./pages/estudiante/matriculacion/MatriculacionPage";
 import ProfesorDashboard from "./pages/profesor/profesorDashboard";
 import EditorDashboard from "./pages/editor/editorDashboard";
 import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
@@ -60,6 +61,7 @@ function App() {
                   <Route path="/estudiante" element={<EstudianteDashboard />} />
                   <Route path="/lista-topicos" element={<ListaPantallasEstudiantePage />} />
                   <Route path="/topico/:id_topico" element={<PantallaEstudiantePage />} />
+                  <Route path="/matriculacion" element={<MatriculacionPage />} />
                 </Route>
 
                 <Route element={<PrivateRoute allowedRoles={["edit"]} />}>

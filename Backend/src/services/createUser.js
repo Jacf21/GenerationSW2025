@@ -4,7 +4,7 @@ import { setCodigo, getCodigo, deleteCodigo } from "../utils/codigoVerificacionS
 import { emailService } from "./emailService.js";
 import { emailTemplates, transporter } from "../config/emailConfig.js";
 
-export const iniciarRegistro = async ({ nombre, email, tipo }) => {
+export const iniciarRegistro = async ({ nombre, email, _password, tipo }) => {
   // 1. Verificar si el email ya está registrado en la BD
   const userExists = await db.query("SELECT * FROM users WHERE email = $1", [email]);
   if (userExists.rows.length > 0) {

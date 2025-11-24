@@ -20,6 +20,7 @@ CREATE TABLE curso (
     descripcion VARCHAR(255) NOT NULL,
     codigo VARCHAR(100) NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (id_usuario) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -67,4 +68,13 @@ CREATE TABLE contenidoPantallaTopico (
 
     FOREIGN KEY (id_pantalla) REFERENCES pantallaTopico(id) ON DELETE CASCADE,
     FOREIGN KEY (id_contenido) REFERENCES contenidoTopico(id) ON DELETE CASCADE
+)
+
+-- Matriculación de cursos
+CREATE TABLE IF NOT EXISTS matriculacurso (
+  id SERIAL PRIMARY KEY,
+  id_usuario INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  id_curso INTEGER NOT NULL REFERENCES curso(id) ON DELETE CASCADE,
+  fecha_matricula TIMESTAMP NOT NULL DEFAULT now(),
+  CONSTRAINT uq_matricula UNIQUE (id_usuario, id_curso)
 );
