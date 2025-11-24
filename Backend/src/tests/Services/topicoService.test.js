@@ -48,7 +48,7 @@ describe("topicoService", () => {
   });
 
   // ✅ Test: obtenerTopicos exitoso
-  test("obtenerTopicos debe retornar todos los tópicos ordenados por orden ASC", async () => {
+  test("obtenerTopicos debe retornar todos los tópicos ordenados por orden ASC, id DESC", async () => {
     const mockRows = [
       { id: 1, titulo: "Intro", orden: 1 },
       { id: 2, titulo: "Avanzado", orden: 2 },
@@ -58,7 +58,7 @@ describe("topicoService", () => {
 
     const result = await obtenerTopicos();
 
-    expect(pool.query).toHaveBeenCalledWith("SELECT * FROM topico ORDER BY orden ASC");
+    expect(pool.query).toHaveBeenCalledWith("SELECT * FROM topico ORDER BY orden ASC, id DESC");
     expect(result).toEqual(mockRows);
   });
 
@@ -70,17 +70,17 @@ describe("topicoService", () => {
 
     const result = await obtenerTopico(3);
 
-    expect(pool.query).toHaveBeenCalledWith("SELECT * FROM topico WHERE id = $1;", [3]);
+    expect(pool.query).toHaveBeenCalledWith("SELECT * FROM topico WHERE id = $1", [3]);
     expect(result).toEqual(mockRow);
   });
 
   // ✅ Test: obtenerTopico sin resultados
-  test("obtenerTopico debe retornar undefined si no se encuentra el id", async () => {
+  test("obtenerTopico debe retornar null si no se encuentra el id", async () => {
     pool.query.mockResolvedValueOnce({ rows: [] });
 
     const result = await obtenerTopico(999);
 
-    expect(result).toBeUndefined();
+    expect(result).toBeNull();
   });
 
   // ✅ Test: eliminarTopico debe ejecutar el DELETE correctamente
@@ -89,7 +89,7 @@ describe("topicoService", () => {
 
     await eliminarTopico(5);
 
-    expect(pool.query).toHaveBeenCalledWith("DELETE FROM topico WHERE id = $1;", [5]);
+    expect(pool.query).toHaveBeenCalledWith("DELETE FROM topico WHERE id = $1", [5]);
   });
 
   // ❌ Test: eliminarTopico con error

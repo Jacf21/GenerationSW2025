@@ -60,8 +60,11 @@ CREATE TABLE contenidoPantallaTopico (
     id SERIAL PRIMARY KEY,
     id_pantalla INT NOT NULL,
     id_contenido INT NOT NULL,
-    posicion VARCHAR(50) NOT NULL CHECK (posicion IN ('izqup', 'derup', 'izqdown', 'derdown')),
+    orden INT NOT NULL;
+    tipo_bloque VARCHAR(50) NOT NULL DEFAULT 'default',
+    layout JSONB DEFAULT '{}',
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (id_pantalla) REFERENCES pantallaTopico(id) ON DELETE CASCADE,
     FOREIGN KEY (id_contenido) REFERENCES contenidoTopico(id) ON DELETE CASCADE
 );

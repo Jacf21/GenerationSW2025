@@ -12,6 +12,8 @@ import { AuthProvider } from "./context/AuthContex";
 import PrivateRoute from "./components/PrivateRoute";
 import AdminDashboard from "./pages/admin/adminDashboard";
 import EstudianteDashboard from "./pages/estudiante/estudianteDashboard";
+import PantallaEstudiantePage from "./pages/estudiante/Pantalla/verPantalla";
+import ListaPantallasEstudiantePage from "./pages/estudiante/Pantalla/listPantallaEstudiantePage";
 import ProfesorDashboard from "./pages/profesor/profesorDashboard";
 import EditorDashboard from "./pages/editor/editorDashboard";
 import GestionarUsers from "./pages/admin/gestionarUsers/gestionarUsers";
@@ -19,10 +21,7 @@ import TopicosPage from "./pages/editor/topicos/topicosPage";
 import TopicosViewerPage from "./pages/editor/topicos/TopicosViewerPage";
 import TopicosList from "./pages/editor/topicos/ListarTopicos/TopicosList";
 import GestionarContenido from "./pages/editor/contenido/gestionarContenido/gestionarContenido";
-
-import Plantilla1 from "./pages/editor/Plantillas/Plantilla1";
-import Plantilla2 from "./pages/editor/Plantillas/Plantilla2";
-import Plantilla3 from "./pages/editor/Plantillas/Plantilla3";
+import EditorPantallaTopico from "./pages/editor/Plantillas/editorPantallaTopico";
 
 import "./index.css";
 import "./App.css";
@@ -59,6 +58,8 @@ function App() {
 
                 <Route element={<PrivateRoute allowedRoles={["est"]} />}>
                   <Route path="/estudiante" element={<EstudianteDashboard />} />
+                  <Route path="/lista-topicos" element={<ListaPantallasEstudiantePage />} />
+                  <Route path="/topico/:id_topico" element={<PantallaEstudiantePage />} />
                 </Route>
 
                 <Route element={<PrivateRoute allowedRoles={["edit"]} />}>
@@ -68,12 +69,8 @@ function App() {
                   <Route path="/contenido" element={<TopicosViewerPage />} />
                   <Route path="/editor/topicos" element={<TopicosList />} />
                   <Route path="/contenidos" element={<GestionarContenido />} />
+                  <Route path="/plantilla-edicion" element={<EditorPantallaTopico />} />
                   {/* opcionales */}
-
-                  {/* Rutas de Plantillas */}
-                  <Route path="/plantillas/1" element={<Plantilla1 />} />
-                  <Route path="/plantillas/2" element={<Plantilla2 />} />
-                  <Route path="/plantillas/3" element={<Plantilla3 />} />
                 </Route>
               </Routes>
             </main>

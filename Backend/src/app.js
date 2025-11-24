@@ -5,6 +5,8 @@ import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import contenidoRoutes from "./routes/contenidoRoutes.js";
 import topicoRoutes from "./routes/topicoRoutes.js";
+import pantallaTopicoRoutes from "./routes/pantallaTopicoRoutes.js";
+import contenidoPantallaTopicoRoutes from "./routes/contenidoPantallaTopicoRoutes.js";
 
 const app = express();
 
@@ -32,11 +34,16 @@ app.use((req, res, next) => {
   express.urlencoded({ limit: "50mb", extended: true })(req, res, next);
 });
 
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
 app.use("/api/curso", cursoRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/topico", topicoRoutes);
 app.use("/api/contenido", contenidoRoutes);
+app.use("/api/pantalla-topico", pantallaTopicoRoutes);
+app.use("/api/contenido-pantalla", contenidoPantallaTopicoRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada" });

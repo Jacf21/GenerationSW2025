@@ -1,0 +1,51 @@
+/* Contenedor general */
+.html-viewer {
+  color: transparent !important;
+  background-color: transparent !important;
+  border-radius: 5px;
+  margin: 0 auto;
+
+}
+
+/* Hace que el HTML ignore los estilos originales */
+html .html-viewer * {
+  color: inherit !important;
+  background-color: transparent !important;
+  font-family: inherit !important;
+}
+
+/* Tablas */
+.html-viewer table,
+.html-viewer th,
+.html-viewer td {
+  color: inherit !important;
+  background-color: transparent !important;
+  border-color: #ccc !important;
+}
+
+/* Corrige enlaces */
+.html-viewer a {
+  color: #007bff !important;
+  text-decoration: underline !important;
+}
+
+/* Modo oscuro (si tu app lo usa) */
+.dark .html-viewer {
+  color: #eee !important;
+  background-color: #1a1a1a !important;
+}
+
+.dark .html-viewer * {
+  color: inherit !important;
+  background-color: transparent !important;
+}
+
+/* Imágenes y videos responsivos */
+.html-media {
+  max-width: 100%;      /* Nunca excede el ancho del contenedor */
+  height: auto;         /* Mantiene proporción */
+  display: block;
+  margin: 10px auto;    /* Centrado y espacio vertical */
+  border-radius: 5px;
+  border: 1px solid #555; /* opcional, borde sutil */
+}
