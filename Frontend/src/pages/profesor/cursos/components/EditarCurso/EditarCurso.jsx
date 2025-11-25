@@ -49,7 +49,9 @@ export default function EditarCurso({ curso, onClose, onSuccess }) {
       <div className="modal-content">
         <div className="modal-header">
           <h3>Editar Curso</h3>
-          <button className="close-btn" onClick={onClose}>&times;</button>
+          <button className="close-btn" onClick={onClose}>
+            &times;
+          </button>
         </div>
 
         {error && <div className="error-message">{error}</div>}
@@ -95,7 +97,9 @@ export default function EditarCurso({ curso, onClose, onSuccess }) {
           </div>
 
           <div className="modal-actions">
-            <button type="button" onClick={onClose} className="btn-secundario">Cancelar</button>
+            <button type="button" onClick={onClose} className="btn-secundario">
+              Cancelar
+            </button>
             <button type="submit" className="btn-primario" disabled={loading}>
               {loading ? "Guardando..." : "Guardar Cambios"}
             </button>

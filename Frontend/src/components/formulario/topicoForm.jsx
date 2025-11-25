@@ -29,7 +29,9 @@ export default function TopicoForm({ onCreado }) {
   return (
     <div className="topico-form-box">
       <h2 className="topico-form-header">Crear Tópico</h2>
-      {mensajeTopico && <p className={`topico-alert topico-alert-${mensajeTopico.tipo}`}>{mensajeTopico.texto}</p>}
+      {mensajeTopico && (
+        <p className={`topico-alert topico-alert-${mensajeTopico.tipo}`}>{mensajeTopico.texto}</p>
+      )}
       <form onSubmit={handleSubmit} className="topico-form">
         <div className="topico-field">
           <label>Título</label>

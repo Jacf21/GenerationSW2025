@@ -4,7 +4,7 @@ import useTopicos from "../../../hooks/useTopico.js";
 import "./TopicosPage.css";
 
 export default function TopicosPage() {
-  const { topicos, loading, agregarTopico } = useTopicos();
+  const { loading, agregarTopico } = useTopicos();
 
   if (loading) return <p className="loading-text">Cargando...</p>;
 

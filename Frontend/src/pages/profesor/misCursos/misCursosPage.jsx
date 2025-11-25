@@ -113,7 +113,7 @@ const MisCursosPage = () => {
                           await navigator.clipboard.writeText(String(curso.codigo || ""));
                           setShowCopyToast(true);
                           setTimeout(() => setShowCopyToast(false), 1500);
-                        } catch (e) {
+                        } catch {
                           alert("No se pudo copiar el código");
                         }
                       }}
@@ -123,7 +123,9 @@ const MisCursosPage = () => {
                   </div>
                 </td>
                 <td>
-                  <span className={`badge ${curso.activo === false ? "badge-inactivo" : "badge-activo"}`}>
+                  <span
+                    className={`badge ${curso.activo === false ? "badge-inactivo" : "badge-activo"}`}
+                  >
                     {curso.activo === false ? "Inactivo" : "Activo"}
                   </span>
                 </td>
@@ -140,7 +142,11 @@ const MisCursosPage = () => {
           </tbody>
         </table>
         {showCopyToast && (
-          <MensajesTopicos message="Código copiado" type="success" onClose={() => setShowCopyToast(false)} />
+          <MensajesTopicos
+            message="Código copiado"
+            type="success"
+            onClose={() => setShowCopyToast(false)}
+          />
         )}
       </div>
 

@@ -4,7 +4,7 @@ import useComentarios from "../../../../../hooks/useComentarios";
 import "./Comentarios.css";
 
 export default function ComentariosModal({ topicoId, onClose, usuario }) {
-  const { comentarios, loading, error, cargar, crear } = useComentarios(topicoId);
+  const { comentarios, loading, error, crear } = useComentarios(topicoId);
   const [mensaje, setMensaje] = useState("");
   const listRef = useRef(null);
 

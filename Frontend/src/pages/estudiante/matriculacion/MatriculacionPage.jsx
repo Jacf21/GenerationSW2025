@@ -58,9 +58,9 @@ const MatriculacionPage = () => {
       </form>
 
       {mensaje && (
-        <p className={`alert ${mensaje.tipo === "success" ? "alert-success" : "alert-error"}`}>{
-          mensaje.texto
-        }</p>
+        <p className={`alert ${mensaje.tipo === "success" ? "alert-success" : "alert-error"}`}>
+          {mensaje.texto}
+        </p>
       )}
 
       <h3>Mis cursos matriculados</h3>
@@ -78,7 +78,9 @@ const MatriculacionPage = () => {
         <tbody>
           {matriculas.length === 0 && (
             <tr>
-              <td colSpan={6} style={{ textAlign: "center", color: "var(--texto-secundario)" }}>Sin cursos</td>
+              <td colSpan={6} style={{ textAlign: "center", color: "var(--texto-secundario)" }}>
+                Sin cursos
+              </td>
             </tr>
           )}
           {matriculas.map((m) => (

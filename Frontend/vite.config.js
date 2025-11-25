@@ -9,13 +9,19 @@ export default defineConfig({
       },
     }),
   ],
+
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: "./src/setupTests.js",
+  },
+
   server: {
     proxy: {
       "/api": {
         target: "http://localhost:5000",
         changeOrigin: true,
         secure: false,
-        // ws: true, // si usas websockets
       },
     },
   },

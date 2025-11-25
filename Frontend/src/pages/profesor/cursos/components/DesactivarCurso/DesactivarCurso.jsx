@@ -30,14 +30,18 @@ export default function DesactivarCurso({ curso, onClose, onSuccess }) {
       <div className="modal-content">
         <div className="modal-header">
           <h3>Desactivar Curso</h3>
-          <button className="close-btn" onClick={onClose}>&times;</button>
+          <button className="close-btn" onClick={onClose}>
+            &times;
+          </button>
         </div>
         {error && <div className="error-message">{error}</div>}
         <p>
           ¿Deseas desactivar el curso <strong>{curso?.nombre}</strong>? Podrás activarlo más tarde.
         </p>
         <div className="modal-actions">
-          <button onClick={onClose} className="btn-secundario">Cancelar</button>
+          <button onClick={onClose} className="btn-secundario">
+            Cancelar
+          </button>
           <button onClick={handleDesactivar} disabled={loading} className="btn-eliminar">
             {loading ? "Desactivando..." : "Desactivar"}
           </button>
