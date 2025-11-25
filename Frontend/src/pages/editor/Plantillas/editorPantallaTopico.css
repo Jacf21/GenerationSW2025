@@ -1,0 +1,129 @@
+/* Contenedor principal del editor */
+.editor-pantalla {
+  padding: var(--espacio-xl);
+  background-color: var(--fondo); /* fondo general modo oscuro */
+  color: #fff;
+  font-family: var(--fuente-principal);
+  min-height: 100vh;
+  border: 2px solid #fff;
+  border-radius: 8px;
+}
+
+/* Mensaje cuando no hay tópico seleccionado */
+.editor-pantalla p {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+/* Encabezados */
+.editor-pantalla h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.editor-pantalla h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+/* Botones */
+.editor-pantalla button {
+  background-color: #4ea8ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.editor-pantalla button:hover {
+  background-color: #1f8ef1;
+}
+
+/* Selector de contenidos y tópicos */
+.selector-contenido,
+.selector-topico {
+  margin: 15px 0;
+}
+
+/* Contenedor de Drag & Drop */
+.droppable-pantalla {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* separación entre bloques */
+  margin-top: 20px;
+}
+
+/* Bloques de contenido */
+.html-viewer {
+  color: #fff !important;
+  background-color: transparent !important;
+  border-radius: 5px;
+  padding: 15px;
+  min-height: 200px;
+  overflow-x: auto;
+}
+
+/* Forzar que TODO dentro también sea blanco */
+.html-viewer * {
+  color: #fff !important;
+  background-color: transparent !important;
+  font-family: inherit !important;
+}
+
+/* Tablas */
+.html-viewer table,
+.html-viewer th,
+.html-viewer td {
+  color: #fff !important;
+  background-color: transparent !important;
+  border-color: #999 !important;
+}
+
+/* Código <pre> y <code> */
+.html-viewer pre,
+.html-viewer code {
+  color: #fff !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  padding: 5px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* Imágenes y videos responsivos */
+.html-media {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  border-radius: 5px;
+  border: 1px solid #555; /* opcional */
+}
+
+/* Enlaces */
+.html-viewer a {
+  color: #4ea8ff !important;
+  text-decoration: underline !important;
+}
+
+/* Soporte modo claro */
+.light .editor-pantalla {
+  background-color: #fdfdfd;
+  color: #222;
+}
+
+.light .html-viewer * {
+  color: inherit !important;
+}
+
+.light .html-media {
+  border-color: #ccc;
+}

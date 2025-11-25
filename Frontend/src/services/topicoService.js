@@ -1,20 +1,35 @@
-import apiRequest from "./apiCliente.js";
+const BASE = "http://localhost:5000/api/topico";
 
-export const crearTopico = (topico) => {
-  return apiRequest("/topico/create", {
+export const crearTopico = async (payload) => {
+  const res = await fetch(`${BASE}/create`, {
     method: "POST",
-    body: JSON.stringify(topico),
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify(payload),
   });
+  if (!res.ok) throw new Error(`Create failed ${res.status}`);
+  return res.json();
 };
 
-export const obtenerTopicos = () => {
-  return apiRequest("/topico/getall");
+export const obtenerTopicos = async () => {
+  const res = await fetch(`${BASE}/getall`, { credentials: "include" });
+  if (!res.ok) throw new Error(`GetAll failed ${res.status}`);
+  return res.json();
 };
 
-export const obtenerTopico = (id) => {
-  return apiRequest(`/topico/get/${id}`);
+export const actualizarTopico = async (id, datos) => {
+  const res = await fetch(`${BASE}/update/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify(datos),
+  });
+  if (!res.ok) throw new Error(`Update failed ${res.status}`);
+  return res.json();
 };
 
-export const eliminarTopico = (id) => {
-  return apiRequest(`/topico/delete/${id}`, { method: "DELETE" });
+export const eliminarTopico = async (id) => {
+  const res = await fetch(`${BASE}/delete/${id}`, { method: "DELETE", credentials: "include" });
+  if (!res.ok) throw new Error(`Delete failed ${res.status}`);
+  return res.json();
 };

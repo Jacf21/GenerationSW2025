@@ -1,0 +1,169 @@
+:root {
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #121212;
+
+  --color-text-light: #212529;
+  --color-text-dark: #f8f9fa;
+
+  --color-border-light: #dee2e6;
+  --color-border-dark: #2c2c2c;
+
+  --color-header-light: #f8f9fa;
+  --color-header-dark: #1e1e1e;
+
+  --color-shadow-light: rgba(0, 0, 0, 0.1);
+  --color-shadow-dark: rgba(255, 255, 255, 0.1);
+
+  --color-btn-crear: #0d6efd;
+  --color-btn-ver: #0dcaf0;
+  --color-btn-editar: #ffc107;
+  --color-btn-eliminar: #dc3545;
+
+}
+
+/* ======== Modo claro por defecto ======== */
+.listar-topicos {
+  padding: var(--espacio-lg);
+  background: var(--fondo-principal);
+  color: var(--texto);
+  border-radius: var(--radio-md);
+  box-shadow: var(--sombra-sm);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--espacio-md);
+}
+
+.header h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 10px 16px;
+  background: var(--color-primario);
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* "foto" verde circular a la izquierda del título */
+.header h2::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-success), var(--color-success-dark));
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+.btn-crear {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--color-primario);
+  color: #fff;
+  border: none;
+  border-radius: var(--radio-sm);
+  cursor: pointer;
+}
+
+.btn-crear:hover {
+  background: var(--color-primario-hover);
+}
+
+.tabla-container {
+  overflow-x: auto;
+  background: transparent;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--fondo-card);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto);
+}
+
+th {
+  background: var(--fondo-input);
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-ver,
+.btn-editar,
+.btn-eliminar {
+  padding: 6px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fondo-input); /* mismo fondo que editar */
+  color: var(--color-primario);
+  transition: background-color .12s ease, transform .06s ease;
+}
+
+.btn-ver { background: var(--color-primario-claro, rgba(13,110,253,0.08)); color: var(--color-primario); }
+.btn-editar { background: var(--fondo-input); color: var(--color-primario); border: 1px solid var(--borde); }
+.btn-eliminar { background: var(--color-error); color: #fff; }
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--texto-secundario);
+}
+
+/* ======== 🌙 MODO OSCURO ======== */
+[data-theme="dark"] .listar-topicos {
+  background: var(--color-bg-dark);
+  color: var(--color-text-dark);
+  box-shadow: 0 2px 6px var(--color-shadow-dark);
+}
+
+[data-theme="dark"] th,
+[data-theme="dark"] td {
+  border-bottom: 1px solid var(--color-border-dark);
+}
+
+[data-theme="dark"] th {
+  background: var(--color-header-dark);
+}
+
+[data-theme="dark"] tr:hover {
+  background-color: #1e1e1e;
+}
+
+[data-theme="dark"] .loading {
+  color: #adb5bd;
+}
+
+[data-theme="dark"] table tbody tr:hover {
+  background-color: rgba(40,167,69,0.08);
+}
+
+[data-theme="dark"] .header h2 {
+  background: linear-gradient(135deg, var(--color-success-dark), #1b5e2b);
+  color: #ffffff;
+}

@@ -6,6 +6,8 @@ import request from "supertest";
 await jest.unstable_mockModule("../../controllers/cursoController.js", () => ({
   crearCurso: jest.fn((req, res) => res.status(201).json({ message: "Curso creado" })),
   getMisCursos: jest.fn((req, res) => res.status(200).json([])),
+  actualizarCurso: jest.fn((req, res) => res.status(200).json({ message: "Curso actualizado" })),
+  desactivarCurso: jest.fn((req, res) => res.status(200).json({ message: "Curso desactivado" })),
 }));
 
 // Importa después de mockear

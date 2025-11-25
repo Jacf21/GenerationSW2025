@@ -1,0 +1,54 @@
+@import "../../../../editor/topicos/ListarTopicos/TopicosList.css";
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--fondo);
+  color: var(--texto);
+  border-radius: 12px;
+  box-shadow: var(--sombra-lg);
+  width: 100%;
+  max-width: 560px;
+  padding: 16px;
+  border: 1px solid var(--borde);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--texto);
+}
+
+.form-group { margin-bottom: 12px; }
+.form-row { display: flex; gap: 12px; }
+.form-group label { display: block; margin-bottom: 6px; }
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--fondo-input);
+  color: var(--texto);
+}
+
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+.btn-secundario { background: var(--fondo-input); border: 1px solid var(--borde); padding: 8px 12px; border-radius: 8px; }
+.btn-primario { background: var(--color-primario); color: #fff; border: none; padding: 8px 12px; border-radius: 8px; }
+
+.error-message { color: var(--color-error); margin-bottom: 10px; }

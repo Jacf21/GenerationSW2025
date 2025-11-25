@@ -1,0 +1,8 @@
+@import "../CrearTopico/CrearTopico.css";
+
+/* botón específico para eliminar (si quieres diferenciar) */
+.btn-eliminar {
+  background: var(--color-error);
+  color: #fff;
+  border: none;
+}

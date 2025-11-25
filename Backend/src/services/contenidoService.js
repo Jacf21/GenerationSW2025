@@ -1,6 +1,6 @@
 import pool from "../config/db.js";
 import { supabase } from "../config/supabase.js";
-import * as fs from "fs";
+import * as fs from "fs/promises";
 
 export const subirContenido = async (id_topico, tipo, file) => {
   try {
@@ -8,7 +8,7 @@ export const subirContenido = async (id_topico, tipo, file) => {
     if (topicoRes.rowCount === 0) throw new Error("Tópico no encontrado");
 
     const filename = `topicos/${id_topico}/${Date.now()}-${file.originalname}`;
-    const fileBuffer = fs.readFileSync(file.path);
+    const fileBuffer = await fs.readFile(file.path); // leer archivo temporal
 
     const { error } = await supabase.storage.from("tutorial-media").upload(filename, fileBuffer, {
       contentType: file.mimetype,
@@ -18,8 +18,10 @@ export const subirContenido = async (id_topico, tipo, file) => {
     if (error) throw error;
 
     const { data: publicData } = supabase.storage.from("tutorial-media").getPublicUrl(filename);
-
     const publicUrl = publicData.publicUrl;
+
+    // Borrar el archivo temporal de uploads
+    await fs.unlink(file.path);
 
     const insert = await pool.query(
       `INSERT INTO contenidoTopico (id_topico, tipo, url, storage_path)
@@ -31,6 +33,10 @@ export const subirContenido = async (id_topico, tipo, file) => {
     return insert.rows[0];
   } catch (error) {
     console.error("Error en subirContenido:", error);
+    // En caso de error, también intentar borrar el archivo temporal
+    if (file?.path) {
+      fs.unlink(file.path).catch(() => null);
+    }
     throw error;
   }
 };
@@ -60,5 +66,10 @@ export const obtenerContenidosPorTopico = async (id_topico) => {
     "SELECT * FROM contenidoTopico WHERE id_topico = $1 ORDER BY id DESC;",
     [id_topico]
   );
+  return rows;
+};
+
+export const obtenerContenidos = async () => {
+  const { rows } = await pool.query("SELECT * FROM contenidoTopico ORDER BY id DESC;");
   return rows;
 };

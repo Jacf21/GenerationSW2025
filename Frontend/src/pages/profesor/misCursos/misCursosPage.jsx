@@ -1,69 +1,160 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { FaEdit, FaTrash, FaCopy } from "react-icons/fa";
 import useMisCursos from "../../../hooks/useMisCursos";
-import CustomTable from "../../../components/customTable";
+import EditarCurso from "../cursos/components/EditarCurso/EditarCurso.jsx";
+import DesactivarCurso from "../cursos/components/DesactivarCurso/DesactivarCurso.jsx";
+import MensajesTopicos from "../../editor/topicos/ListarTopicos/MensajesTopicos/MensajesTopicos.jsx";
 import "./misCursosPage.css";
+import "../../editor/topicos/ListarTopicos/TopicosList.css";
 
 const MisCursosPage = () => {
-  const { cursos, isLoading, error, selectedCurso, handleRowSelect } = useMisCursos();
+  const { cursos, isLoading, error, recargar } = useMisCursos();
+  const [modal, setModal] = useState(null);
+  const [cursoSeleccionado, setCursoSeleccionado] = useState(null);
+  const [actualizando, setActualizando] = useState(false);
+  const [filtroEstado, setFiltroEstado] = useState("todos");
+  const [busqueda, setBusqueda] = useState("");
+  const [showCopyToast, setShowCopyToast] = useState(false);
 
-  const cursosFormateados = cursos.map((curso) => ({
-    ...curso,
-    fecha_ini: new Date(curso.fecha_ini).toLocaleDateString(),
-    fecha_fin: new Date(curso.fecha_fin).toLocaleDateString(),
-  }));
+  useEffect(() => {
+    if (!modal && actualizando) {
+      recargar();
+      setActualizando(false);
+    }
+  }, [modal, actualizando, recargar]);
 
-  const columns = [
-    { key: "id", label: "ID" },
-    { key: "nombre", label: "Nombre" },
-    { key: "descripcion", label: "Descripción" },
-    { key: "fecha_ini", label: "Fecha Inicio" },
-    { key: "fecha_fin", label: "Fecha Fin" },
-    { key: "codigo", label: "Codigo" },
-  ];
+  const abrirModal = (tipo, curso = null) => {
+    setCursoSeleccionado(curso);
+    setModal(tipo);
+  };
 
-  if (isLoading) return <p className="text-gray-600">Cargando cursos...</p>;
-  if (error) return <p className="text-red-600">{error}</p>;
+  const cerrarModal = () => {
+    setActualizando(true);
+    setModal(null);
+    setCursoSeleccionado(null);
+  };
+
+  const cursosFiltrados = cursos
+    .filter((c) => {
+      if (filtroEstado === "activos") return c.activo !== false;
+      if (filtroEstado === "inactivos") return c.activo === false;
+      return true;
+    })
+    .filter((c) => {
+      const q = busqueda.trim().toLowerCase();
+      if (!q) return true;
+      return (
+        (c.nombre || "").toLowerCase().includes(q) ||
+        (c.descripcion || "").toLowerCase().includes(q) ||
+        (c.codigo || "").toLowerCase().includes(q)
+      );
+    });
+
+  if (isLoading) return <div className="loading">Cargando cursos...</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
-    <div className="mis-cursos-container">
-      <h1>Mis Cursos</h1>
+    <div className="listar-topicos">
+      <div className="header">
+        <h2>Gestión de Cursos</h2>
+      </div>
 
-      {isLoading && <p className="loading">Cargando cursos...</p>}
-      {error && <p className="error">{error}</p>}
+      <div className="filtros">
+        <select value={filtroEstado} onChange={(e) => setFiltroEstado(e.target.value)}>
+          <option value="todos">Todos</option>
+          <option value="activos">Activos</option>
+          <option value="inactivos">Inactivos</option>
+        </select>
+        <input
+          type="text"
+          placeholder="Buscar por nombre, descripción o código"
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+      </div>
 
-      {!isLoading && !error && (
-        <>
-          {cursos.length === 0 ? (
-            <p className="no-cursos">No tienes cursos registrados.</p>
-          ) : (
-            <div className="table-wrapper">
-              <CustomTable
-                columns={columns}
-                data={cursosFormateados}
-                onRowSelect={handleRowSelect}
-                selectedRowId={selectedCurso?.id}
-              />
-            </div>
-          )}
+      <div className="tabla-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Fecha Inicio</th>
+              <th>Fecha Fin</th>
+              <th>Código</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cursosFiltrados.length === 0 && (
+              <tr>
+                <td colSpan={8} style={{ textAlign: "center", color: "var(--texto-secundario)" }}>
+                  Sin cursos
+                </td>
+              </tr>
+            )}
+            {cursosFiltrados.map((curso) => (
+              <tr key={curso.id}>
+                <td>{curso.id}</td>
+                <td>{curso.nombre}</td>
+                <td>{curso.descripcion}</td>
+                <td>{new Date(curso.fecha_ini).toLocaleDateString()}</td>
+                <td>{new Date(curso.fecha_fin).toLocaleDateString()}</td>
+                <td>
+                  <div className="codigo-cell">
+                    <span className="codigo-text">{curso.codigo}</span>
+                    <button
+                      className="btn-copiar"
+                      title="Copiar código"
+                      onClick={async () => {
+                        try {
+                          await navigator.clipboard.writeText(String(curso.codigo || ""));
+                          setShowCopyToast(true);
+                          setTimeout(() => setShowCopyToast(false), 1500);
+                        } catch {
+                          alert("No se pudo copiar el código");
+                        }
+                      }}
+                    >
+                      <FaCopy />
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <span
+                    className={`badge ${curso.activo === false ? "badge-inactivo" : "badge-activo"}`}
+                  >
+                    {curso.activo === false ? "Inactivo" : "Activo"}
+                  </span>
+                </td>
+                <td className="acciones">
+                  <button onClick={() => abrirModal("editar", curso)} className="btn-editar">
+                    <FaEdit />
+                  </button>
+                  <button onClick={() => abrirModal("desactivar", curso)} className="btn-eliminar">
+                    <FaTrash />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {showCopyToast && (
+          <MensajesTopicos
+            message="Código copiado"
+            type="success"
+            onClose={() => setShowCopyToast(false)}
+          />
+        )}
+      </div>
 
-          {selectedCurso && (
-            <div className="curso-detalle">
-              <h2>Curso seleccionado</h2>
-              <p>
-                <strong>Nombre:</strong> {selectedCurso.nombre}
-              </p>
-              <p>
-                <strong>Descripción:</strong> {selectedCurso.descripcion}
-              </p>
-              <p>
-                <strong>Fechas:</strong> {selectedCurso.fecha_ini} — {selectedCurso.fecha_fin}
-              </p>
-              <p>
-                <strong>Código:</strong> {selectedCurso.codigo}
-              </p>
-            </div>
-          )}
-        </>
+      {modal === "editar" && (
+        <EditarCurso curso={cursoSeleccionado} onClose={cerrarModal} onSuccess={recargar} />
+      )}
+      {modal === "desactivar" && (
+        <DesactivarCurso curso={cursoSeleccionado} onClose={cerrarModal} onSuccess={recargar} />
       )}
     </div>
   );

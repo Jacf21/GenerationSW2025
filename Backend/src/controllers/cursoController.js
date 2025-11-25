@@ -55,3 +55,42 @@ export const getMisCursos = async (req, res) => {
     });
   }
 };
+
+export const actualizarCurso = async (req, res) => {
+  const { id } = req.params;
+  const { nombre, fecha_ini, fecha_fin, descripcion } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ message: "Falta el parámetro 'id' del curso" });
+  }
+
+  try {
+    const actualizado = await cursoService.actualizarCurso(id, {
+      nombre,
+      fecha_ini,
+      fecha_fin,
+      descripcion,
+    });
+
+    return res.status(200).json({ message: "Curso actualizado", curso: actualizado });
+  } catch (error) {
+    console.error("Error al actualizar curso:", error);
+    return res.status(500).json({ message: "Error al actualizar curso", error: error.message });
+  }
+};
+
+export const desactivarCurso = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: "Falta el parámetro 'id' del curso" });
+  }
+
+  try {
+    await cursoService.desactivarCurso(id);
+    return res.status(200).json({ message: "Curso desactivado correctamente" });
+  } catch (error) {
+    console.error("Error al desactivar curso:", error);
+    return res.status(500).json({ message: "Error al desactivar curso", error: error.message });
+  }
+};

@@ -1,0 +1,102 @@
+/* Variables de color (si ya están definidas en :root, se usan directamente) */
+:root {
+  --color-fondo-form: #1b2635;
+  --color-borde: #334155;
+  --color-primario: #00d4ff;
+  --color-primario-hover: #00a8cc;
+  --color-texto: #e9ecef;
+  --color-exito: #16a34a;
+  --color-error: #dc2626;
+}
+
+/* Contenedor del formulario */
+.formulario-container {
+  background-color: var(--color-fondo-form);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  max-width: 600px;
+  width: 100%;
+  margin: 2rem auto;
+  box-sizing: border-box;
+}
+
+/* Título */
+.formulario-container h2 {
+  color: var(--color-primario);
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Campos del formulario */
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.campo label {
+  font-weight: 600;
+  color: var(--color-texto);
+  margin-bottom: 0.4rem;
+}
+
+/* Inputs y selects */
+.campo select,
+.campo input[type="text"],
+.campo input[type="file"] {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-borde);
+  background-color: var(--fondo-oscuro);
+  color: var(--color-texto);
+  font-size: 0.95rem;
+  width: 100%; /* Asegura que no se salga del contenedor */
+  box-sizing: border-box;
+  transition: 0.2s;
+}
+
+.campo select:focus,
+.campo input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+  box-shadow: 0 0 5px var(--color-primario + "55");
+}
+
+/* Botón */
+.boton {
+  background-color: var(--color-primario);
+  color: var(--color-texto);
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s;
+}
+
+.boton:hover {
+  background-color: var(--color-primario-hover);
+  transform: scale(1.05);
+}
+
+/* Mensajes */
+.mensaje {
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.mensaje-exito {
+  background-color: var(--color-exito);
+  color: #fff;
+}
+
+.mensaje-error {
+  background-color: var(--color-error);
+  color: #fff;
+}

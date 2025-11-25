@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContex";
 import {
   FaHome,
+  FaPlusCircle,
+  FaTasks,
+  FaLayerGroup,
   FaUserPlus,
   FaSignInAlt,
   FaUsers,
@@ -9,12 +12,13 @@ import {
   FaChalkboardTeacher,
   FaBook,
   FaCog,
+  FaCogs,
   FaEdit,
   FaUserCircle,
-  FaPlusCircle,
-  FaFileUpload,
-  FaListUl,
+  FaChevronUp,
+  FaListAlt,
 } from "react-icons/fa";
+
 import "./sidebar.css";
 
 const Sidebar = () => {
@@ -36,25 +40,35 @@ const Sidebar = () => {
           { to: "/gestionar-usuarios", label: "Gestionar Usuarios", icon: <FaUsers /> },
           { to: "/reportes", label: "Reportes", icon: <FaChartBar /> },
         ];
+
       case "profesor":
         return [
           { to: "/mis-cursos", label: "Mis Cursos", icon: <FaChalkboardTeacher /> },
           { to: "/crear-curso", label: "Crear Curso", icon: <FaEdit /> },
           { to: "/perfil", label: "Mi Perfil", icon: <FaUserCircle /> },
         ];
+
       case "est":
         return [
           { to: "/estudiante", label: "Mis Clases", icon: <FaBook /> },
+          { to: "/matriculacion", label: "Matriculación", icon: <FaPlusCircle /> },
           { to: "/perfil", label: "Mi Perfil", icon: <FaUserCircle /> },
           { to: "/configuracion", label: "Configuración", icon: <FaCog /> },
+          { to: "/lista-topicos-est", label: "Ver Topico", icon: <FaListAlt /> },
         ];
+
       case "edit":
         return [
-          { to: "/editor", label: "Panel de Edición", icon: <FaHome /> },
-          { to: "/crear-topico", label: "Crear Tópico", icon: <FaPlusCircle /> },
-          { to: "/agregar-contenido", label: "Agregar Contenido", icon: <FaFileUpload /> },
-          { to: "/contenido", label: "Lista de Contenidos", icon: <FaListUl /> },
+          { to: "/editor", label: "Dashboard Editor", icon: <FaHome /> },
+          { to: "/lista-topicos", label: "Gestión de Tópicos", icon: <FaTasks /> },
+          { to: "/contenidos", label: "Gestión de Contenidos", icon: <FaLayerGroup /> },
+          {
+            to: "/plantilla-edicion",
+            label: "Gestinar pantallas de topicos",
+            icon: <FaCogs />,
+          },
         ];
+
       default:
         return [{ to: "/", label: "Inicio", icon: <FaHome /> }];
     }
@@ -66,8 +80,8 @@ const Sidebar = () => {
     <aside className="sidebar">
       <nav className="sidebar-nav">
         <ul>
-          {menuItems.map((item) => (
-            <li key={item.to} className="tooltip-container">
+          {menuItems.map((item, idx) => (
+            <li key={idx} className="tooltip-container">
               <Link to={item.to} className="sidebar-icon">
                 {item.icon}
                 <span className="tooltip-text">{item.label}</span>

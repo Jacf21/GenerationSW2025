@@ -1,68 +1,70 @@
 import { useState } from "react";
 import { crearTopico } from "../../services/topicoService.js";
+import "./TopicoForm.css"; // Importa su propio CSS
 
 export default function TopicoForm({ onCreado }) {
-  const [titulo, setTitulo] = useState("");
-  const [orden, setOrden] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [mensaje, setMensaje] = useState(null);
+  const [tituloTopico, setTituloTopico] = useState("");
+  const [ordenTopico, setOrdenTopico] = useState("");
+  const [descripcionTopico, setDescripcionTopico] = useState("");
+  const [mensajeTopico, setMensajeTopico] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const topico = await crearTopico({
-        titulo,
-        orden: Number(orden),
-        descripcion,
+        titulo: tituloTopico,
+        orden: Number(ordenTopico),
+        descripcion: descripcionTopico,
       });
       onCreado(topico);
-      setTitulo("");
-      setOrden("");
-      setDescripcion("");
-      setMensaje({ tipo: "exito", texto: "Tópico creado correctamente" });
+      setTituloTopico("");
+      setOrdenTopico("");
+      setDescripcionTopico("");
+      setMensajeTopico({ tipo: "exito", texto: "Tópico creado correctamente" });
     } catch (err) {
-      setMensaje({ tipo: "error", texto: err.message });
+      setMensajeTopico({ tipo: "error", texto: err.message });
     }
   };
 
   return (
-    <div className="formulario-container">
-      <h2>Crear Tópico</h2>
-      {mensaje && <p className={`mensaje mensaje-${mensaje.tipo}`}>{mensaje.texto}</p>}
-
-      <form onSubmit={handleSubmit}>
-        <div className="campo">
+    <div className="topico-form-box">
+      <h2 className="topico-form-header">Crear Tópico</h2>
+      {mensajeTopico && (
+        <p className={`topico-alert topico-alert-${mensajeTopico.tipo}`}>{mensajeTopico.texto}</p>
+      )}
+      <form onSubmit={handleSubmit} className="topico-form">
+        <div className="topico-field">
           <label>Título</label>
           <input
             type="text"
             placeholder="Título del tópico"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
+            value={tituloTopico}
+            onChange={(e) => setTituloTopico(e.target.value)}
             required
           />
         </div>
 
-        <div className="campo">
+        <div className="topico-field">
           <label>Orden</label>
           <input
             type="number"
             placeholder="Orden"
-            value={orden}
-            onChange={(e) => setOrden(e.target.value)}
+            value={ordenTopico}
+            onChange={(e) => setOrdenTopico(e.target.value)}
             required
           />
         </div>
 
-        <div className="campo">
+        <div className="topico-field">
           <label>Descripción</label>
           <textarea
             placeholder="Ingresa una breve descripción"
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
+            value={descripcionTopico}
+            onChange={(e) => setDescripcionTopico(e.target.value)}
           ></textarea>
         </div>
 
-        <button type="submit" className="boton">
+        <button type="submit" className="topico-btn">
           Crear Tópico
         </button>
       </form>

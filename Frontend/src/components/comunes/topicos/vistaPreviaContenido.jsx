@@ -3,7 +3,6 @@ export default function VistaPreviaContenido({ contenido }) {
     return <div className="vista-previa">Selecciona un contenido para visualizarlo 📄</div>;
   }
 
-  // Extraer el ID del archivo desde la URL (más robusto)
   const extractFileId = (url) => {
     const match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
     return match ? match[1] : null;
@@ -15,12 +14,16 @@ export default function VistaPreviaContenido({ contenido }) {
   return (
     <div className="vista-previa">
       <h2>{contenido.nombre_archivo}</h2>
-      <iframe
-        src={previewUrl}
-        title={contenido.nombre_archivo}
-        className="iframe-preview"
-        allow="autoplay"
-      ></iframe>
+      {contenido.tipo === "img" ? (
+        <img src={contenido.url} alt={contenido.nombre_archivo} className="preview-imagen" />
+      ) : (
+        <iframe
+          src={previewUrl}
+          title={contenido.nombre_archivo}
+          className="iframe-preview"
+          allow="autoplay"
+        ></iframe>
+      )}
     </div>
   );
 }

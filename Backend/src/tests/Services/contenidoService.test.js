@@ -5,9 +5,10 @@
 
 import { jest } from "@jest/globals";
 
-// 🧩 Mock de fs: aquí devolvemos directamente las funciones esperadas
-jest.unstable_mockModule("fs", () => ({
-  readFileSync: jest.fn(() => Buffer.from("mockFile")),
+// 🧩 Mock de fs/promises
+jest.unstable_mockModule("fs/promises", () => ({
+  readFile: jest.fn(() => Buffer.from("mockFile")), // simula lectura del archivo
+  unlink: jest.fn(() => Promise.resolve()), // simula borrado sin error
 }));
 
 // 🧩 Mock de pool (PostgreSQL)
@@ -20,6 +21,7 @@ jest.unstable_mockModule("../../config/db.js", () => ({
 const mockUpload = jest.fn();
 const mockGetPublicUrl = jest.fn();
 const mockRemove = jest.fn();
+
 jest.unstable_mockModule("../../config/supabase.js", () => ({
   supabase: {
     storage: {
@@ -35,7 +37,8 @@ jest.unstable_mockModule("../../config/supabase.js", () => ({
 // 🧩 Importar el módulo bajo prueba (después de los mocks)
 const { subirContenido, eliminarContenido, obtenerContenido, obtenerContenidosPorTopico } =
   await import("../../services/contenidoService.js");
-const fs = await import("fs");
+
+const fs = await import("fs/promises");
 
 describe("contenidoService", () => {
   beforeEach(() => {
@@ -47,13 +50,14 @@ describe("contenidoService", () => {
     mockQuery
       .mockResolvedValueOnce({ rowCount: 1, rows: [{ id: 1 }] }) // tópico existe
       .mockResolvedValueOnce({ rows: [{ id: 10, url: "https://mock.url" }] }); // inserción DB
+
     mockUpload.mockResolvedValueOnce({ data: {}, error: null });
     mockGetPublicUrl.mockReturnValueOnce({ data: { publicUrl: "https://mock.url" } });
 
     const fakeFile = { path: "fakepath", originalname: "file.png", mimetype: "image/png" };
     const result = await subirContenido(1, "imagen", fakeFile);
 
-    expect(fs.readFileSync).toHaveBeenCalledWith("fakepath");
+    expect(fs.readFile).toHaveBeenCalledWith("fakepath");
     expect(mockUpload).toHaveBeenCalled();
     expect(mockGetPublicUrl).toHaveBeenCalled();
     expect(mockQuery).toHaveBeenCalledTimes(2);

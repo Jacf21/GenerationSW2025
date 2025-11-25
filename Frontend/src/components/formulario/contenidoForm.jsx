@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { subirContenido } from "../../services/contenidoService.js";
+import "./contenidoForm.css"; // Importa su propio CSS
 
 export default function ContenidoForm({ topicos, onSubido }) {
   const [topicoId, setTopicoId] = useState("");
