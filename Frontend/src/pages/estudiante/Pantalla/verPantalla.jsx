@@ -17,7 +17,7 @@ export default function PantallaEstudiantePage() {
     <div style={{ padding: 20 }}>
       <h1>Tópico #{id_topico}</h1>
 
-      <button onClick={() => navigate("/lista-topicos")}>← Volver a la lista</button>
+      <button onClick={() => navigate("/lista-topicos-est")}>← Volver a la lista</button>
 
       {!pantalla && <p>Este tópico no tiene contenido publicado aún.</p>}
 

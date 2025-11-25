@@ -25,7 +25,7 @@ export default function ListaPantallasEstudiantePage() {
         if (pantalla && pantalla.visible) {
           visibles.push({
             id: t.id,
-            nombre: t.nombre ?? `Tópico ${t.id}`,
+            nombre: t.nombre ?? `Tópico ${t.orden}`,
           });
         }
       }

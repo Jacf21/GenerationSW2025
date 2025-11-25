@@ -59,7 +59,7 @@ function App() {
 
                 <Route element={<PrivateRoute allowedRoles={["est"]} />}>
                   <Route path="/estudiante" element={<EstudianteDashboard />} />
-                  <Route path="/lista-topicos" element={<ListaPantallasEstudiantePage />} />
+                  <Route path="/lista-topicos-est" element={<ListaPantallasEstudiantePage />} />
                   <Route path="/topico/:id_topico" element={<PantallaEstudiantePage />} />
                   <Route path="/matriculacion" element={<MatriculacionPage />} />
                 </Route>

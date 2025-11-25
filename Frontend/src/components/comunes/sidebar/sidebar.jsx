@@ -54,7 +54,7 @@ const Sidebar = () => {
           { to: "/matriculacion", label: "Matriculación", icon: <FaPlusCircle /> },
           { to: "/perfil", label: "Mi Perfil", icon: <FaUserCircle /> },
           { to: "/configuracion", label: "Configuración", icon: <FaCog /> },
-          { to: "/lista-topicos", label: "Ver Topico", icon: <FaListAlt /> },
+          { to: "/lista-topicos-est", label: "Ver Topico", icon: <FaListAlt /> },
         ];
 
       case "edit":
