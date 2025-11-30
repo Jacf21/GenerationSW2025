@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:5000/api";
+const PORT = parseInt(import.meta.env.VITE_PORTBACK) || 5000;
+
+const BASE_URL = `http://localhost:${PORT}/api`;
 
 // Función genérica de manejo de errores
 const handleResponse = async (response) => {

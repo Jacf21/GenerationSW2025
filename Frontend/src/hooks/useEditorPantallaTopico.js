@@ -12,6 +12,8 @@ import {
   eliminarContenidoDePantalla,
 } from "../services/contenidoPantallaTopicoService";
 
+const PORT = parseInt(import.meta.env.VITE_PORTBACK) || 5000;
+
 export default function useEditorPantallaTopico(id_topico) {
   const [pantalla, setPantalla] = useState(null);
   const [contenidos, setContenidos] = useState([]);
@@ -72,7 +74,7 @@ export default function useEditorPantallaTopico(id_topico) {
 
     // Actualizamos el orden en backend
     for (let i = 0; i < items.length; i++) {
-      await fetch(`http://localhost:5000/api/contenido-pantalla/${items[i].id}`, {
+      await fetch(`http://localhost:${PORT}/api/contenido-pantalla/${items[i].id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ orden: i + 1 }),
