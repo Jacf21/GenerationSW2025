@@ -1,4 +1,4 @@
-import ContenidoForm from "../../../../../components/formulario/ContenidoForm";
+import ContenidoForm from "../../../../../components/formulario/contenidoForm";
 import "./addContenido.css";
 
 export default function AddContenidoModal({ topicos, onClose, onSuccess }) {

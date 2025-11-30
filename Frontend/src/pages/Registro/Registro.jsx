@@ -1,6 +1,6 @@
 import { useFormulario } from "../../hooks/useFormulario";
 import { useRegistro } from "../../hooks/useRegistro";
-import Modal from "../../components/comunes/Modal/modal";
+import Modal from "../../components/comunes/modal/modal";
 import VerificacionModal from "../../components/VerificacionModal/VerificacionModal";
 import { FaUserGraduate, FaChalkboardTeacher, FaUserCog } from "react-icons/fa";
 import "./Registro.css";

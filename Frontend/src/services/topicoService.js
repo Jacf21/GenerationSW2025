@@ -1,6 +1,7 @@
 const PORT = parseInt(import.meta.env.VITE_PORTBACK) || 5000;
 
-const BASE = `http://localhost:${PORT}/api/topico`;
+const API_URL = import.meta.env.VITE_API_URL || `http://localhost:${PORT}/api`;
+const BASE = `${API_URL}`;
 
 export const crearTopico = async (payload) => {
   const res = await fetch(`${BASE}/create`, {

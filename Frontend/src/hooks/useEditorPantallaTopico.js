@@ -13,6 +13,7 @@ import {
 } from "../services/contenidoPantallaTopicoService";
 
 const PORT = parseInt(import.meta.env.VITE_PORTBACK) || 5000;
+const API_URL = import.meta.env.VITE_API_URL || `http://localhost:${PORT}/api`;
 
 export default function useEditorPantallaTopico(id_topico) {
   const [pantalla, setPantalla] = useState(null);
@@ -74,7 +75,7 @@ export default function useEditorPantallaTopico(id_topico) {
 
     // Actualizamos el orden en backend
     for (let i = 0; i < items.length; i++) {
-      await fetch(`http://localhost:${PORT}/api/contenido-pantalla/${items[i].id}`, {
+      await fetch(`${API_URL}/contenido-pantalla/${items[i].id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ orden: i + 1 }),
