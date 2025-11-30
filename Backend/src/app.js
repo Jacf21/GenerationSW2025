@@ -12,7 +12,11 @@ import matriculaRoutes from "./routes/matriculaRoutes.js";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+const allowedOrigins = [
+  process.env.CORS_ORIGIN,
+  "http://localhost:5173",
+  "http://localhost:5174",
+].filter(Boolean);
 
 app.use(
   cors({
