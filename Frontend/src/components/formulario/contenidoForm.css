@@ -61,7 +61,7 @@
 .campo input:focus {
   outline: none;
   border-color: var(--color-primario);
-  box-shadow: 0 0 5px var(--color-primario + "55");
+  box-shadow: 0 0 5px color-mix(in srgb, var(--color-primario) 67%, transparent);
 }
 
 /* Botón */

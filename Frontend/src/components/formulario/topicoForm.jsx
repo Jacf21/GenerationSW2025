@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { crearTopico } from "../../services/topicoService.js";
-import "./TopicoForm.css"; // Importa su propio CSS
+import "./topicoForm.css";
 
 export default function TopicoForm({ onCreado }) {
   const [tituloTopico, setTituloTopico] = useState("");

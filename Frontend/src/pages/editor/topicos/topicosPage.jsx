@@ -1,7 +1,7 @@
 import TopicoForm from "../../../components/formulario/topicoForm.jsx";
 import useTopicos from "../../../hooks/useTopico.js";
 
-import "./TopicosPage.css";
+import "./topicosPage.css";
 
 export default function TopicosPage() {
   const { loading, agregarTopico } = useTopicos();

@@ -8,7 +8,7 @@ import EditContenidoModal from "../components/editContenido/editContenido.jsx";
 import DeleteContenidoModal from "../components/deleteContenido/deleteContenido.jsx";
 import ViewContenidoModal from "../components/viewContenido/viewContenido.jsx";
 
-import "./GestionarContenido.css";
+import "./gestionarContenido.css";
 
 export default function GestionarContenido() {
   const { topicos } = useTopicos();
